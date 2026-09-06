@@ -1,0 +1,3315 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Brand Palette - derived from the CodeCare logo gradient (blue -> violet) */
+    --primary-color: #6366f1;
+    --primary-dark: #4f46e5;
+    --primary-light: #818cf8;
+    --secondary-color: #8b5cf6;
+    --accent-color: #06b6d4;
+    --accent-light: #67e8f9;
+    --logo-blue: #3b9df5;
+    --logo-violet: #8b4fe0;
+
+    /* Background Colors */
+    --bg-primary: #0b0b18;
+    --bg-secondary: #12122a;
+    --bg-tertiary: #16213e;
+    --bg-card: #16162f;
+    --bg-overlay: rgba(11, 11, 24, 0.72);
+    /* Panoul mobil e aproape opac: --bg-overlay e croit pentru bara de sus,
+       unde translucenta e intentionata. */
+    --bg-menu: rgba(6, 6, 16, 0.97);
+
+    /* Glass surfaces */
+    --surface-glass: rgba(255, 255, 255, 0.035);
+    --surface-glass-strong: rgba(255, 255, 255, 0.06);
+    --border-glass: rgba(255, 255, 255, 0.08);
+    --border-glass-strong: rgba(255, 255, 255, 0.14);
+
+    /* Text Colors */
+    --text-primary: #ffffff;
+    --text-secondary: #a5a5b8;
+    --text-muted: #6f6f85;
+
+    /* Border and Shadow */
+    --border-color: rgba(255, 255, 255, 0.08);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 8px 20px -6px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 20px 40px -12px rgba(0, 0, 0, 0.6);
+    --shadow-xl: 0 32px 64px -16px rgba(0, 0, 0, 0.7);
+    --shadow-glow: 0 8px 30px -8px rgba(99, 102, 241, 0.45);
+    --shadow-glow-strong: 0 12px 44px -8px rgba(99, 102, 241, 0.6);
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, var(--logo-blue) 0%, var(--primary-color) 45%, var(--secondary-color) 100%);
+    --gradient-accent: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
+    --gradient-text: linear-gradient(120deg, var(--accent-light) 0%, var(--primary-light) 45%, var(--secondary-color) 100%);
+    --gradient-border: linear-gradient(135deg, rgba(129, 140, 248, 0.55), rgba(139, 92, 246, 0.15) 45%, rgba(103, 232, 249, 0.4));
+    --gradient-hairline: linear-gradient(90deg, transparent, rgba(129, 140, 248, 0.7), rgba(103, 232, 249, 0.5), transparent);
+
+    /* Layout */
+    --container-max-width: 1200px;
+    --nav-height: 72px;
+    --section-padding: clamp(3.5rem, 8vw, 7rem) 0;
+    --card-padding: clamp(1.35rem, 3vw, 2rem);
+
+    /* Radii */
+    --radius-sm: 0.5rem;
+    --radius-md: 0.875rem;
+    --radius-lg: 1.25rem;
+    --radius-xl: 1.75rem;
+    --radius-pill: 999px;
+
+    /* Spacing scale */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+
+    /* Typography */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: clamp(1.0625rem, 0.99rem + 0.34vw, 1.125rem);
+    --font-size-xl: clamp(1.125rem, 1.03rem + 0.47vw, 1.25rem);
+    --font-size-2xl: clamp(1.3rem, 1.14rem + 0.8vw, 1.5rem);
+    --font-size-3xl: clamp(1.55rem, 1.27rem + 1.4vw, 1.875rem);
+    --font-size-4xl: clamp(1.85rem, 1.4rem + 2.2vw, 2.5rem);
+    --font-size-5xl: clamp(2.25rem, 1.5rem + 3.7vw, 3.25rem);
+    --font-size-6xl: clamp(2.6rem, 1.5rem + 5.4vw, 4.25rem);
+
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--nav-height) + 1rem);
+    -webkit-text-size-adjust: 100%;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+::selection {
+    background: rgba(99, 102, 241, 0.35);
+    color: #fff;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(129, 140, 248, 0.35) transparent;
+}
+
+*::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: rgba(129, 140, 248, 0.3);
+    border-radius: var(--radius-pill);
+    border: 3px solid transparent;
+    background-clip: content-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: rgba(129, 140, 248, 0.55);
+    background-clip: content-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-primary);
+    background-image:
+        radial-gradient(900px 600px at 12% -10%, rgba(59, 157, 245, 0.12), transparent 60%),
+        radial-gradient(800px 600px at 92% 8%, rgba(139, 79, 224, 0.12), transparent 60%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    line-height: 1.65;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+.container {
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 clamp(1rem, 4vw, 2rem);
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 650;
+    line-height: 1.15;
+    letter-spacing: -0.022em;
+    margin-bottom: 1rem;
+    text-wrap: balance;
+}
+
+h1 {
+    font-size: var(--font-size-5xl);
+}
+
+h2 {
+    font-size: var(--font-size-4xl);
+}
+
+h3 {
+    font-size: var(--font-size-3xl);
+}
+
+h4 {
+    font-size: var(--font-size-2xl);
+}
+
+h5 {
+    font-size: var(--font-size-xl);
+}
+
+h6 {
+    font-size: var(--font-size-lg);
+}
+
+p {
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 48px;
+    padding: 0.85rem 2rem;
+    border: none;
+    border-radius: var(--radius-pill);
+    font-family: inherit;
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    isolation: isolate;
+    transition: transform 0.35s var(--ease-spring), box-shadow 0.35s var(--ease-out-expo),
+        background-color 0.35s var(--ease-out-expo), border-color 0.35s var(--ease-out-expo);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0));
+    opacity: 0;
+    transition: opacity 0.35s var(--ease-out-expo);
+}
+
+.btn:hover::before {
+    opacity: 1;
+}
+
+.btn:active {
+    transform: translateY(0) scale(0.985);
+}
+
+.btn:focus-visible {
+    outline: 2px solid var(--primary-light);
+    outline-offset: 3px;
+}
+
+.btn-primary {
+    background: var(--gradient-primary);
+    color: #fff;
+    box-shadow: var(--shadow-glow), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-glow-strong), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.btn-secondary {
+    background: var(--surface-glass);
+    color: var(--text-primary);
+    border: 1px solid var(--border-glass-strong);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-3px);
+    background: var(--surface-glass-strong);
+    border-color: rgba(129, 140, 248, 0.75);
+    box-shadow: 0 10px 30px -12px rgba(99, 102, 241, 0.6);
+}
+
+/* Gradient Text */
+.gradient-text {
+    background: var(--gradient-text);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    animation: gradientShift 9s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+
+    0%,
+    100% {
+        background-position: 0% center;
+    }
+
+    50% {
+        background-position: 100% center;
+    }
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    z-index: 1000;
+    transition: background-color 0.4s var(--ease-out-expo), border-color 0.4s var(--ease-out-expo),
+        box-shadow 0.4s var(--ease-out-expo);
+}
+
+.navbar.scrolled {
+    background: var(--bg-overlay);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom-color: var(--border-glass);
+    box-shadow: 0 10px 30px -20px rgba(0, 0, 0, 0.9);
+}
+
+/* Hairline in gradient sub navbar, vizibila doar dupa scroll */
+.navbar::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    background: var(--gradient-hairline);
+    opacity: 0;
+    transition: opacity 0.4s var(--ease-out-expo);
+}
+
+.navbar.scrolled::after {
+    opacity: 0.7;
+}
+
+.nav-container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 clamp(1rem, 4vw, 2rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    height: var(--nav-height);
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.nav-logo a {
+    display: block;
+    line-height: 0;
+    border-radius: var(--radius-sm);
+    transition: transform 0.4s var(--ease-spring), filter 0.4s var(--ease-out-expo);
+}
+
+.nav-logo a:hover {
+    transform: translateY(-1px) scale(1.03);
+    filter: drop-shadow(0 4px 16px rgba(99, 102, 241, 0.55));
+}
+
+.nav-logo a:focus-visible {
+    outline: 2px solid var(--primary-light);
+    outline-offset: 4px;
+}
+
+/*
+ * logo.png e 500x500 cu mult padding transparent in jurul marcii.
+ * Il randam mai mare decat bara si taiem surplusul cu margini negative:
+ * padding-ul fiind transparent, depasirea nu se vede.
+ */
+.logo-img {
+    height: 112px;
+    width: auto;
+    margin: -36px 0;
+    -webkit-user-drag: none;
+    user-select: none;
+}
+
+.logo-img--footer {
+    height: 130px;
+    margin: -42px 0 -34px -6px;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+}
+
+@media (max-width: 1080px) {
+    .nav-menu {
+        gap: 1.35rem;
+    }
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color var(--transition-fast);
+    position: relative;
+}
+
+.nav-link {
+    padding: 0.4rem 0;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--text-primary);
+}
+
+.nav-link:focus-visible {
+    outline: 2px solid var(--primary-light);
+    outline-offset: 4px;
+    border-radius: var(--radius-sm);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    border-radius: var(--radius-pill);
+    background: var(--gradient-primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.45s var(--ease-spring);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    transform: scaleX(1);
+}
+
+/* Language Switch */
+
+/*
+ * Sta direct in .nav-container (nu in <ul>), ca sa ramana vizibil pe mobil
+ * si cu meniul inchis. Separatorul vertical il desparte de meniu pe desktop.
+ */
+.language-switch {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-left: 2rem;
+    padding-left: 2rem;
+}
+
+.language-switch::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 20px;
+    background: var(--border-glass-strong);
+}
+
+@media (max-width: 1080px) {
+    .language-switch {
+        margin-left: 1rem;
+        padding-left: 1rem;
+    }
+}
+
+.switch-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.lang-label {
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    user-select: none;
+    transition: color var(--transition-fast);
+}
+
+.lang-label:focus-visible {
+    outline: 2px solid var(--primary-light);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+}
+
+.lang-label.active {
+    color: var(--text-primary);
+    text-shadow: 0 0 18px rgba(129, 140, 248, 0.7);
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-glass-strong);
+    transition: background-color 0.35s var(--ease-out-expo), border-color 0.35s var(--ease-out-expo);
+    border-radius: var(--radius-pill);
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 2px;
+    bottom: 2px;
+    background: var(--gradient-primary);
+    box-shadow: 0 2px 10px rgba(99, 102, 241, 0.7);
+    transition: transform 0.4s var(--ease-spring);
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: rgba(99, 102, 241, 0.2);
+    border-color: rgba(129, 140, 248, 0.6);
+}
+
+input:checked+.slider:before {
+    transform: translateX(26px);
+}
+
+.switch input:focus-visible+.slider {
+    outline: 2px solid var(--primary-light);
+    outline-offset: 3px;
+}
+
+/* Mobile Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    /* fara intarzierea de 300ms si fara zoom la dublu-tap */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    gap: 5px;
+    /* Zona de atingere de 44px, ceruta pe touch */
+    width: 44px;
+    height: 44px;
+    margin-right: -8px;
+    border-radius: var(--radius-sm);
+    transition: background-color var(--transition-fast);
+}
+
+.hamburger:hover {
+    background: var(--surface-glass);
+}
+
+.hamburger:focus-visible {
+    outline: 2px solid var(--primary-light);
+    outline-offset: 2px;
+}
+
+.bar {
+    width: 24px;
+    height: 2px;
+    background-color: var(--text-primary);
+    transition: transform 0.38s var(--ease-out-expo), opacity 0.38s var(--ease-out-expo);
+    border-radius: 2px;
+}
+
+/*
+ * Bara din mijloc reapare abia dupa ce X-ul s-a desfacut. Fara intarziere,
+ * opacitatea revenea la 1 (0.25s) inaintea rotatiei (0.4s) si se vedea, la
+ * dublu-tap, un X cu o linie prin mijloc.
+ */
+.bar:nth-child(2) {
+    transition: opacity 0.2s var(--ease-out-expo) 0.18s,
+        transform 0.38s var(--ease-out-expo);
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding-top: var(--nav-height);
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at 50% 40%, var(--bg-secondary) 0%, var(--bg-primary) 70%);
+}
+
+/* Doua orb-uri difuze in culorile logo-ului, animate lent */
+.hero-background::before,
+.hero-background::after {
+    content: '';
+    position: absolute;
+    width: min(60vw, 620px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.5;
+    will-change: transform;
+}
+
+.hero-background::before {
+    top: -12%;
+    left: -8%;
+    background: radial-gradient(circle, rgba(59, 157, 245, 0.45), transparent 65%);
+    animation: orbDrift 22s ease-in-out infinite alternate;
+}
+
+.hero-background::after {
+    right: -10%;
+    bottom: -18%;
+    background: radial-gradient(circle, rgba(139, 79, 224, 0.45), transparent 65%);
+    animation: orbDrift 28s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes orbDrift {
+    from {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    to {
+        transform: translate3d(6%, 8%, 0) scale(1.15);
+    }
+}
+
+/* Fade catre sectiunea urmatoare, ca hero-ul sa nu se termine brusc */
+.hero::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 160px;
+    background: linear-gradient(to bottom, transparent, var(--bg-secondary));
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hero-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(2px 2px at 20px 30px, var(--primary-color), transparent),
+        radial-gradient(2px 2px at 40px 70px, var(--accent-color), transparent),
+        radial-gradient(1px 1px at 90px 40px, var(--secondary-color), transparent),
+        radial-gradient(1px 1px at 130px 80px, var(--primary-light), transparent),
+        radial-gradient(2px 2px at 160px 30px, var(--accent-light), transparent);
+    background-repeat: repeat;
+    background-size: 200px 100px;
+    animation: particles 20s linear infinite;
+    opacity: 0.3;
+}
+
+@keyframes particles {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(-200px, -100px);
+    }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 860px;
+    padding: clamp(1.5rem, 5vw, 2.5rem) 0;
+}
+
+.hero-title {
+    font-size: var(--font-size-6xl);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    margin-bottom: 1.5rem;
+    line-height: 1.05;
+    animation: heroReveal 0.9s var(--ease-out-expo) both;
+}
+
+.hero-subtitle {
+    font-size: var(--font-size-xl);
+    color: var(--text-secondary);
+    margin-bottom: clamp(2rem, 5vw, 3rem);
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    text-wrap: pretty;
+    animation: heroReveal 0.9s 0.12s var(--ease-out-expo) both;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: heroReveal 0.9s 0.24s var(--ease-out-expo) both;
+}
+
+@keyframes heroReveal {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Section Styles */
+section {
+    padding: var(--section-padding);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+.section-title {
+    font-size: var(--font-size-4xl);
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+}
+
+/* Accent scurt in gradient sub titlul de sectiune */
+.section-title::after {
+    content: '';
+    display: block;
+    width: 68px;
+    height: 3px;
+    margin: 1rem auto 0;
+    border-radius: var(--radius-pill);
+    background: var(--gradient-primary);
+}
+
+.section-subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--text-secondary);
+    max-width: 620px;
+    margin: 0 auto;
+    text-wrap: pretty;
+}
+
+/* Services Section */
+.services {
+    background: var(--bg-secondary);
+    position: relative;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: clamp(1rem, 2.5vw, 2rem);
+}
+
+/*
+ * Pe desktop fixam 3 coloane. Cu auto-fit, containerul largit la 1600px
+ * incapea 4 carduri pe rand, iar cele 6 servicii se rupeau in 4 + 2.
+ * Trei pe rand inseamna doua randuri egale si arata mai asezat.
+ */
+@media (min-width: 1024px) {
+    .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.service-card {
+    background:
+        linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
+        var(--gradient-border) border-box;
+    border: 1px solid transparent;
+    border-radius: var(--radius-lg);
+    padding: var(--card-padding);
+    transition: transform 0.45s var(--ease-out-expo), box-shadow 0.45s var(--ease-out-expo);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* Halou care urmeaza cardul la hover */
+.service-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(600px circle at 50% 0%, rgba(99, 102, 241, 0.16), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.45s var(--ease-out-expo);
+}
+
+.service-card:hover::after {
+    opacity: 1;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s var(--ease-out-expo);
+}
+
+.service-card:hover::before {
+    transform: scaleX(1);
+}
+
+.service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg), 0 0 0 1px rgba(129, 140, 248, 0.25);
+}
+
+.service-icon {
+    width: 58px;
+    height: 58px;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-glow), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    transition: transform 0.5s var(--ease-spring);
+}
+
+.service-card:hover .service-icon {
+    transform: translateY(-2px) rotate(-4deg) scale(1.06);
+}
+
+.service-icon svg {
+    width: 30px;
+    height: 30px;
+    color: white;
+}
+
+.service-title {
+    font-size: var(--font-size-xl);
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.service-description {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.service-features {
+    list-style: none;
+}
+
+.service-features li {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.service-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--accent-light);
+    font-weight: bold;
+}
+
+/* Portfolio Section */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: clamp(1rem, 2.5vw, 2rem);
+}
+
+.portfolio-card {
+    background:
+        linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
+        var(--gradient-border) border-box;
+    border: 1px solid transparent;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: transform 0.45s var(--ease-out-expo), box-shadow 0.45s var(--ease-out-expo);
+}
+
+.portfolio-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg), 0 0 0 1px rgba(129, 140, 248, 0.25);
+}
+
+.portfolio-card:hover .project-thumbnail {
+    transform: scale(1.06);
+}
+
+.portfolio-image {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    height: auto;
+    background: var(--bg-tertiary);
+    overflow: hidden;
+}
+
+.project-thumbnail {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Cheia succesului: taie imaginea să se potrivească perfect */
+    object-position: center;
+    /* Centrează imaginea */
+    transition: transform 0.5s ease;
+    /* Pregătim animația de zoom */
+    display: block;
+}
+
+.portfolio-placeholder {
+    /* Sta sub thumbnail: daca imaginea lipseste, scripts.js scoate <img>
+       si ramane acest panou, nu o iconita de imagine stricata. */
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+}
+
+.portfolio-placeholder svg {
+    width: 60px;
+    height: 60px;
+    color: var(--text-muted);
+}
+
+.portfolio-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /*
+     * Obligatoriu: .project-thumbnail e pe z-index 1, deci fara asta
+     * imaginea s-ar desena peste overlay si etichetele ar ramane dedesubt.
+     * Se aplica tuturor cardurilor, nu doar celor cu buton Live.
+     */
+    z-index: 5;
+    background: linear-gradient(to top, rgba(11, 11, 24, 0.94), rgba(11, 11, 24, 0.6));
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    opacity: 0;
+    transition: opacity 0.4s var(--ease-out-expo);
+}
+
+.portfolio-card:hover .portfolio-overlay {
+    opacity: 1;
+}
+
+.portfolio-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.tech-tag {
+    background: var(--surface-glass-strong);
+    border: 1px solid var(--border-glass-strong);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #fff;
+    padding: 0.3rem 0.8rem;
+    border-radius: var(--radius-pill);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+}
+
+.portfolio-content {
+    padding: var(--card-padding);
+}
+
+.portfolio-title {
+    font-size: var(--font-size-xl);
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.portfolio-description {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Contact Section */
+.contact {
+    background: var(--bg-primary);
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/*
+ * Pe doua coloane, datele de contact se lipesc de marginea din dreapta si nu
+ * mai ocupa toata coloana: asa creste distanta dintre ele si formular, care
+ * altfel ramanea doar cat gap-ul grilei. Pragul e 1025px, nu 1024, pentru ca
+ * la exact 1024 grila e deja pe o coloana si latimea fixa ar strica randul.
+ */
+@media (min-width: 1025px) {
+    .contact-info {
+        justify-self: end;
+        width: min(100%, 380px);
+    }
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid transparent;
+    transition: background-color 0.35s var(--ease-out-expo), border-color 0.35s var(--ease-out-expo),
+        transform 0.35s var(--ease-out-expo);
+}
+
+.contact-item:hover {
+    background: var(--surface-glass);
+    border-color: var(--border-glass);
+    transform: translateX(4px);
+}
+
+.contact-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-glow), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.contact-icon svg {
+    width: 24px;
+    height: 24px;
+    color: white;
+}
+
+.contact-details h3 {
+    font-size: var(--font-size-lg);
+    margin-bottom: 0.25rem;
+    color: var(--text-primary);
+}
+
+.contact-details p {
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* Contact Form */
+.contact-form {
+    background:
+        linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
+        var(--gradient-border) border-box;
+    border: 1px solid transparent;
+    border-radius: var(--radius-lg);
+    padding: clamp(1.25rem, 4vw, 2.25rem);
+    box-shadow: var(--shadow-lg);
+    /*
+     * Formularul sta primul in grila, desi in HTML vine al doilea: pe desktop
+     * ajunge in stanga, iar datele de contact in dreapta. Ordinea din DOM
+     * ramane cea logica pentru citire si pentru tastatura, iar pe o singura
+     * coloana `order` se anuleaza mai jos, ca sa nu sara formularul deasupra.
+     */
+    order: -1;
+}
+
+/*
+ * Banda de sus a grupului e rezervata etichetei ridicate. Eticheta urca
+ * DEASUPRA campului, nu peste chenarul lui: varianta cu fundal care taia
+ * bordura lasa o crestatura vizibila, cu atat mai lata cu cat textul e mai
+ * lung ("Tipul Proiectului" injumatatea practic marginea de sus).
+ */
+.form-group {
+    position: relative;
+    padding-top: 1.35rem;
+    margin-bottom: 1.35rem;
+}
+
+.form-group input,
+.form-group textarea,
+.custom-select-trigger {
+    width: 100%;
+    /*
+     * `display: block` scapa de spatiul de sub textarea, care altfel se aseaza
+     * pe linia de baza a randului. 58px e exact inaltimea unui input plin, deci
+     * si trigger-ul gol al selectului are aceeasi talie.
+     */
+    display: block;
+    min-height: 58px;
+    padding: 1rem 1.05rem;
+    background: var(--surface-glass);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: max(16px, var(--font-size-base));
+    line-height: 1.5;
+    transition: border-color 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out-expo),
+        background-color 0.3s var(--ease-out-expo);
+}
+
+.form-group input:hover,
+.form-group textarea:hover,
+.custom-select-trigger:hover {
+    border-color: var(--border-glass-strong);
+    background: var(--surface-glass-strong);
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.custom-select.open .custom-select-trigger {
+    outline: none;
+    background: var(--surface-glass-strong);
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
+}
+
+.form-group label {
+    position: absolute;
+    /* banda de sus + padding-ul campului = exact linia textului dinauntru */
+    top: calc(1.35rem + 1rem);
+    left: 1.05rem;
+    color: var(--text-muted);
+    font-size: max(16px, var(--font-size-base));
+    line-height: 1.5;
+    letter-spacing: 0;
+    transition: top 0.28s var(--ease-out-expo), left 0.28s var(--ease-out-expo),
+        font-size 0.28s var(--ease-out-expo), color 0.28s var(--ease-out-expo),
+        letter-spacing 0.28s var(--ease-out-expo);
+    pointer-events: none;
+}
+
+/*
+ * `.has-value` (pusa din scripts.js) tine eticheta sus dupa ce campul si-a
+ * pierdut focusul. Nu folosim `:valid`, cum era inainte: un email scris pe
+ * jumatate e invalid, deci eticheta cadea inapoi peste textul deja tastat.
+ */
+.form-group input:focus+label,
+.form-group input.has-value+label,
+.form-group textarea:focus+label,
+.form-group textarea.has-value+label,
+.custom-select-wrapper.active label {
+    top: 0;
+    left: 0.3rem;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--primary-light);
+    background: none;
+    padding: 0;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 148px;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: transparent;
+}
+
+/* Butonul e singura actiune din formular: il lasam pe toata latimea. */
+.contact-form .btn[type="submit"] {
+    width: 100%;
+    margin-top: 0.35rem;
+}
+
+/* Footer */
+.footer {
+    position: relative;
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border-glass);
+    padding: clamp(2.5rem, 6vw, 4rem) 0 1.5rem;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--gradient-hairline);
+    opacity: 0.6;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 2rem;
+}
+
+.footer-brand {
+    max-width: 400px;
+}
+
+.footer-logo {
+    margin-bottom: 0.75rem;
+}
+
+.footer-description {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.footer-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.footer-column h4 {
+    color: var(--text-primary);
+    font-size: var(--font-size-lg);
+    margin-bottom: 1rem;
+}
+
+.footer-column ul {
+    list-style: none;
+}
+
+.footer-column ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-column ul li a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.footer-column ul li a {
+    display: inline-block;
+    padding: 0.2rem 0;
+}
+
+.footer-column ul li a:hover {
+    color: var(--primary-light);
+    transform: translateX(3px);
+}
+
+.footer-column ul li a:focus-visible {
+    outline: 2px solid var(--primary-light);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--border-glass);
+    padding-top: 1.75rem;
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* Datele de identificare ale firmei, deasupra copyright-ului */
+.footer-legal {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem 1rem;
+    margin-bottom: 0.75rem !important;
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
+}
+
+.footer-legal span:first-child {
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+/* Responsive Design */
+
+/* Ecrane foarte late: container mai generos */
+@media (min-width: 1440px) {
+    :root {
+        --container-max-width: 1320px;
+    }
+}
+
+/*
+ * Peste 1600px marginile laterale devenau exagerate (300px de fiecare parte
+ * pe un ecran de 1920px), asa ca lasam continutul sa creasca.
+ */
+@media (min-width: 1600px) {
+    :root {
+        --container-max-width: 1600px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    /* O singura coloana: datele de contact raman inaintea formularului */
+    .contact-form {
+        order: 0;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .footer-links {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --nav-height: 64px;
+    }
+
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: var(--nav-height);
+        height: calc(100svh - var(--nav-height));
+        flex-direction: column;
+        justify-content: center;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 30%),
+            var(--bg-menu);
+        backdrop-filter: blur(24px) saturate(180%);
+        -webkit-backdrop-filter: blur(24px) saturate(180%);
+        width: 100%;
+        text-align: center;
+        transition: left 0.45s var(--ease-out-expo);
+        box-shadow: var(--shadow-xl);
+        padding: 2.5rem 1.5rem 3rem;
+        gap: 0.25rem;
+    }
+
+    /* Linie fina in gradient intre bara si panou */
+    .nav-menu::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: var(--gradient-hairline);
+        opacity: 0.6;
+    }
+
+    .nav-menu .nav-item {
+        width: 100%;
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    .nav-menu.active .nav-item {
+        animation: navItemIn 0.45s var(--ease-out-expo) forwards;
+    }
+
+    .nav-menu.active .nav-item:nth-child(1) {
+        animation-delay: 0.06s;
+    }
+
+    .nav-menu.active .nav-item:nth-child(2) {
+        animation-delay: 0.12s;
+    }
+
+    .nav-menu.active .nav-item:nth-child(3) {
+        animation-delay: 0.18s;
+    }
+
+    .nav-menu.active .nav-item:nth-child(4) {
+        animation-delay: 0.24s;
+    }
+
+    .nav-menu.active .nav-item:nth-child(5) {
+        animation-delay: 0.3s;
+    }
+
+    @keyframes navItemIn {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /*
+     * inline-block, ca sublinierea sa fie exact cat textul, nu cat ecranul.
+     * Zona de atingere ramane cat randul, prin padding-ul de pe .nav-item.
+     */
+    .nav-menu .nav-link {
+        display: inline-block;
+        width: auto;
+        padding: 0.85rem 0.35rem;
+        font-size: var(--font-size-xl);
+    }
+
+    .nav-menu .nav-link::after {
+        bottom: 0.35rem;
+        transform-origin: center;
+    }
+
+    .nav-menu .nav-link.active::after {
+        box-shadow: 0 0 14px rgba(129, 140, 248, 0.9);
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /*
+     * Pe mobil comutatorul devine buton segmentat RO|EN in bara de sus.
+     * Segmentul activ e chiar eticheta, folosind clasa .active pusa deja
+     * de updateLanguageLabels() - deci fara :has() si fara JS in plus.
+     */
+    .language-switch {
+        margin-left: auto;
+        margin-right: 0.75rem;
+        padding-left: 0;
+    }
+
+    .language-switch::before {
+        display: none;
+    }
+
+    .switch-container {
+        gap: 2px;
+        padding: 3px;
+        border-radius: var(--radius-pill);
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--border-glass-strong);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    /* comutatorul propriu-zis nu are ce cauta in pastila */
+    .switch-container .switch {
+        display: none;
+    }
+
+    .lang-label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 40px;
+        min-height: 32px;
+        padding: 0 0.6rem;
+        border-radius: var(--radius-pill);
+        font-size: var(--font-size-xs);
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        transition: background-color 0.35s var(--ease-out-expo),
+            color 0.35s var(--ease-out-expo), box-shadow 0.35s var(--ease-out-expo);
+    }
+
+    .lang-label.active {
+        background: var(--gradient-primary);
+        color: #fff;
+        text-shadow: none;
+        box-shadow: var(--shadow-glow), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    }
+
+    .logo-img {
+        height: 96px;
+        margin: -32px 0;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    /*
+     * Doar butoanele de tip "call to action" devin full-width.
+     * Butoanele mici din pricing/extras raman inline.
+     */
+    .hero-buttons .btn,
+    .contact-form .btn,
+    .portfolio-actions .btn {
+        width: 100%;
+    }
+
+    /*
+     * "Servicii" si "Companie" raman alaturi si pe telefon. Una sub alta
+     * facea footer-ul de doua ori mai inalt degeaba - listele sunt scurte
+     * si incap pe jumatate de ecran chiar si la 320px.
+     */
+    .footer-links {
+        /*
+         * Coloanele se ingusteaza la latimea continutului si perechea se
+         * centreaza ca un bloc. Textul din ele ramane aliniat la stanga:
+         * centrat pe fiecare rand, listele arata zdrentuite, pentru ca
+         * etichetele nu au aceeasi lungime.
+         */
+        grid-template-columns: auto auto;
+        justify-content: center;
+        gap: 2.5rem;
+        text-align: left;
+    }
+
+    .footer-content {
+        text-align: center;
+    }
+
+    .footer-brand {
+        margin: 0 auto;
+    }
+
+    .footer-logo {
+        display: flex;
+        justify-content: center;
+    }
+
+    .logo-img--footer {
+        margin-left: 0;
+    }
+}
+
+/* Landscape pe telefon: hero-ul nu trebuie sa ocupe tot ecranul */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        min-height: auto;
+        padding-top: calc(var(--nav-height) + 2rem);
+        padding-bottom: 3rem;
+    }
+
+    .nav-menu {
+        height: auto;
+        max-height: calc(100svh - var(--nav-height));
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    .contact-item {
+        text-align: left;
+        gap: 0.75rem;
+        padding: 0.75rem;
+    }
+
+    .section-title::after {
+        width: 52px;
+    }
+}
+
+/* Telefoane mici (320-380px) */
+@media (max-width: 380px) {
+    .container {
+        padding: 0 0.875rem;
+    }
+
+    .btn {
+        padding: 0.8rem 1.25rem;
+        font-size: var(--font-size-sm);
+    }
+
+    .logo-img {
+        height: 88px;
+        margin: -29px 0;
+    }
+
+    .contact-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* Utilizatorii care cer mai putina miscare nu primesc animatii ambientale */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .hero-particles,
+    .hero-background::before,
+    .hero-background::after,
+    .gradient-text {
+        animation: none !important;
+    }
+}
+
+/* Notificari (injectate din scripts.js) */
+.notification {
+    position: fixed;
+    top: calc(var(--nav-height) + 1rem);
+    right: 1rem;
+    left: auto;
+    max-width: min(380px, calc(100vw - 2rem));
+    z-index: 10000;
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-md);
+    color: #fff;
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+    white-space: pre-line;
+    border: 1px solid var(--border-glass-strong);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    box-shadow: var(--shadow-lg);
+    animation: notifySlideIn 0.45s var(--ease-out-expo);
+}
+
+.notification-success {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.95), rgba(139, 92, 246, 0.95));
+}
+
+.notification-error {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.95), rgba(190, 24, 93, 0.95));
+}
+
+.notification-info {
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.95), rgba(99, 102, 241, 0.95));
+}
+
+.notification-content {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 0.25rem;
+    opacity: 0.8;
+    transition: opacity var(--transition-fast);
+}
+
+.notification-close:hover {
+    opacity: 1;
+}
+
+@keyframes notifySlideIn {
+    from {
+        transform: translateX(110%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .notification {
+        left: 1rem;
+        right: 1rem;
+        max-width: none;
+    }
+}
+
+/* Loading Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.7s var(--ease-out-expo) both;
+}
+
+/* Utility Classes */
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.mb-1 {
+    margin-bottom: 0.25rem;
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+.mb-3 {
+    margin-bottom: 0.75rem;
+}
+
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
+.mb-5 {
+    margin-bottom: 1.25rem;
+}
+
+.mt-1 {
+    margin-top: 0.25rem;
+}
+
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+.mt-3 {
+    margin-top: 0.75rem;
+}
+
+.mt-4 {
+    margin-top: 1rem;
+}
+
+.mt-5 {
+    margin-top: 1.25rem;
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+/* Print Styles */
+@media print {
+
+    .navbar,
+    .hero-particles,
+    .contact-form,
+    .footer {
+        display: none;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    .hero {
+        min-height: auto;
+        padding: 2rem 0;
+    }
+}
+
+/* Portfolio Actions */
+.portfolio-actions,
+.pricing-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.portfolio-toggle-btn {
+    min-width: 200px;
+    transition: all var(--transition-normal);
+}
+
+.portfolio-toggle-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Responsive pentru butoanele portfolio */
+@media (max-width: 768px) {
+    .portfolio-toggle-btn {
+        min-width: 180px;
+        font-size: var(--font-size-sm);
+    }
+}
+
+@media (max-width: 480px) {
+    .portfolio-toggle-btn {
+        min-width: 160px;
+        padding: 0.6rem 1.5rem;
+    }
+
+    .portfolio-actions {
+        margin-top: 2rem;
+    }
+}
+
+/* Portfolio Cards cu Link */
+.portfolio-with-link {
+    position: relative;
+}
+
+/* Butonul Live în colțul din dreapta sus */
+.portfolio-live-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--gradient-primary);
+    color: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: 1.5rem;
+    text-decoration: none;
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    z-index: 10;
+    transition: all var(--transition-normal);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.portfolio-live-btn svg {
+    width: 14px;
+    height: 14px;
+}
+
+.portfolio-live-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+    background: var(--gradient-accent);
+    color: white;
+    text-decoration: none;
+}
+
+.portfolio-live-btn:active {
+    transform: translateY(0) scale(1);
+}
+
+/* Confirmarea care rămâne sub formular după trimitere.
+   `hidden` e declarat explicit fiindcă `display: block` de mai jos ar învinge
+   altfel stilul implicit al atributului și mesajul s-ar vedea de la început. */
+.form-confirm {
+    display: block;
+    margin-top: 1.25rem;
+    padding: 1rem 1.15rem;
+    border-radius: 0.75rem;
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    color: #a7f3d0;
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.28);
+}
+
+.form-confirm[hidden] {
+    display: none;
+}
+
+.form-confirm strong {
+    color: #d1fae5;
+    font-weight: 600;
+}
+
+/* Eticheta de stare pentru un proiect care nu e încă public.
+   Aceeași poziție ca butonul Live, dar deliberat neutră și fără hover:
+   comunică o stare, nu o acțiune, ca vizitatorul să nu încerce să dea click. */
+.portfolio-status-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 1.5rem;
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    color: #fbbf24;
+    background: rgba(17, 24, 39, 0.72);
+    border: 1px solid rgba(251, 191, 36, 0.35);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+    cursor: default;
+    user-select: none;
+}
+
+.portfolio-status-badge::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #fbbf24;
+    box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.18);
+    flex-shrink: 0;
+}
+
+/* Animație subtilă pentru buton */
+@keyframes livePulse {
+
+    0%,
+    100% {
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.5);
+    }
+}
+
+.portfolio-live-btn {
+    animation: livePulse 3s ease-in-out infinite;
+}
+
+.portfolio-live-btn:hover {
+    animation: none;
+}
+
+/* Portfolio Status pentru proiectele offline */
+.portfolio-status {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(239, 68, 68, 0.9);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 1.5rem;
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 10;
+}
+
+/*
+ * Badge de platforma pentru aplicatiile mobile. Are aceeasi forma si pozitie
+ * ca .portfolio-status, dar neutru: rosul de acolo semnaleaza "offline", ceea
+ * ce nu inseamna nimic pentru o aplicatie care nu are adresa publica.
+ */
+.portfolio-status--platform {
+    background: var(--surface-glass-strong);
+    border: 1px solid var(--border-glass-strong);
+    color: var(--text-primary);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+/*
+ * Rama pentru capturi de aplicatie: acestea sunt in format portret (~9:19.5),
+ * iar rama e 16:10. Cu object-fit: cover s-ar vedea doar o fasie orizontala
+ * din mijlocul ecranului, asa ca aici afisam captura intreaga, centrata.
+ */
+.portfolio-image--app {
+    background:
+        radial-gradient(120% 80% at 50% 0%, rgba(99, 102, 241, 0.18), transparent 65%),
+        linear-gradient(160deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+}
+
+.portfolio-image--app .project-thumbnail {
+    object-fit: contain;
+    object-position: center;
+}
+
+/* Zoom-ul de la hover nu are sens pe o captura afisata intreaga */
+.portfolio-card:hover .portfolio-image--app .project-thumbnail {
+    transform: scale(1.02);
+}
+
+/* Hover effect pentru carduri cu link */
+.portfolio-with-link:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--primary-color);
+}
+
+.portfolio-with-link:hover .portfolio-live-btn {
+    transform: translateY(-2px) scale(1.1);
+}
+
+/* Focus states pentru accesibilitate */
+.portfolio-live-btn:focus {
+    outline: 2px solid var(--accent-light);
+    outline-offset: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .portfolio-live-btn {
+        top: 0.75rem;
+        right: 0.75rem;
+        padding: 0.4rem 0.6rem;
+        font-size: 0.7rem;
+    }
+
+    .portfolio-live-btn svg {
+        width: 12px;
+        height: 12px;
+    }
+
+    .portfolio-status {
+        top: 0.75rem;
+        right: 0.75rem;
+        padding: 0.3rem 0.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .portfolio-live-btn {
+        top: 0.5rem;
+        right: 0.5rem;
+        padding: 0.3rem 0.5rem;
+        font-size: 0.65rem;
+        gap: 0.2rem;
+    }
+
+    .portfolio-live-btn svg {
+        width: 10px;
+        height: 10px;
+    }
+
+    .portfolio-status {
+        top: 0.5rem;
+        right: 0.5rem;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.6rem;
+    }
+}
+
+/* Asigură că butonul nu interferează cu overlay-ul */
+.portfolio-card:hover .portfolio-overlay {
+    opacity: 1;
+}
+
+.portfolio-live-btn {
+    z-index: 15;
+}
+
+/* --- Pricing Section --- */
+.pricing {
+    background: var(--bg-secondary);
+    /* Sau tertiary pentru contrast */
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: clamp(1.25rem, 3vw, 2rem);
+    align-items: start;
+    /* Important ca să nu se întindă toate la fel dacă au text diferit */
+}
+
+.pricing-card {
+    background:
+        linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
+        var(--gradient-border) border-box;
+    border: 1px solid transparent;
+    border-radius: var(--radius-lg);
+    padding: clamp(1.75rem, 4vw, 2.5rem) clamp(1.25rem, 3vw, 2rem);
+    text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.45s var(--ease-out-expo), box-shadow 0.45s var(--ease-out-expo);
+}
+
+.pricing-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg), 0 0 0 1px rgba(129, 140, 248, 0.25);
+}
+
+.pricing-card .btn {
+    margin-top: auto;
+}
+
+/* Stil pentru cardul POPULAR (din mijloc) */
+.pricing-card.popular {
+    background:
+        linear-gradient(145deg, var(--bg-card) 0%, rgba(99, 102, 241, 0.14) 100%) padding-box,
+        linear-gradient(135deg, rgba(129, 140, 248, 0.9), rgba(103, 232, 249, 0.5)) border-box;
+    border: 1px solid transparent;
+    box-shadow: 0 24px 60px -24px rgba(99, 102, 241, 0.65), 0 0 0 1px rgba(129, 140, 248, 0.2);
+    transform: scale(1.04);
+    /* Puțin mai mare */
+    z-index: 2;
+}
+
+.pricing-card.popular:hover {
+    transform: scale(1.04) translateY(-6px);
+    box-shadow: 0 32px 70px -24px rgba(99, 102, 241, 0.8), 0 0 0 1px rgba(129, 140, 248, 0.35);
+}
+
+/* Badge-ul "Cel mai ales" */
+.popular-badge {
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gradient-primary);
+    color: white;
+    padding: 0.35rem 1.1rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    box-shadow: var(--shadow-glow);
+}
+
+.pricing-header {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-glass);
+    padding-bottom: 2rem;
+}
+
+.pricing-header h3 {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.price {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+/*
+ * Moneda e sufix in romana ("1.499 lei"), asa ca in DOM suma vine prima.
+ * O aliniem la baza cifrelor, nu ca exponent: "lei" e un cuvant, nu un simbol.
+ */
+.price .currency {
+    align-self: flex-end;
+    margin-left: 0.4rem;
+    padding-bottom: 0.15em;
+    font-size: clamp(1.05rem, 0.9rem + 0.6vw, 1.35rem);
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+/*
+ * In engleza moneda e prefix ("EUR 299"). applyTranslations() seteaza
+ * documentElement.lang la fiecare comutare de limba, deci inversam
+ * doar vizual, fara JavaScript in plus.
+ */
+html[lang="en"] .price .currency {
+    order: -1;
+    align-self: flex-start;
+    margin: 0.5rem 0.1rem 0 0;
+    padding-bottom: 0;
+    font-size: 1.5rem;
+    color: inherit;
+}
+
+.price .amount {
+    font-size: clamp(2.5rem, 1.6rem + 4vw, 3.5rem);
+    letter-spacing: -0.03em;
+    font-weight: 700;
+    line-height: 1;
+    /* Efect gradient pe textul prețului */
+    background: var(--gradient-text);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.price-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.pricing-features {
+    list-style: none;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.pricing-features li {
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Iconiță checkmark automată cu CSS */
+.pricing-features li::before {
+    content: "✓";
+    color: var(--accent-light);
+    font-weight: bold;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.full-width {
+    width: 100%;
+}
+
+/* Responsive fix pentru cardul popular */
+@media (max-width: 1024px) {
+
+    .pricing-card.popular,
+    .pricing-card.popular:hover {
+        transform: scale(1);
+        /* Revenim la mărimea normală pe ecrane mici */
+    }
+
+    .pricing-card.popular:hover {
+        transform: translateY(-6px);
+    }
+}
+
+/* --- Individual Services (Extras) --- */
+.pricing-extras {
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    padding-top: clamp(2rem, 5vw, 3rem);
+    border-top: 1px solid var(--border-glass);
+}
+
+.extras-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.extras-header h3 {
+    font-size: 1.75rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.extras-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.extra-item {
+    background: var(--surface-glass);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-md);
+    padding: clamp(1.1rem, 3vw, 1.5rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(1rem, 3vw, 2rem);
+    transition: border-color 0.35s var(--ease-out-expo), background-color 0.35s var(--ease-out-expo),
+        transform 0.35s var(--ease-out-expo);
+}
+
+.extra-item:hover {
+    border-color: rgba(129, 140, 248, 0.6);
+    background: var(--surface-glass-strong);
+    transform: translateY(-2px);
+}
+
+.extra-info h4 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.extra-info p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+.extra-action {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-shrink: 0;
+    /* Previne turtirea butonului */
+}
+
+.extra-price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.btn-sm {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.9rem;
+}
+
+/* Responsive pentru mobil */
+@media (max-width: 768px) {
+    .extra-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .extra-info {
+        width: 100%;
+    }
+
+    .extra-action {
+        width: 100%;
+        justify-content: space-between;
+        border-top: 1px solid var(--border-color);
+        padding-top: 1rem;
+    }
+}
+
+
+/* Stilizare Dropdown (Select) */
+.form-group select {
+    width: 100%;
+    padding: 1rem;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    color: var(--text-primary);
+    font-size: var(--font-size-base);
+    transition: all var(--transition-normal);
+    appearance: none;
+    /* Ascunde săgeata default a browserului */
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* Stil pentru opțiunile din meniu (fundal închis) */
+.form-group select option {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    padding: 10px;
+}
+
+/* --- Custom Dropdown Styles --- */
+.custom-select-wrapper {
+    position: relative;
+    user-select: none;
+    /* Previne selectarea textului */
+}
+
+.custom-select {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/*
+ * Trigger-ul (campul pe care dai click). Aspectul vine din regula comuna a
+ * campurilor, mai sus; aici raman doar diferentele fata de un input.
+ */
+.custom-select-trigger {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    cursor: pointer;
+}
+
+.custom-select-trigger .selection-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Sageata: un unghi de 45 de grade, nu un triunghi plin */
+.arrow {
+    flex-shrink: 0;
+    width: 9px;
+    height: 9px;
+    border-right: 2px solid var(--text-muted);
+    border-bottom: 2px solid var(--text-muted);
+    border-radius: 1px;
+    transform: translateY(-3px) rotate(45deg);
+    transition: transform 0.35s var(--ease-out-expo), border-color 0.3s var(--ease-out-expo);
+}
+
+.custom-select-trigger:hover .arrow {
+    border-color: var(--text-secondary);
+}
+
+.custom-select.open .arrow {
+    transform: translateY(2px) rotate(-135deg);
+    border-color: var(--primary-light);
+}
+
+/* Lista de Opțiuni */
+/*
+ * Panou desprins de camp, rotunjit de jur imprejur. Varianta veche statea
+ * lipita sub trigger si ii patra colturile de jos, deci cele doua aratau ca
+ * o singura cutie crapata in doua.
+ */
+.custom-options {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    right: 0;
+    padding: 0.35rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-glass-strong);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xl);
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-6px) scale(0.985);
+    transform-origin: top center;
+    transition: opacity 0.28s var(--ease-out-expo), transform 0.28s var(--ease-out-expo), visibility 0.28s;
+    /* Nu depaseste ecranul pe telefoane joase */
+    max-height: min(260px, 45svh);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    /* Scroll dacă lista e prea lungă */
+}
+
+.custom-select.open .custom-options {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+    transform: translateY(0) scale(1);
+}
+
+/* Opțiune Individuală */
+.custom-option {
+    display: flex;
+    align-items: center;
+    padding: 0.7rem 0.85rem;
+    min-height: 44px;
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    background: transparent;
+    transition: background-color 0.2s var(--ease-out-expo), color 0.2s var(--ease-out-expo);
+}
+
+.custom-options::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-options::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.custom-options::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 3px;
+}
+
+.custom-options::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
+
+/* Mouse-ul doar lumineaza randul; gradientul ramane al alegerii facute. */
+.custom-option:hover {
+    background: var(--surface-glass-strong);
+    color: var(--text-primary);
+}
+
+.custom-option.selected {
+    background: var(--gradient-primary);
+    color: #fff;
+    font-weight: 500;
+}
+
+/*
+ * Eticheta selectului foloseste aceleasi doua pozitii ca la input-uri
+ * (regulile comune de mai sus). Aici ramane doar stiva, ca sa stea peste
+ * fundalul trigger-ului.
+ */
+.custom-select-wrapper label {
+    z-index: 5;
+}
+
+/* --- Pagina de proiecte (proiecte.html) --- */
+
+/*
+ * Antet de pagina in locul unui hero de 100svh: pe o pagina de listare
+ * un hero pe tot ecranul ar fi doar spatiu gol inaintea continutului.
+ */
+.page-header {
+    position: relative;
+    overflow: hidden;
+    padding: calc(var(--nav-height) + clamp(3rem, 8vw, 6rem)) 0 clamp(2rem, 5vw, 3.5rem);
+    text-align: center;
+    background: radial-gradient(ellipse at 50% 0%, var(--bg-secondary) 0%, var(--bg-primary) 70%);
+}
+
+.page-header-bg {
+    position: absolute;
+    top: -40%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(90vw, 780px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(59, 157, 245, 0.28), rgba(139, 79, 224, 0.16) 45%, transparent 68%);
+    filter: blur(90px);
+    pointer-events: none;
+}
+
+.page-header .container {
+    position: relative;
+    z-index: 1;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
+}
+
+.breadcrumb a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.breadcrumb a:hover {
+    color: var(--primary-light);
+}
+
+.breadcrumb a:focus-visible {
+    outline: 2px solid var(--primary-light);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+}
+
+.page-title {
+    font-size: var(--font-size-5xl);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+    margin-bottom: 1rem;
+}
+
+.page-subtitle {
+    max-width: 640px;
+    margin: 0 auto;
+    font-size: var(--font-size-lg);
+    color: var(--text-secondary);
+    text-wrap: pretty;
+}
+
+/* Pe pagina de proiecte grila urmeaza direct dupa antet */
+.page-header+.portfolio {
+    padding-top: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+/* Banda de final, ca pagina sa nu se termine sec dupa ultimul card */
+.projects-cta {
+    padding-bottom: clamp(3.5rem, 8vw, 6rem);
+}
+
+.cta-card {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(2rem, 6vw, 3.5rem) clamp(1.25rem, 5vw, 3rem);
+    text-align: center;
+    border-radius: var(--radius-xl);
+    border: 1px solid transparent;
+    background:
+        linear-gradient(145deg, var(--bg-card) 0%, rgba(99, 102, 241, 0.12) 100%) padding-box,
+        var(--gradient-border) border-box;
+    box-shadow: var(--shadow-lg);
+}
+
+.cta-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(700px circle at 50% 0%, rgba(99, 102, 241, 0.18), transparent 70%);
+    pointer-events: none;
+}
+
+.cta-card>* {
+    position: relative;
+}
+
+.cta-card h2 {
+    font-size: var(--font-size-3xl);
+    margin-bottom: 0.75rem;
+}
+
+.cta-card p {
+    max-width: 520px;
+    margin: 0 auto 2rem;
+    color: var(--text-secondary);
+    text-wrap: pretty;
+}
+
+.cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .cta-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cta-actions .btn {
+        width: 100%;
+    }
+}
+
+
+/* --- Dezvaluirea tehnologiilor pe touch --- */
+
+/*
+ * Pe desktop overlay-ul apare la hover. Pe touch nu exista hover, iar
+ * browserul il emuleaza la tap si il lasa agatat, asa ca il comandam
+ * explicit printr-o clasa pusa din scripts.js.
+ */
+@media (hover: none) {
+
+    .portfolio-image {
+        cursor: pointer;
+    }
+
+    .portfolio-card:hover .portfolio-overlay {
+        opacity: 0;
+    }
+
+    .portfolio-card.tech-visible .portfolio-overlay {
+        opacity: 1;
+    }
+
+    /* Indiciu ca pe card se poate apasa */
+    .portfolio-image::after {
+        content: '</>';
+        position: absolute;
+        left: 1rem;
+        bottom: 1rem;
+        z-index: 11;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.35rem 0.7rem;
+        border-radius: var(--radius-pill);
+        background: var(--surface-glass-strong);
+        border: 1px solid var(--border-glass-strong);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        color: var(--text-primary);
+        font-size: var(--font-size-xs);
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        transition: opacity 0.3s var(--ease-out-expo);
+        animation: techHintPulse 2.6s ease-in-out infinite;
+    }
+
+    .portfolio-card.tech-visible .portfolio-image::after {
+        opacity: 0;
+        animation: none;
+    }
+
+    /* Cardurile fac un salt discret pana cand utilizatorul descopera gestul */
+    .portfolio-card:not(.tech-visible) .portfolio-image {
+        animation: techHintNudge 3.2s ease-in-out infinite;
+    }
+
+    /*
+     * Dupa primul tap indiciile se opresc definitiv. Selectorul repeta
+     * .portfolio-card:not(.tech-visible) ca sa depaseasca specificitatea
+     * regulii care porneste animatia.
+     */
+    body.tech-discovered .portfolio-card:not(.tech-visible) .portfolio-image {
+        animation: none;
+    }
+
+    body.tech-discovered .portfolio-card .portfolio-image::after {
+        animation: none;
+        opacity: 0.55;
+    }
+
+    /* pe cardul deschis chipul dispare, indiferent de regulile de mai sus */
+    body .portfolio-card.tech-visible .portfolio-image::after {
+        opacity: 0;
+    }
+}
+
+@keyframes techHintPulse {
+
+    0%,
+    72%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(129, 140, 248, 0);
+    }
+
+    82% {
+        transform: scale(1.12);
+        box-shadow: 0 0 18px 0 rgba(129, 140, 248, 0.55);
+    }
+}
+
+@keyframes techHintNudge {
+
+    0%,
+    84%,
+    100% {
+        transform: translateY(0);
+    }
+
+    90% {
+        transform: translateY(-5px);
+    }
+
+    95% {
+        transform: translateY(-2px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .portfolio-image,
+    .portfolio-image::after {
+        animation: none !important;
+    }
+}
+
+
+/* ==========================================================================
+   Pagina de preturi (preturi.html)
+   ========================================================================== */
+
+.preturi-detaliu {
+    padding: clamp(1.5rem, 4vw, 2.5rem) 0 var(--space-16);
+}
+
+.pret-intro {
+    max-width: 760px;
+    margin: 0 auto clamp(2rem, 5vw, 3rem);
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: var(--font-size-lg);
+    text-wrap: pretty;
+}
+
+.pret-intro p {
+    margin: 0 0 1rem;
+}
+
+/* Statutul fiscal e informatia pe care oamenii o cauta prima; o scoatem
+   din text si o punem intr-o banda proprie. */
+.pret-tva {
+    display: inline-block;
+    padding: 0.7rem 1.15rem;
+    border-radius: var(--radius-md);
+    background: var(--surface-glass);
+    border: 1px solid var(--border-glass);
+    font-size: var(--font-size-base);
+}
+
+.pret-titlu-sectiune {
+    margin: clamp(2.5rem, 6vw, 4rem) 0 0.75rem;
+    font-size: var(--font-size-3xl);
+    text-align: center;
+}
+
+.pret-subtitlu-sectiune {
+    max-width: 680px;
+    margin: 0 auto clamp(1.25rem, 3vw, 2rem);
+    text-align: center;
+    color: var(--text-secondary);
+    text-wrap: pretty;
+}
+
+/* --- cei patru pasi --- */
+.pret-pasi {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+}
+
+.pret-pas {
+    padding: var(--space-6) var(--space-4);
+    border-radius: var(--radius-lg);
+    border: 1px solid transparent;
+    background:
+        linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
+        var(--gradient-border) border-box;
+}
+
+.pret-pas-nr {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    margin-bottom: var(--space-3);
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    color: #fff;
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+}
+
+.pret-pas h3 {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-2);
+}
+
+.pret-pas p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+/* --- un pachet --- */
+.pret-pachet {
+    /* scroll-margin: ancorele #site-business nu trebuie sa intre sub bara fixa */
+    scroll-margin-top: calc(var(--nav-height) + 1rem);
+    margin-bottom: var(--space-6);
+    border-radius: var(--radius-lg);
+    border: 1px solid transparent;
+    background:
+        linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
+        var(--gradient-border) border-box;
+    overflow: hidden;
+}
+
+.pret-pachet--evidentiat {
+    box-shadow: var(--shadow-glow);
+}
+
+.pret-pachet-cap {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-6);
+    padding: var(--card-padding);
+    border-bottom: 1px solid var(--border-glass);
+    background: var(--surface-glass);
+}
+
+.pret-pachet-cap h3 {
+    font-size: var(--font-size-2xl);
+}
+
+.pret-rol {
+    margin: var(--space-2) 0 0;
+    max-width: 62ch;
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.pret-valoare {
+    flex-shrink: 0;
+    text-align: right;
+}
+
+.pret-suma {
+    display: block;
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    line-height: 1.1;
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.pret-nota {
+    display: block;
+    margin-top: 0.2rem;
+    color: var(--text-muted);
+    font-size: var(--font-size-xs);
+}
+
+.pret-pachet-corp {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+}
+
+.pret-coloana {
+    padding: var(--card-padding);
+}
+
+.pret-coloana+.pret-coloana {
+    border-left: 1px solid var(--border-glass);
+    background: rgba(255, 255, 255, 0.015);
+}
+
+.pret-coloana h4 {
+    margin-bottom: var(--space-4);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.pret-da,
+.pret-nu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.pret-da li,
+.pret-nu li {
+    position: relative;
+    padding-left: 1.6rem;
+    margin-bottom: 0.6rem;
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.pret-da li strong,
+.pret-nu li strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* bifa desenata din doua laturi de chenar, ca sa nu incarcam o fontura */
+.pret-da li::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 0.4em;
+    width: 8px;
+    height: 4px;
+    border-left: 2px solid var(--primary-light);
+    border-bottom: 2px solid var(--primary-light);
+    transform: rotate(-45deg);
+}
+
+.pret-nu li::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 0.68em;
+    width: 9px;
+    height: 2px;
+    border-radius: 1px;
+    background: var(--text-muted);
+}
+
+.pret-termen {
+    margin: var(--space-4) 0 0;
+    padding-top: var(--space-3);
+    border-top: 1px dashed var(--border-glass-strong);
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.pret-termen strong {
+    color: var(--text-primary);
+}
+
+.pret-pachet-jos {
+    padding: var(--space-4) var(--card-padding) var(--card-padding);
+    border-top: 1px solid var(--border-glass);
+}
+
+/* --- tabelul de costuri --- */
+.pret-tabel-cadru {
+    overflow-x: auto;
+    border-radius: var(--radius-lg);
+    border: 1px solid transparent;
+    background:
+        linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
+        var(--gradient-border) border-box;
+}
+
+.pret-tabel {
+    width: 100%;
+    min-width: 460px;
+    border-collapse: collapse;
+}
+
+.pret-tabel th,
+.pret-tabel td {
+    padding: 0.9rem var(--space-4);
+    text-align: left;
+    border-bottom: 1px solid var(--border-glass);
+}
+
+.pret-tabel th {
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.pret-tabel td {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.pret-tabel tr:last-child td {
+    border-bottom: none;
+}
+
+.pret-tabel th:last-child,
+.pret-tabel td:last-child {
+    text-align: right;
+    white-space: nowrap;
+}
+
+/* --- conditii --- */
+.pret-conditii {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: var(--space-4);
+    margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+.pret-conditii div {
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    background: var(--surface-glass);
+    border: 1px solid var(--border-glass);
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.pret-conditii b {
+    display: block;
+    margin-bottom: 0.2rem;
+    color: var(--text-primary);
+    font-size: var(--font-size-base);
+}
+
+@media (max-width: 768px) {
+    .pret-pachet-cap {
+        flex-direction: column;
+        gap: var(--space-4);
+    }
+
+    .pret-valoare {
+        text-align: left;
+    }
+
+    .pret-pachet-corp {
+        grid-template-columns: 1fr;
+    }
+
+    .pret-coloana+.pret-coloana {
+        border-left: none;
+        border-top: 1px solid var(--border-glass);
+    }
+}
+
+/* ==========================================================================
+   Tiparire: aceeasi pagina devine oferta trimisa clientilor.
+   Paleta e construita din variabile, deci intoarcem tema pe alb schimband
+   variabilele, nu fiecare regula in parte.
+   ========================================================================== */
+/*
+ * Antetul care apare doar pe hartie. Marca are cuvantul "Code" scris cu alb,
+ * deci sta pe o banda inchisa si atunci cand restul paginii devine alba.
+ */
+.pret-antet-print {
+    display: none;
+}
+
+@media print {
+    :root {
+        --bg-primary: #ffffff;
+        --bg-secondary: #ffffff;
+        --bg-tertiary: #ffffff;
+        --bg-card: #ffffff;
+        --surface-glass: #f7f7fb;
+        --surface-glass-strong: #f1f1f7;
+        --border-glass: #e2e2ec;
+        --border-glass-strong: #d4d4e0;
+        --border-color: #e2e2ec;
+        --text-primary: #14141f;
+        --text-secondary: #4a4a5e;
+        --text-muted: #7a7a90;
+        --shadow-sm: none;
+        --shadow-md: none;
+        --shadow-lg: none;
+        --shadow-xl: none;
+        --shadow-glow: none;
+        --shadow-glow-strong: none;
+        --gradient-border: linear-gradient(135deg, #d4d4e0, #d4d4e0);
+        --nav-height: 0px;
+    }
+
+    @page {
+        size: A4;
+        margin: 14mm 12mm 16mm;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    body {
+        background: #fff;
+        color: var(--text-primary);
+    }
+
+    /* Elementele de navigare nu au ce cauta pe hartie */
+    .navbar,
+    .footer,
+    .page-header-bg,
+    .breadcrumb,
+    .pret-pachet-jos,
+    .cta-card .cta-actions,
+    .extra-action .btn,
+    .notification {
+        display: none !important;
+    }
+
+    .pret-antet-print {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 1.25rem;
+        padding: 0.9rem 1.15rem;
+        border-radius: 10px;
+        background: #0b0b18;
+        color: #fff;
+    }
+
+    .pret-antet-print img {
+        height: 62px;
+        margin: -14px 0;
+    }
+
+    .pret-antet-print-date {
+        text-align: right;
+        font-size: 8.5pt;
+        line-height: 1.6;
+        color: #c9c9dc;
+    }
+
+    .pret-antet-print-date strong {
+        color: #fff;
+    }
+
+    .page-header {
+        padding: 0 0 1rem;
+        background: none;
+    }
+
+    /* Pe hartie, patru cutii intr-un rand ies prea inguste: le punem 2 pe 2. */
+    .pret-pasi {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .preturi-detaliu {
+        padding: 0;
+    }
+
+    .container {
+        max-width: none;
+        padding: 0;
+    }
+
+    /* Un pachet nu se rupe intre doua pagini */
+    .pret-pachet,
+    .pret-pas,
+    .extra-item,
+    .pret-tabel-cadru,
+    .cta-card,
+    .pret-conditii div {
+        break-inside: avoid;
+    }
+
+    .pret-titlu-sectiune {
+        break-after: avoid;
+    }
+
+    /* Textul in degrade devine invizibil la tiparire daca ramane transparent */
+    .gradient-text,
+    .pret-suma {
+        background: none;
+        -webkit-text-fill-color: currentColor;
+        color: var(--text-primary);
+    }
+
+    .pret-da li::before {
+        border-color: #4a4ae0;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    /* Animatiile de aparitie ar lasa continutul invizibil pe hartie */
+    .fade-in-up,
+    [class*='fade-in'] {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
