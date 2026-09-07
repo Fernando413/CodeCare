@@ -407,6 +407,27 @@
             <div class="pricing-grid">
                 <div class="pricing-card">
                     <div class="pricing-header">
+                        <h3 data-translate="price_start_title">Landing Page</h3>
+                        <div class="price">
+                            <span class="amount" data-translate="price_start_amount">899</span>
+                            <span class="currency" data-translate="price_start_currency">lei</span>
+                        </div>
+                        <p class="price-subtitle" data-translate="price_start_sub">Preț de pornire</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li data-translate="price_start_f1">Design Responsive (Optimizat Mobile)</li>
+                        <li data-translate="price_start_f2">Pagină Unică (Scroll fluid cu secțiuni)</li>
+                        <li data-translate="price_start_f3">Secțiune Servicii & Listă de Prețuri</li>
+                        <li data-translate="price_start_f4">Integrare Buton WhatsApp / Apel Direct</li>
+                        <li data-translate="price_start_f5">Asistență gratuită achiziție domeniu & hosting</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-secondary full-width" data-service="landing-page"
+                        data-translate="btn_order">Comandă</a>
+                </div>
+
+                <div class="pricing-card popular">
+                    <div class="popular-badge" data-translate="price_badge">Cel mai ales</div>
+                    <div class="pricing-header">
                         <h3 data-translate="price_basic_title">Site Prezentare</h3>
                         <div class="price">
                             <span class="amount" data-translate="price_basic_amount">1.499</span>
@@ -421,12 +442,11 @@
                         <li data-translate="price_basic_f4">Formular Contact & Harta</li>
                         <li data-translate="price_basic_f5">Configurare Hosting Gratuită</li>
                     </ul>
-                    <a href="#contact" class="btn btn-secondary full-width" data-service="site-prezentare"
+                    <a href="#contact" class="btn btn-primary full-width" data-service="site-prezentare"
                         data-translate="btn_order">Comandă</a>
                 </div>
 
-                <div class="pricing-card popular">
-                    <div class="popular-badge" data-translate="price_badge">Cel mai ales</div>
+                <div class="pricing-card">
                     <div class="pricing-header">
                         <h3 data-translate="price_biz_title">Site Business</h3>
                         <div class="price">
@@ -442,7 +462,7 @@
                         <li data-translate="price_biz_f4">SEO Avansat & Google Analytics</li>
                         <li data-translate="price_biz_f5">3 Luni de Suport Inclus</li>
                     </ul>
-                    <a href="#contact" class="btn btn-primary full-width" data-service="site-business"
+                    <a href="#contact" class="btn btn-secondary full-width" data-service="site-business"
                         data-translate="btn_order">Comandă</a>
                 </div>
 
@@ -450,7 +470,7 @@
                     <div class="pricing-header">
                         <h3 data-translate="price_pro_title">Aplicații / Custom</h3>
                         <div class="price">
-                            <span class="amount" data-translate="price_pro_amount">Discutabil</span>
+                            <span class="amount amount--text" data-translate="price_pro_amount">Discutabil</span>
                         </div>
                         <p class="price-subtitle" data-translate="price_pro_sub">În funcție de complexitate</p>
                     </div>
@@ -595,6 +615,7 @@
                     <div class="form-group custom-select-wrapper">
                         <select id="service" name="service" style="display: none;">
                             <option value="" disabled selected></option>
+                            <option value="landing-page">Landing Page</option>
                             <option value="site-prezentare">Site Prezentare (Start)</option>
                             <option value="site-business">Site Business</option>
                             <option value="custom-app">Aplicație / Custom</option>
@@ -613,6 +634,8 @@
                                 <div class="arrow"></div>
                             </div>
                             <div class="custom-options">
+                                <span class="custom-option" data-value="landing-page"
+                                    data-translate="opt_landing">Landing Page</span>
                                 <span class="custom-option" data-value="site-prezentare"
                                     data-translate="opt_site_pres">Site Prezentare (Start)</span>
                                 <span class="custom-option" data-value="site-business"

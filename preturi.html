@@ -120,11 +120,18 @@
                     Orice lucru din coloana alăturată se poate face, dar se ofertează separat, după ce discutăm ce anume
                     îți trebuie. Dacă un proiect iese din tipar, primești o ofertă scrisă înainte să înceapă ceva.
                 </p>
-                <p class="pret-tva" data-translate="prices_vat">
-                    <strong>Firma nu este plătitoare de TVA</strong>, deci prețurile de mai jos sunt cele finale. Nu se
-                    adaugă nimic peste ele.
+                <p class="pret-anunt" data-translate="prices_notice">
+                    <strong>Pagina este încă în lucru.</strong> Prețurile și detaliile de mai jos se pot schimba până
+                    la varianta finală.
                 </p>
             </div>
+
+            <nav class="pret-scurtaturi" aria-label="Pachete">
+                <a href="#landing-page" data-translate="price_start_title">Landing Page</a>
+                <a href="#site-prezentare" data-translate="price_basic_title">Site Prezentare</a>
+                <a href="#site-business" data-translate="price_biz_title">Site Business</a>
+                <a href="#aplicatii-custom" data-translate="price_pro_title">Aplicații / Custom</a>
+            </nav>
 
             <h2 class="pret-titlu-sectiune" data-translate="prices_process_title">Cum decurge un proiect</h2>
 
@@ -157,10 +164,73 @@
 
             <h2 class="pret-titlu-sectiune" data-translate="prices_packages_title">Pachete</h2>
 
-            <article class="pret-pachet" id="site-prezentare">
+            <article class="pret-pachet" id="landing-page">
                 <div class="pret-pachet-cap">
-                    <div>
-                        <h3 data-translate="price_basic_title">Site Prezentare</h3>
+                    <div class="pret-pachet-info">
+                        <div class="pret-pachet-titlu">
+                            <span class="pret-index" aria-hidden="true">01</span>
+                            <h3 data-translate="price_start_title">Landing Page</h3>
+                        </div>
+                        <p class="pret-rol" data-translate="prices_start_role">
+                            Pentru afacerea locală care are nevoie de o singură pagină bine făcută: ce oferi, cât
+                            costă și un buton prin care omul te sună sau îți scrie pe loc. Cel mai rapid mod de a
+                            exista online cu adresa ta, nu doar cu o pagină de Facebook.
+                        </p>
+                    </div>
+                    <div class="pret-valoare">
+                        <span class="pret-suma" data-translate="prices_start_value">899 lei</span>
+                        <span class="pret-nota" data-translate="price_start_sub">Preț de pornire</span>
+                    </div>
+                </div>
+                <div class="pret-pachet-corp">
+                    <div class="pret-coloana">
+                        <h4 data-translate="prices_included">Ce intră în preț</h4>
+                        <ul class="pret-da" data-translate="prices_start_in">
+                            <li><strong>O singură pagină</strong> cu scroll fluid și secțiuni: prezentare, servicii,
+                                galerie, program, contact</li>
+                            <li><strong>Design responsive</strong>, gândit întâi pentru telefon — de acolo vin
+                                aproape toți vizitatorii unei firme locale</li>
+                            <li><strong>Secțiune de servicii cu listă de prețuri</strong>, pe care o poți schimba
+                                oricând, printr-un mesaj</li>
+                            <li><strong>Buton de WhatsApp și de apel direct</strong>, care deschide conversația sau
+                                sună de pe telefonul clientului</li>
+                            <li>Galerie foto și integrare Google Maps</li>
+                            <li>Optimizare SEO de bază: titluri, descrieri, date structurate</li>
+                            <li><strong>Asistență gratuită la achiziția domeniului și a hostingului</strong> —
+                                serviciu de 249 lei, gratuit aici</li>
+                            <li>Certificat SSL și punerea site-ului online</li>
+                            <li>O rundă de modificări după prima versiune</li>
+                        </ul>
+                    </div>
+                    <div class="pret-coloana">
+                        <h4 data-translate="prices_excluded">Nu intră în preț</h4>
+                        <ul class="pret-nu" data-translate="prices_start_out">
+                            <li>Pagini separate (Despre, Portofoliu, Contact) — vezi pachetul Site Prezentare</li>
+                            <li>Textele și pozele — le pui tu; le pot scrie sau procura contra cost</li>
+                            <li>Versiune în a doua limbă</li>
+                            <li>Blog sau panou de administrare pentru conținut</li>
+                            <li>Sistem de rezervări online sau cont de utilizator</li>
+                            <li>Costul anual de hosting și domeniu</li>
+                        </ul>
+                        <p class="pret-termen" data-translate="prices_start_time">
+                            <strong>Termen:</strong> 3–5 zile lucrătoare de la primirea textelor și a pozelor.
+                        </p>
+                    </div>
+                </div>
+                <div class="pret-pachet-jos">
+                    <a href="index.html?serviciu=landing-page#contact" class="btn btn-secondary"
+                        data-translate="prices_ask">Cere ofertă pentru acest pachet</a>
+                </div>
+            </article>
+
+            <article class="pret-pachet pret-pachet--evidentiat" id="site-prezentare">
+                <div class="pret-pachet-cap">
+                    <div class="pret-pachet-info">
+                        <div class="pret-pachet-titlu">
+                            <span class="pret-index" aria-hidden="true">02</span>
+                            <h3 data-translate="price_basic_title">Site Prezentare</h3>
+                            <span class="pret-eticheta" data-translate="price_badge">Cel mai ales</span>
+                        </div>
                         <p class="pret-rol" data-translate="prices_basic_role">
                             Pentru firma care are nevoie să fie găsită și să inspire încredere: servicii, portofoliu,
                             date de contact. Scris de mână, fără teme cumpărate.
@@ -207,10 +277,13 @@
                 </div>
             </article>
 
-            <article class="pret-pachet pret-pachet--evidentiat" id="site-business">
+            <article class="pret-pachet" id="site-business">
                 <div class="pret-pachet-cap">
-                    <div>
-                        <h3 data-translate="price_biz_title">Site Business</h3>
+                    <div class="pret-pachet-info">
+                        <div class="pret-pachet-titlu">
+                            <span class="pret-index" aria-hidden="true">03</span>
+                            <h3 data-translate="price_biz_title">Site Business</h3>
+                        </div>
                         <p class="pret-rol" data-translate="prices_biz_role">
                             Site de prezentare dus până la capăt: mai multe pagini, în două limbi, cu design făcut de la
                             zero și SEO complet. Pentru firma care vrea să fie găsită și de clienți din afara țării.
@@ -266,8 +339,11 @@
 
             <article class="pret-pachet" id="aplicatii-custom">
                 <div class="pret-pachet-cap">
-                    <div>
-                        <h3 data-translate="price_pro_title">Aplicații / Custom</h3>
+                    <div class="pret-pachet-info">
+                        <div class="pret-pachet-titlu">
+                            <span class="pret-index" aria-hidden="true">04</span>
+                            <h3 data-translate="price_pro_title">Aplicații / Custom</h3>
+                        </div>
                         <p class="pret-rol" data-translate="prices_pro_role">
                             Aici intră tot ce nu încape într-un pachet cu preț fix: aplicații de telefon, platforme
                             interne, rezervări online, cataloage cu bază de date, conturi de client, integrări între
@@ -314,53 +390,6 @@
                 </div>
             </article>
 
-            <h2 class="pret-titlu-sectiune" data-translate="extras_title">Servicii Individuale</h2>
-            <p class="pret-subtitlu-sectiune" data-translate="prices_extras_sub">
-                Ai deja un site și ai nevoie doar de o bucată de lucrare. Prețurile de mai jos se aplică pe site-uri
-                existente, indiferent cine le-a făcut.
-            </p>
-
-            <div class="extras-list">
-                <div class="extra-item">
-                    <div class="extra-info">
-                        <h4 data-translate="extra_seo_title">Optimizare SEO Tehnic</h4>
-                        <p data-translate="extra_seo_desc">Optimizare cod, meta tag-uri, sitemap și viteză de încărcare
-                            pentru un site existent.</p>
-                    </div>
-                    <div class="extra-action">
-                        <span class="extra-price" data-translate="extra_seo_price">749 lei</span>
-                        <a href="index.html?serviciu=seo-only#contact" class="btn btn-secondary btn-sm"
-                            data-translate="btn_order">Comandă</a>
-                    </div>
-                </div>
-
-                <div class="extra-item">
-                    <div class="extra-info">
-                        <h4 data-translate="extra_host_title">Configurare Hosting & Domeniu</h4>
-                        <p data-translate="extra_host_desc">Asistență achiziție HostGate, configurare DNS, instalare SSL
-                            și urcare fișiere pe server.</p>
-                    </div>
-                    <div class="extra-action">
-                        <span class="extra-price" data-translate="extra_host_price">249 lei</span>
-                        <a href="index.html?serviciu=hosting-setup#contact" class="btn btn-secondary btn-sm"
-                            data-translate="btn_order">Comandă</a>
-                    </div>
-                </div>
-
-                <div class="extra-item">
-                    <div class="extra-info">
-                        <h4 data-translate="extra_audit_title">Audit & Mentenanță</h4>
-                        <p data-translate="extra_audit_desc">Verificare erori, actualizare platformă, backup manual și
-                            mici modificări de conținut.</p>
-                    </div>
-                    <div class="extra-action">
-                        <span class="extra-price" data-translate="extra_audit_price">149 lei/h</span>
-                        <a href="index.html?serviciu=mentenanta#contact" class="btn btn-secondary btn-sm"
-                            data-translate="btn_order">Comandă</a>
-                    </div>
-                </div>
-            </div>
-
             <h2 class="pret-titlu-sectiune" data-translate="prices_costs_title">Costuri care nu sunt ale mele</h2>
             <p class="pret-subtitlu-sectiune" data-translate="prices_costs_sub">
                 Ca să nu existe surprize: acestea se plătesc anual către alți furnizori, nu către mine. Le trec aici
@@ -400,8 +429,8 @@
 
             <div class="pret-conditii" data-translate="prices_terms">
                 <div><b>Plata</b>50% avans la începerea lucrului, 50% la livrare, înainte de punerea online.</div>
-                <div><b>TVA</b>Firma nu este plătitoare de TVA. Prețurile afișate sunt finale.</div>
-                <div><b>Modificări</b>O rundă inclusă la Site Prezentare, două la Site Business. Peste ele, 149 lei/h.
+                <div><b>Modificări</b>O rundă inclusă la Landing Page și Site Prezentare, două la Site Business. Peste ele,
+                    149 lei/h.
                 </div>
                 <div><b>Garanție</b>30 de zile de la livrare în care repar gratuit orice nu funcționează cum am stabilit.
                 </div>

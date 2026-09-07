@@ -2141,10 +2141,15 @@ section {
 
 .pricing-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    /* 240px, nu 300px: cu patru pachete si un container de 1200px, minimul de
+       300px cerea 1296px pe un rand, deci al patrulea card cadea singur dedesubt
+       (3+1). La 240px incap toate patru pe desktop si se reduc gradual la 3, 2,
+       apoi 1 coloana pe ecrane mai mici. */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
     gap: clamp(1.25rem, 3vw, 2rem);
-    align-items: start;
-    /* Important ca să nu se întindă toate la fel dacă au text diferit */
+    /* Fara `align-items: start`: cardurile aveau fiecare inaltimea textului lor,
+       deci se terminau la patru linii diferite si butoanele „Comanda" nu erau
+       aliniate. Acum se intind toate cat cel mai inalt din rand. */
 }
 
 .pricing-card {
@@ -2220,7 +2225,12 @@ section {
 .price {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    /* Preturile scrise in cuvinte („Discutabil") sunt mai mici decat cifrele,
+       deci blocul lor era mai scund si linia despartitoare de sub el urca fata
+       de celelalte carduri. Rezervam inaltimea cifrelor si asezam totul pe
+       aceeasi linie de baza. */
+    align-items: flex-end;
+    min-height: clamp(2.5rem, 1.6rem + 4vw, 3.5rem);
     color: white;
     margin-bottom: 0.5rem;
 }
@@ -2264,6 +2274,14 @@ html[lang="en"] .price .currency {
     -webkit-text-fill-color: transparent;
 }
 
+/* „Discutabil" / „Let's Talk" e un cuvant, nu o cifra. La marimea cifrelor si
+   patru coloane iesea in afara cardului, peste chenar. */
+.price .amount--text {
+    font-size: clamp(1.5rem, 1rem + 1.6vw, 2rem);
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+}
+
 .price-subtitle {
     font-size: 0.9rem;
     color: var(--text-muted);
@@ -2273,13 +2291,22 @@ html[lang="en"] .price .currency {
     list-style: none;
     margin-bottom: 2rem;
     text-align: left;
+    /* Lista preia spatiul ramas si il imparte intre bife. Fara asta, diferenta
+       dintre un card cu bife scurte si unul cu bife pe trei randuri se aduna
+       intr-un gol de ~120px deasupra butonului — exact „spatiul gol" care arata
+       urat. Asa, diferenta se vede ca o lista putin mai aerisita. */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
 }
 
 .pricing-features li {
-    margin-bottom: 1rem;
+    /* Spatierea vine din `gap`-ul listei, ca sa poata creste uniform. */
     color: var(--text-secondary);
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 0.75rem;
 }
 
@@ -2289,11 +2316,22 @@ html[lang="en"] .price .currency {
     color: var(--accent-light);
     font-weight: bold;
     font-size: 1.1rem;
+    line-height: 1.5;
     flex-shrink: 0;
 }
 
 .full-width {
     width: 100%;
+}
+
+/* Intre 4 coloane si 1 coloana, grila trece prin 3 => al patrulea pachet ramane
+   singur pe randul doi. Doua randuri de cate doua arata ca o oferta, 3+1 arata a
+   greseala. Pragul de sus e latimea de la care incap patru carduri de 240px:
+   4 x 240 + 3 x 32 = 1056px de continut, adica ~1120px de fereastra. */
+@media (min-width: 620px) and (max-width: 1119px) {
+    .pricing-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 /* Responsive fix pentru cardul popular */
@@ -2861,21 +2899,117 @@ html[lang="en"] .price .currency {
     margin: 0 0 1rem;
 }
 
-/* Statutul fiscal e informatia pe care oamenii o cauta prima; o scoatem
-   din text si o punem intr-o banda proprie. */
-.pret-tva {
+/*
+ * Anuntul ca pagina e in lucru. Bulina care pulseaza il face sa se citeasca
+ * a stare curenta, nu a text de umplutura.
+ */
+/*
+ * `inline-block`, nu `inline-flex`: intr-un container flex, textul aldin si
+ * restul frazei devin doua elemente separate si se aseaza in doua coloane de
+ * indata ce randul se ingusteaza. Asa raman o singura fraza care curge.
+ */
+.pret-anunt {
     display: inline-block;
-    padding: 0.7rem 1.15rem;
-    border-radius: var(--radius-md);
+    position: relative;
+    max-width: 100%;
+    padding: 0.7rem 1.25rem 0.7rem 2.15rem;
+    border-radius: var(--radius-pill);
     background: var(--surface-glass);
+    border: 1px solid var(--border-glass-strong);
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    text-align: left;
+}
+
+.pret-anunt::before {
+    content: '';
+    position: absolute;
+    left: 1.1rem;
+    top: 1.32em;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-light);
+    box-shadow: 0 0 0 4px rgba(103, 232, 249, 0.14);
+    animation: pretAnuntPuls 2.4s var(--ease-out-expo) infinite;
+}
+
+@keyframes pretAnuntPuls {
+
+    0%,
+    100% {
+        opacity: 1;
+        box-shadow: 0 0 0 4px rgba(103, 232, 249, 0.14);
+    }
+
+    50% {
+        opacity: 0.55;
+        box-shadow: 0 0 0 7px rgba(103, 232, 249, 0.05);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pret-anunt::before {
+        animation: none;
+    }
+}
+
+/*
+ * Scurtaturi catre pachete. Raman lipite sub bara cat timp derulezi lista,
+ * ca sa poti sari intre pachete fara sa te intorci sus.
+ */
+.pret-scurtaturi {
+    position: sticky;
+    top: calc(var(--nav-height) + 0.75rem);
+    z-index: 20;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.35rem;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0.35rem;
+    border-radius: var(--radius-pill);
+    background: var(--bg-menu);
     border: 1px solid var(--border-glass);
-    font-size: var(--font-size-base);
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.pret-scurtaturi a {
+    padding: 0.5rem 1.05rem;
+    border-radius: var(--radius-pill);
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.25s var(--ease-out-expo), color 0.25s var(--ease-out-expo);
+}
+
+.pret-scurtaturi a:hover,
+.pret-scurtaturi a:focus-visible {
+    background: var(--surface-glass-strong);
+    color: var(--text-primary);
 }
 
 .pret-titlu-sectiune {
     margin: clamp(2.5rem, 6vw, 4rem) 0 0.75rem;
     font-size: var(--font-size-3xl);
     text-align: center;
+}
+
+/* Linie fina sub titlu, in locul unui chenar: tine ochiul pe axa centrala. */
+.pret-titlu-sectiune::after {
+    content: '';
+    display: block;
+    width: 68px;
+    height: 2px;
+    margin: 0.85rem auto 0;
+    border-radius: 2px;
+    background: var(--gradient-hairline);
 }
 
 .pret-subtitlu-sectiune {
@@ -2942,7 +3076,20 @@ html[lang="en"] .price .currency {
 }
 
 .pret-pachet--evidentiat {
+    position: relative;
     box-shadow: var(--shadow-glow);
+}
+
+/* Dunga de sus spune care e pachetul recomandat inainte sa citesti eticheta */
+.pret-pachet--evidentiat::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-primary);
+    z-index: 1;
 }
 
 .pret-pachet-cap {
@@ -2955,12 +3102,43 @@ html[lang="en"] .price .currency {
     background: var(--surface-glass);
 }
 
+.pret-pachet-info {
+    min-width: 0;
+}
+
+/* Numarul, titlul si eticheta stau pe aceeasi linie de baza */
+.pret-pachet-titlu {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
 .pret-pachet-cap h3 {
     font-size: var(--font-size-2xl);
 }
 
+.pret-index {
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.pret-eticheta {
+    padding: 0.28rem 0.7rem;
+    border-radius: var(--radius-pill);
+    background: var(--gradient-primary);
+    color: #fff;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+}
+
 .pret-rol {
-    margin: var(--space-2) 0 0;
+    margin: var(--space-3) 0 0;
     max-width: 62ch;
     color: var(--text-secondary);
     font-size: var(--font-size-sm);
@@ -2969,11 +3147,14 @@ html[lang="en"] .price .currency {
 .pret-valoare {
     flex-shrink: 0;
     text-align: right;
+    /* Latime fixa: cele trei sume se aliniaza pe aceeasi verticala */
+    min-width: 8.5rem;
 }
 
 .pret-suma {
     display: block;
-    font-size: var(--font-size-3xl);
+    font-size: var(--font-size-4xl);
+    letter-spacing: -0.02em;
     font-weight: 700;
     line-height: 1.1;
     background: var(--gradient-text);
@@ -2991,7 +3172,9 @@ html[lang="en"] .price .currency {
 
 .pret-pachet-corp {
     display: grid;
-    grid-template-columns: 1.25fr 1fr;
+    /* Coloana din stanga are mereu mai mult text, dar diferenta ramane mica:
+       doua coloane prea inegale rup axa verticala a cardului. */
+    grid-template-columns: 1.15fr 1fr;
 }
 
 .pret-coloana {
@@ -3071,8 +3254,15 @@ html[lang="en"] .price .currency {
 }
 
 .pret-pachet-jos {
+    display: flex;
+    justify-content: center;
     padding: var(--space-4) var(--card-padding) var(--card-padding);
     border-top: 1px solid var(--border-glass);
+    background: rgba(255, 255, 255, 0.015);
+}
+
+.pret-pachet-jos .btn {
+    min-width: 280px;
 }
 
 /* --- tabelul de costuri --- */
@@ -3123,7 +3313,9 @@ html[lang="en"] .price .currency {
 /* --- conditii --- */
 .pret-conditii {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    /* 360px, nu 300: cu cinci conditii, patru coloane ar lasa una singura pe
+       randul al doilea. La trei coloane iese 3 + 2, care arata echilibrat. */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
     gap: var(--space-4);
     margin-bottom: clamp(2.5rem, 6vw, 4rem);
 }
@@ -3145,6 +3337,35 @@ html[lang="en"] .price .currency {
 }
 
 @media (max-width: 768px) {
+    .pret-anunt {
+        display: block;
+        border-radius: var(--radius-md);
+    }
+
+    /* Trei celule egale: cu `flex-wrap` a treia scurtatura ramanea singura
+       pe un rand, sub celelalte doua. */
+    .pret-scurtaturi {
+        position: static;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        width: 100%;
+    }
+
+    .pret-scurtaturi a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem 0.4rem;
+        text-align: center;
+        font-size: var(--font-size-xs);
+        white-space: normal;
+    }
+
+    .pret-pachet-jos .btn {
+        width: 100%;
+        min-width: 0;
+    }
+
     .pret-pachet-cap {
         flex-direction: column;
         gap: var(--space-4);
@@ -3220,6 +3441,7 @@ html[lang="en"] .price .currency {
     .footer,
     .page-header-bg,
     .breadcrumb,
+    .pret-scurtaturi,
     .pret-pachet-jos,
     .cta-card .cta-actions,
     .extra-action .btn,
@@ -3298,6 +3520,16 @@ html[lang="en"] .price .currency {
 
     .pret-da li::before {
         border-color: #4a4ae0;
+    }
+
+    .pret-eticheta {
+        background: none;
+        border: 1px solid #4a4ae0;
+        color: #4a4ae0;
+    }
+
+    .pret-anunt {
+        border-radius: 8px;
     }
 
     a {
