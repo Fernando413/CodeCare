@@ -55,7 +55,37 @@ document.addEventListener('DOMContentLoaded', function () {
     initializeCustomSelect();
     initializePricingButtons();
     preselecteazaServiciulDinAdresa();
+    numaraVizita();
 });
+
+/**
+ * Contorul de vizite al site-ului.
+ *
+ * Aceeasi functie care numara vizitele demo-urilor (`/api/vizita`), doar cu alt
+ * slug. Cere o imagine de 1x1: nu are nevoie de CORS, nu blocheaza randarea si
+ * nu depinde de vreo librarie externa.
+ *
+ * Nu se scrie nimic in browserul vizitatorului si nu se salveaza niciun IP —
+ * functia numara si atat. De asta nu e nevoie de banner de consimtamant.
+ */
+function numaraVizita() {
+    const PAGINI = {
+        '/': 'site-acasa',
+        '/index.html': 'site-acasa',
+        '/preturi.html': 'site-preturi',
+        '/proiecte.html': 'site-proiecte',
+    };
+
+    const slug = PAGINI[window.location.pathname];
+    if (!slug) return;
+
+    try {
+        // Acelasi domeniu, deci adresa relativa e suficienta.
+        new Image().src = `/api/vizita?slug=${slug}&t=${Date.now()}`;
+    } catch (eroare) {
+        // Un contor care nu merge nu are voie sa strice pagina.
+    }
+}
 
 // --- Language Management (Sistemul Nou) ---
 
