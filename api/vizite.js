@@ -1,15 +1,3 @@
-/**
- * Citirea contoarelor, pentru platforma de prospectare.
- *
- * Protejat cu token: fara el, oricine ar putea vedea cati clienti ti-au deschis
- * demo-urile si cand — informatie comerciala, chiar daca nu contine date
- * personale.
- *
- * Intoarce, pentru fiecare slug, numarul total de deschideri si evenimentele
- * (o intrare per persoana per zi). Platforma insereaza doar ce e mai nou decat
- * cursorul ei, deci poate cere fara grija de cate ori vrea.
- */
-
 const crypto = require("node:crypto");
 
 async function redis(comenzi) {
@@ -37,7 +25,6 @@ async function redis(comenzi) {
     return raspuns.json();
 }
 
-/** Comparatie in timp constant, ca tokenul sa nu poata fi ghicit caracter cu caracter. */
 function tokenValid(primit, asteptat) {
     if (!asteptat) return false;
     const a = Buffer.from(String(primit || ""));
@@ -46,10 +33,6 @@ function tokenValid(primit, asteptat) {
     return crypto.timingSafeEqual(a, b);
 }
 
-/**
- * Sterge toate cheile contorului. Folosit ca sa poti porni de la zero dupa
- * teste, fara sa intri in consola Upstash.
- */
 async function stergeTot() {
     let cursor = "0";
     let sterse = 0;
@@ -82,10 +65,6 @@ async function handler(req, res) {
         res.status(401).json({ eroare: "token invalid" });
         return;
     }
-
-    // POST = stergerea contoarelor. Un GET nu are voie sa stearga nimic, chiar
-    // daca ar avea tokenul: un link deschis din greseala nu trebuie sa poata
-    // arunca datele.
     if (req.method === "POST") {
         try {
             const sterse = await stergeTot();
@@ -105,7 +84,6 @@ async function handler(req, res) {
             return;
         }
 
-        // O singura runda de comenzi pentru toate slugurile: doua per slug.
         const comenzi = [];
         for (const slug of sluguri) {
             comenzi.push(["GET", `demo:${slug}:deschideri`]);
@@ -133,8 +111,6 @@ async function handler(req, res) {
                 }
             }
 
-            // `persoane` e contorul cumulat (o intrare per om per zi);
-            // `evenimente` e doar coada recenta, plafonata.
             demo[slug] = { deschideri, persoane, evenimente };
         });
 

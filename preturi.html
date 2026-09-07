@@ -38,6 +38,13 @@
 </head>
 
 <body>
+    <div id="pret-intro" class="pret-intro-cortina" aria-hidden="true" hidden>
+        <canvas class="pret-intro-panza"></canvas>
+        <button type="button" class="pret-intro-sari" data-translate="prices_intro_skip">
+            Sari peste
+        </button>
+    </div>
+
     <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <div class="nav-logo">
@@ -54,7 +61,7 @@
                     <a href="index.html#services" class="nav-link" data-translate="nav_services">Servicii</a>
                 </li>
                 <li class="nav-item">
-                    <a href="proiecte.html" class="nav-link" data-translate="nav_portfolio">Proiecte</a>
+                    <a href="index.html#portfolio" class="nav-link" data-translate="nav_portfolio">Proiecte</a>
                 </li>
                 <li class="nav-item">
                     <a href="preturi.html" class="nav-link active" aria-current="page"
@@ -84,16 +91,7 @@
         </div>
     </nav>
 
-    <div class="pret-antet-print" aria-hidden="true">
-        <img src="assets/logo.png" alt="CodeCare">
-        <div class="pret-antet-print-date">
-            <strong>codecare.ro</strong><br>
-            contact@codecare.ro<br>
-            +40 729 728 477
-        </div>
-    </div>
-
-    <header class="page-header">
+    <header class="page-header page-header--pret">
         <div class="page-header-bg" aria-hidden="true"></div>
         <div class="container">
             <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -107,6 +105,14 @@
             <p class="page-subtitle" data-translate="prices_header_subtitle">
                 Prețurile de mai jos sunt prețuri de pornire. Aici scrie exact ce intră în ele și ce nu, ca să știi de
                 la început unde te afli.
+            </p>
+
+            <p class="pret-cuvinte" aria-hidden="true" data-translate="prices_header_tags">
+                <span>Design</span>
+                <span>Premium</span>
+                <span>Modern</span>
+                <span>Performant</span>
+                <span>Inovator</span>
             </p>
         </div>
     </header>
@@ -140,7 +146,7 @@
                     <span class="pret-pas-nr">1</span>
                     <h3 data-translate="prices_step1_title">Discuție</h3>
                     <p data-translate="prices_step1_text">30 de minute, telefonic sau pe WhatsApp. Îmi spui ce vrei, îți
-                        spun ce e realist.</p>
+                        spunem ce e realist.</p>
                 </div>
                 <div class="pret-pas">
                     <span class="pret-pas-nr">2</span>
@@ -164,7 +170,7 @@
 
             <h2 class="pret-titlu-sectiune" data-translate="prices_packages_title">Pachete</h2>
 
-            <article class="pret-pachet" id="landing-page">
+            <article class="pret-pachet" id="landing-page" data-index="01">
                 <div class="pret-pachet-cap">
                     <div class="pret-pachet-info">
                         <div class="pret-pachet-titlu">
@@ -223,7 +229,7 @@
                 </div>
             </article>
 
-            <article class="pret-pachet pret-pachet--evidentiat" id="site-prezentare">
+            <article class="pret-pachet pret-pachet--evidentiat" id="site-prezentare" data-index="02">
                 <div class="pret-pachet-cap">
                     <div class="pret-pachet-info">
                         <div class="pret-pachet-titlu">
@@ -277,7 +283,7 @@
                 </div>
             </article>
 
-            <article class="pret-pachet" id="site-business">
+            <article class="pret-pachet" id="site-business" data-index="03">
                 <div class="pret-pachet-cap">
                     <div class="pret-pachet-info">
                         <div class="pret-pachet-titlu">
@@ -337,7 +343,7 @@
                 </div>
             </article>
 
-            <article class="pret-pachet" id="aplicatii-custom">
+            <article class="pret-pachet" id="aplicatii-custom" data-index="04">
                 <div class="pret-pachet-cap">
                     <div class="pret-pachet-info">
                         <div class="pret-pachet-titlu">
@@ -390,7 +396,7 @@
                 </div>
             </article>
 
-            <h2 class="pret-titlu-sectiune" data-translate="prices_costs_title">Costuri care nu sunt ale mele</h2>
+            <h2 class="pret-titlu-sectiune" data-translate="prices_costs_title">Costuri care nu sunt ale noastre</h2>
             <p class="pret-subtitlu-sectiune" data-translate="prices_costs_sub">
                 Ca să nu existe surprize: acestea se plătesc anual către alți furnizori, nu către mine. Le trec aici
                 pentru că fac parte din costul real al unui site.
@@ -429,12 +435,14 @@
 
             <div class="pret-conditii" data-translate="prices_terms">
                 <div><b>Plata</b>50% avans la începerea lucrului, 50% la livrare, înainte de punerea online.</div>
-                <div><b>Modificări</b>O rundă inclusă la Landing Page și Site Prezentare, două la Site Business. Peste ele,
+                <div><b>Modificări</b>O rundă inclusă la Landing Page și Site Prezentare, două la Site Business. Peste
+                    ele,
                     149 lei/h.
                 </div>
-                <div><b>Garanție</b>30 de zile de la livrare în care repar gratuit orice nu funcționează cum am stabilit.
+                <div><b>Garanție</b>30 de zile de la livrare în care repar gratuit orice nu funcționează cum am
+                    stabilit.
                 </div>
-                <div><b>Proprietate</b>La plata finală, site-ul, codul și conturile sunt ale tale. Nu țin nimic ostatic.
+                <div><b>Proprietate</b>La plata finală, site-ul, codul și conturile sunt ale tale.
                 </div>
                 <div><b>De la tine</b>Texte, poze și logo. Fără ele proiectul stă, iar termenul se decalează.</div>
             </div>
@@ -493,7 +501,7 @@
             </div>
 
             <div class="footer-bottom">
-                <!-- DATE FICTIVE - de decomentat cu cele reale ale firmei
+                <!--
                 <p class="footer-legal">
                     <span data-translate="footer_legal_name">CodeCare Solutions S.R.L.</span>
                     <span data-translate="footer_legal_ids">CUI: RO12345678 · Reg. Com.: J01/123/2025</span>
@@ -505,6 +513,7 @@
     </footer>
 
     <script src="scripts.js"></script>
+    <script src="intro-preturi.js"></script>
 </body>
 
 </html>

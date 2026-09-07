@@ -1,28 +1,11 @@
-/**
- * Numara vizualizarile unui demo.
- *
- * Pagina de demo cere de aici o imagine de 1x1 la incarcare. O imagine, nu un
- * fetch: nu are nevoie de CORS, merge si cand demo-ul e deschis direct pe
- * codecare-demos.vercel.app, si nu blocheaza randarea paginii.
- *
- * Nu se salveaza IP-ul si nu se scrie nimic in browserul vizitatorului, deci nu
- * e nevoie de banner de consimtamant. Ca sa putem totusi spune „doua persoane",
- * nu „cinci incarcari", se calculeaza un hash care se schimba in fiecare zi:
- * acelasi om care revine maine apare ca vizitator nou. Asta e compromisul
- * pentru „fara cookie-uri".
- */
 
 const crypto = require("node:crypto");
 
-// GIF transparent de 1x1, cel mai mic raspuns posibil care e o imagine valida.
 const PIXEL = Buffer.from(
     "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
     "base64"
 );
 
-// Cand trimiti linkul, WhatsApp cere singur pagina ca sa faca previzualizarea.
-// Fara filtrul asta, fiecare demo ar porni cu o vizualizare falsa la o secunda
-// dupa ce l-ai trimis, si ai da follow-up unui om care nu s-a uitat inca.
 const BOTI = [
     "whatsapp",
     "facebookexternalhit",
@@ -94,12 +77,6 @@ async function redis(comenzi) {
     return raspuns.json();
 }
 
-/**
- * Numara o vizita pentru un slug. Intoarce true daca vizitatorul e nou azi.
- *
- * `SADD` intoarce 1 doar pentru o amprenta noua, deci un eveniment se scrie o
- * singura data per persoana per zi: asa numaram oameni, nu reincarcari.
- */
 async function numara(slug, azi, amprenta, userAgent) {
     const cheiePersoane = `demo:${slug}:persoane:${azi}`;
 
@@ -120,8 +97,6 @@ async function numara(slug, azi, amprenta, userAgent) {
     });
 
     await redis([
-        // Contor propriu de persoane, pe langa lista de evenimente: lista e
-        // plafonata, deci pe termen lung nu mai poate servi drept numaratoare.
         ["INCR", `demo:${slug}:persoane`],
         ["LPUSH", `demo:${slug}:evenimente`, eveniment],
         ["LTRIM", `demo:${slug}:evenimente`, "0", String(MAX_EVENIMENTE - 1)],
@@ -138,8 +113,6 @@ function trimitePixel(res) {
 }
 
 async function handler(req, res) {
-    // Orice s-ar intampla mai jos, vizitatorul primeste imaginea: o eroare de
-    // numarare nu are voie sa lase un patrat rupt in pagina clientului.
     const slug = String(req.query.slug || "").toLowerCase();
 
     if (!/^[a-z0-9-]{1,80}$/.test(slug)) {
@@ -165,9 +138,6 @@ async function handler(req, res) {
 
         await numara(slug, azi, amprenta, userAgent);
 
-        // Paginile site-ului se numara si la gramada, sub slug-ul `site`. Fara
-        // asta, acelasi om care intra pe Acasa, Preturi si Proiecte ar aparea
-        // ca trei persoane — pe pagina e corect, pe site nu.
         if (slug.startsWith("site-")) {
             await numara("site", azi, amprenta, userAgent);
         }

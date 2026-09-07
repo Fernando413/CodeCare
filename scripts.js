@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initializeCustomSelect();
     initializePricingButtons();
     preselecteazaServiciulDinAdresa();
+    initializeScurtaturiPreturi();
     numaraVizita();
 });
 
@@ -284,8 +285,12 @@ function initializeNavigation() {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                const offsetTop = target.offsetTop - getNavHeight();
-                window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+                // `offsetTop` se masoara fata de primul parinte pozitionat, nu
+                // fata de document: e destul ca o sectiune sa aiba
+                // `position: relative` si saltul aterizeaza cu sute de pixeli
+                // mai jos. `getBoundingClientRect` nu are problema asta.
+                const y = target.getBoundingClientRect().top + window.pageYOffset;
+                window.scrollTo({ top: y - getNavHeight(), behavior: 'smooth' });
             }
         });
     });
@@ -409,7 +414,60 @@ function initializeScrollEffects() {
         });
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-    document.querySelectorAll('.service-card, .portfolio-card, .contact-item').forEach(el => observer.observe(el));
+    document.querySelectorAll(
+        '.service-card, .portfolio-card, .contact-item, ' +
+        '.pret-pas, .pret-pachet, .pret-tabel-cadru, .pret-conditii > div'
+    ).forEach(el => observer.observe(el));
+}
+
+/**
+ * Bara de scurtaturi din pagina de preturi urmareste pachetul din dreptul
+ * ecranului.
+ *
+ * Fara ea, bara ramane lipita sus dar nu spune nimic: derulezi patru pachete
+ * lungi si nu mai stii la care esti. Marcam ultimul pachet care a trecut de
+ * linia superioara a ecranului, nu pe cel mai vizibil — asa pastilele nu
+ * clipesc inainte si inapoi cand doua carduri se vad in acelasi timp.
+ */
+function initializeScurtaturiPreturi() {
+    const legaturi = Array.from(document.querySelectorAll('.pret-scurtaturi a'));
+    if (!legaturi.length) return;
+
+    const sectiuni = legaturi
+        .map(a => document.querySelector(a.getAttribute('href')))
+        .filter(Boolean);
+    if (!sectiuni.length) return;
+
+    let ticking = false;
+
+    function actualizeaza() {
+        ticking = false;
+        const inaltime = window.innerHeight || 0;
+        const prag = inaltime * 0.35;
+
+        // Se aprinde DOAR pachetul care e chiar in dreptul ecranului. Inainte
+        // pornea cu primul marcat de sus, de la inceputul paginii, si ramanea
+        // aprins si dupa ce treceai de ultimul pachet — bara spunea „esti la
+        // Landing Page" cand tu citeai despre costuri sau conditii.
+        let activ = -1;
+        sectiuni.forEach((sectiune, i) => {
+            const r = sectiune.getBoundingClientRect();
+            const aInceput = r.top <= prag;
+            const nuS_aTerminat = r.bottom > inaltime * 0.2;
+            if (aInceput && nuS_aTerminat) activ = i;
+        });
+
+        legaturi.forEach((a, i) => a.classList.toggle('este-activ', i === activ));
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(actualizeaza);
+            ticking = true;
+        }
+    }, { passive: true });
+
+    actualizeaza();
 }
 
 function initializeAnimations() {
