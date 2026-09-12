@@ -1,0 +1,1340 @@
+/*
+ * Pagina de proiecte (proiecte.html): orbita proiectelor.
+ *
+ * Se incarca DUPA acasa.css si foloseste tot ce e acolo: tokenurile, antetul,
+ * subsolul, logo-ul SVG, stelele din fundal, butoanele .cc-btn si aparitia
+ * [data-reveal]. Aici stau doar piesele paginii, toate cu prefixul `po-`.
+ *
+ * Proiectele stau pe o orbita 3D, facuta doar din transformari CSS: derularea
+ * paginii roteste orbita, iar proiectul care ajunge in fata isi arata detaliile
+ * in panoul de jos. Pozitia fiecarui proiect o calculeaza proiecte.js, la fiecare
+ * cadru in care orbita se misca.
+ *
+ * Clase pe <html>, puse de proiecte.js:
+ *   .po-js      scriptul ruleaza.
+ *   .po-orbita  orbita e pornita: fara „miscare redusa" si pe un ecran destul de
+ *               inalt. Fara ea (si fara JavaScript) aceeasi lista de proiecte e o
+ *               pagina editoriala obisnuita, cu tot textul la vedere.
+ */
+
+.po-pagina {
+    --po-gutter: 24px;
+    --po-fir: rgba(255, 255, 255, .09);
+    --po-fir-tare: rgba(255, 255, 255, .18);
+    /* cata derulare costa trecerea de la un proiect la urmatorul */
+    --pas-h: 72vh;
+}
+
+@media (max-width: 820px) {
+    .po-pagina {
+        --po-gutter: 20px;
+        --pas-h: 64vh;
+    }
+}
+
+/* ==================== piese comune ==================== */
+
+.po-ascuns {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.po-eticheta {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+    font-family: var(--cc-font-mono);
+    font-size: 12px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--cc-text-estompat);
+}
+
+.po-eticheta b {
+    font-weight: 500;
+    color: var(--cc-turcoaz);
+}
+
+.po-eticheta-fir {
+    width: 40px;
+    height: 1px;
+    background: currentColor;
+    opacity: .5;
+}
+
+.po-eticheta--centru {
+    justify-content: center;
+}
+
+.po-accent {
+    background: var(--cc-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.po-bloc {
+    max-width: var(--cc-latime);
+    margin: 0 auto;
+    padding: clamp(96px, 14vh, 160px) var(--po-gutter);
+}
+
+.po-titlu-mare {
+    margin: 20px 0 0;
+    font-family: var(--cc-font-titlu);
+    font-size: clamp(38px, 6vw, 92px);
+    line-height: .96;
+    letter-spacing: -.045em;
+    color: var(--cc-alb-cald);
+    text-wrap: balance;
+}
+
+.po-cap-text {
+    margin: 22px 0 0;
+    max-width: 620px;
+    font-size: clamp(16px, 1.35vw, 18px);
+    line-height: 1.65;
+    color: var(--cc-text-2);
+}
+
+.po-butoane {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 40px;
+}
+
+.po-cu-sageata {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.po-sageata {
+    display: inline-block;
+    transition: transform .45s var(--cc-ease);
+}
+
+a:hover .po-sageata,
+a:focus-visible .po-sageata {
+    transform: translateX(5px);
+}
+
+.po-doar-mic {
+    display: none;
+}
+
+@media (max-width: 820px) {
+    .po-doar-mare {
+        display: none;
+    }
+
+    .po-doar-mic {
+        display: inline;
+    }
+}
+
+/* Titlurile mari urca rand cu rand din spatele unei margini. Pe randuri, nu pe
+   litere: la schimbarea limbii textul e inlocuit intreg. */
+.po-rand {
+    display: block;
+    overflow: hidden;
+    padding: 0 .06em .09em 0;
+    margin-bottom: -.09em;
+}
+
+.po-rand > span {
+    display: block;
+}
+
+html.cc-gata:not(.cc-static) .po-linii[data-reveal] {
+    opacity: 1;
+}
+
+html.cc-gata:not(.cc-static) .po-linii[data-reveal] .po-rand > span {
+    transform: translateY(110%);
+}
+
+html.cc-gata:not(.cc-static) .po-linii[data-reveal].este-vizibil {
+    animation: none;
+}
+
+html.cc-gata:not(.cc-static) .po-linii[data-reveal].este-vizibil .po-rand > span {
+    animation: poRand 1.05s var(--cc-ease) both;
+}
+
+html.cc-gata:not(.cc-static) .po-linii[data-reveal].este-vizibil .po-rand + .po-rand > span {
+    animation-delay: .09s;
+}
+
+@keyframes poRand {
+    from {
+        transform: translateY(110%);
+    }
+
+    to {
+        transform: none;
+    }
+}
+
+@keyframes poPlutire {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(6px);
+    }
+}
+
+@keyframes poFir {
+    from {
+        transform: scaleX(0);
+    }
+}
+
+/* ==================== intro ==================== */
+
+.po-intro {
+    max-width: var(--cc-latime);
+    margin: 0 auto;
+    padding: clamp(56px, 10vh, 110px) var(--po-gutter) clamp(44px, 7vh, 80px);
+}
+
+.po-intro-titlu {
+    margin-top: 22px;
+    font-family: var(--cc-font-titlu);
+    font-weight: 700;
+    font-size: clamp(54px, 10vw, 156px);
+    line-height: .88;
+    letter-spacing: -.058em;
+    color: var(--cc-alb-cald);
+}
+
+.po-intro-sub {
+    max-width: 580px;
+    margin: 28px 0 0;
+    font-size: clamp(16px, 1.4vw, 19px);
+    line-height: 1.6;
+    color: var(--cc-text-2);
+}
+
+/* Indicatorul sistemului: o linie subtire se intinde intre repere, ca un
+   instrument care porneste. */
+.po-intro-sistem,
+.po-intro-rotire {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 16px;
+}
+
+.po-intro-sistem {
+    margin-top: clamp(40px, 7vh, 64px);
+    font-family: var(--cc-font-mono);
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--cc-text-estompat);
+}
+
+.po-intro-sistem b {
+    font-weight: 500;
+    color: var(--cc-turcoaz);
+}
+
+.po-intro-fir {
+    width: clamp(24px, 6vw, 80px);
+    height: 1px;
+    background: currentColor;
+    opacity: .5;
+    transform-origin: left center;
+    animation: poFir 1.2s var(--cc-ease) .6s both;
+}
+
+.po-sageata-jos {
+    display: inline-block;
+    color: var(--cc-turcoaz);
+    animation: poPlutire 2.2s ease-in-out infinite;
+}
+
+html:not(.po-orbita) .po-intro-rotire {
+    display: none;
+}
+
+/* ==================== orbita ==================== */
+
+/*
+ * Pista e lunga cat derularea care roteste orbita; scena sta lipita sub antet
+ * pe toata durata ei, apoi pagina merge mai departe normal. Nimic nu opreste
+ * derularea: orbita doar o traduce in rotatie.
+ */
+html.po-orbita .po-pista {
+    position: relative;
+    height: calc(100vh - var(--nav-height) + (var(--n, 7) - 1) * var(--pas-h));
+}
+
+html.po-orbita .po-scena {
+    --po-cy: 36%;
+    --po-ochi: 22%;
+    position: sticky;
+    top: var(--nav-height);
+    height: calc(100vh - var(--nav-height));
+    overflow: hidden;
+}
+
+@supports (height: 100svh) {
+    html.po-orbita .po-scena {
+        height: calc(100svh - var(--nav-height));
+    }
+}
+
+/* Camera: perspectiva privita putin de sus, ca proiectele din spate sa urce
+   spre orizont, iar inelul de sub ele sa se vada ca elipsa. */
+html.po-orbita .po-spatiu {
+    position: absolute;
+    inset: 0;
+    perspective: 1700px;
+    perspective-origin: 50% var(--po-ochi);
+    pointer-events: none;
+}
+
+html.po-orbita .po-centru {
+    position: absolute;
+    left: 50%;
+    top: var(--po-cy);
+    width: 0;
+    height: 0;
+    transform-style: preserve-3d;
+}
+
+html.po-orbita .po-lista {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    transform-style: preserve-3d;
+}
+
+html.po-orbita .po-proiect {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: var(--card-w, 480px);
+    margin: calc(var(--card-w, 480px) * -.3125) 0 0 calc(var(--card-w, 480px) / -2);
+    pointer-events: auto;
+    will-change: transform, opacity;
+}
+
+html.po-orbita .po-lista .po-info {
+    display: none;
+}
+
+/* Obiectul de pe orbita: doar poza, intr-un cadru subtire. Detaliile stau in
+   panoul de jos, unde se pot citi — pe un obiect care se roteste, nu. */
+html.po-orbita .po-lista .po-proiect-interior {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: 14px;
+    background: #0b0b16;
+    box-shadow: 0 40px 90px -40px rgba(0, 0, 0, .95);
+    transition: border-color .6s, box-shadow .6s;
+}
+
+html.po-orbita .po-lista .po-proiect.este-in-fata .po-proiect-interior {
+    border-color: rgba(124, 233, 224, .45);
+    box-shadow: 0 0 0 1px rgba(124, 233, 224, .1), 0 50px 120px -40px rgba(124, 233, 224, .22);
+}
+
+html.po-orbita .po-lista .po-poza-cadru {
+    position: absolute;
+    inset: 0;
+}
+
+.po-poza-cadru {
+    position: relative;
+    overflow: hidden;
+    background: #0b0b16;
+}
+
+.po-poza {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1s var(--cc-ease);
+}
+
+/* Capturile aplicatiilor au telefoanele pe mijloc; `contain` nu taie nimic. */
+.po-proiect--app .po-poza-cadru {
+    background: radial-gradient(90% 90% at 50% 40%, rgba(160, 120, 255, .18), transparent 70%), #0b0b16;
+}
+
+.po-proiect--app .po-poza {
+    object-fit: contain;
+}
+
+html.po-orbita .po-lista .po-proiect.este-in-fata .po-poza {
+    transform: scale(1.04);
+}
+
+/* Voalul intuneca proiectele pe masura ce se departeaza (opacitatea lui o
+   pune proiecte.js) — mai ieftin decat un filtru pe fiecare poza. */
+.po-val {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: #06060d;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.po-card-eticheta {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 44px 18px 14px;
+    background: linear-gradient(rgba(6, 6, 13, 0), rgba(6, 6, 13, .88));
+    font-family: var(--cc-font-mono);
+    font-size: 12px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--cc-alb-cald);
+    opacity: 0;
+    transition: opacity .5s;
+}
+
+.po-card-eticheta b {
+    font-weight: 500;
+    color: var(--cc-turcoaz);
+}
+
+html.po-orbita .po-proiect.este-in-fata .po-card-eticheta {
+    opacity: 1;
+}
+
+.po-card-buton {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    padding: 0;
+    border: 0;
+    border-radius: inherit;
+    background: transparent;
+    cursor: pointer;
+}
+
+.po-card-buton:focus-visible {
+    outline-offset: -4px;
+}
+
+html:not(.po-orbita) .po-val,
+html:not(.po-orbita) .po-card-eticheta,
+html:not(.po-orbita) .po-card-buton {
+    display: none;
+}
+
+/* Inelul de sub proiecte: un cerc culcat, cu gradatii care se rotesc odata cu
+   orbita. Se deseneaza cand intri in sectiune (`--f`, formarea). */
+.po-inel {
+    display: none;
+}
+
+html.po-orbita .po-inel {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    width: calc(var(--r, 500px) * 2);
+    height: calc(var(--r, 500px) * 2);
+    margin: calc(var(--r, 500px) * -1) 0 0 calc(var(--r, 500px) * -1);
+    pointer-events: none;
+}
+
+.po-inel svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.po-inel-cerc {
+    fill: none;
+    stroke: rgba(255, 255, 255, .2);
+    stroke-width: .25;
+    stroke-dasharray: 1 1;
+    stroke-dashoffset: calc(1 - var(--f, 1));
+}
+
+.po-inel-gradatii {
+    fill: none;
+    stroke: rgba(255, 255, 255, .2);
+    stroke-width: 2.2;
+    stroke-dasharray: .25 6;
+    opacity: var(--f, 1);
+}
+
+.po-inel-interior {
+    fill: none;
+    stroke: rgba(124, 233, 224, .1);
+    stroke-width: .2;
+    opacity: var(--f, 1);
+}
+
+/* --- bara de sus: eticheta sistemului si navigarea 01–07 --- */
+
+.po-bara,
+.po-hud,
+.po-indiciu {
+    display: none;
+}
+
+html.po-orbita .po-bara {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 5;
+    max-width: var(--cc-latime);
+    margin: 0 auto;
+    padding: 16px var(--po-gutter) 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    opacity: clamp(0, (var(--f, 1) - .4) * 2.5, 1);
+}
+
+.po-bara-eticheta {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--cc-font-mono);
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--cc-text-estompat);
+}
+
+.po-bara-eticheta b {
+    font-weight: 500;
+    color: var(--cc-turcoaz);
+}
+
+.po-unghi {
+    margin-left: 14px;
+    padding-left: 14px;
+    border-left: 1px solid var(--po-fir-tare);
+    letter-spacing: .08em;
+    color: var(--cc-text-slab);
+    font-variant-numeric: tabular-nums;
+}
+
+.po-nav {
+    display: flex;
+    gap: 2px;
+}
+
+.po-nav-buton {
+    position: relative;
+    min-width: 42px;
+    height: 42px;
+    padding: 0 8px;
+    border: 0;
+    background: none;
+    font-family: var(--cc-font-mono);
+    font-size: 12px;
+    letter-spacing: .06em;
+    color: var(--cc-text-slab);
+    cursor: pointer;
+    transition: color .3s;
+}
+
+.po-nav-buton::after {
+    content: '';
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    bottom: 7px;
+    height: 1px;
+    background: currentColor;
+    transform-origin: left center;
+    transform: scaleX(0);
+    transition: transform .6s var(--cc-ease);
+}
+
+.po-nav-buton:hover {
+    color: var(--cc-text);
+}
+
+.po-nav-buton[aria-current="true"] {
+    color: var(--cc-turcoaz);
+}
+
+.po-nav-buton[aria-current="true"]::after {
+    transform: scaleX(1);
+}
+
+/* --- panoul proiectului din fata --- */
+
+/*
+ * Cate un panou pentru fiecare proiect, toate in aceeasi celula; se vede doar
+ * al celui din fata. La „sosire" elementele intra in trepte scurte: meta si
+ * linia, titlul, descrierea, tehnologiile, actiunile.
+ */
+html.po-orbita .po-hud {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: clamp(50px, 7vh, 76px);
+    z-index: 4;
+    max-width: var(--cc-latime);
+    margin: 0 auto;
+    padding: 0 var(--po-gutter);
+    display: grid;
+    opacity: clamp(0, (var(--f, 1) - .6) * 2.5, 1);
+    pointer-events: none;
+}
+
+.po-hud-panou {
+    grid-area: 1 / 1;
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    align-items: end;
+    gap: 16px clamp(32px, 5vw, 80px);
+    visibility: hidden;
+    transition: visibility 0s .4s;
+}
+
+.po-hud-panou.este-activ {
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
+}
+
+.po-hud-st > *,
+.po-hud-dr > * {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity .3s, transform .5s var(--cc-ease);
+}
+
+.po-hud-panou.este-activ .po-hud-st > *,
+.po-hud-panou.este-activ .po-hud-dr > * {
+    opacity: 1;
+    transform: none;
+    transition: opacity .6s var(--cc-ease), transform .9s var(--cc-ease);
+}
+
+.po-hud-panou.este-activ .po-hud-st > :nth-child(2) {
+    transition-delay: .06s;
+}
+
+.po-hud-panou.este-activ .po-hud-dr > :nth-child(1) {
+    transition-delay: .12s;
+}
+
+.po-hud-panou.este-activ .po-hud-dr > :nth-child(2) {
+    transition-delay: .18s;
+}
+
+.po-hud-panou.este-activ .po-hud-dr > :nth-child(3) {
+    transition-delay: .24s;
+}
+
+.po-hud-meta {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+    font-family: var(--cc-font-mono);
+    font-size: 12px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--cc-text-estompat);
+}
+
+.po-hud-meta b {
+    font-weight: 500;
+    color: var(--cc-turcoaz);
+}
+
+.po-hud-total {
+    color: var(--cc-text-slab);
+}
+
+.po-hud-fir {
+    width: 48px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--cc-turcoaz), rgba(124, 233, 224, 0));
+    transform-origin: left center;
+    transform: scaleX(0);
+    transition: transform .9s var(--cc-ease) .15s;
+}
+
+.po-hud-panou.este-activ .po-hud-fir {
+    transform: none;
+}
+
+.po-hud-titlu {
+    margin: 14px 0 0;
+    font-family: var(--cc-font-titlu);
+    font-weight: 700;
+    font-size: clamp(36px, 4.6vw, 74px);
+    line-height: .95;
+    letter-spacing: -.05em;
+    color: var(--cc-alb-cald);
+    text-wrap: balance;
+}
+
+.po-hud-desc {
+    margin: 0;
+    max-width: 38em;
+    font-size: clamp(15px, 1.2vw, 17px);
+    line-height: 1.6;
+    color: var(--cc-text-2);
+}
+
+.po-taguri {
+    margin: 16px 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.po-taguri li {
+    padding: 6px 11px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, .06);
+    font-family: var(--cc-font-mono);
+    font-size: 11px;
+    color: var(--cc-text-estompat);
+}
+
+.po-hud-actiuni {
+    margin-top: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 24px;
+}
+
+.po-hud-stare {
+    display: contents;
+}
+
+.po-live {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding-top: 6px;
+    border-bottom: 1px solid rgba(124, 233, 224, .5);
+    font-family: var(--cc-font-mono);
+    font-size: 13px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--cc-alb-cald);
+    transition: color .3s, border-color .3s;
+}
+
+.po-live:hover {
+    color: var(--cc-turcoaz);
+    border-color: var(--cc-turcoaz);
+}
+
+.po-insigna {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 13px;
+    border: 1px solid var(--po-fir-tare);
+    border-radius: 999px;
+    font-family: var(--cc-font-mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--cc-turcoaz);
+}
+
+.po-insigna::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.po-insigna--lucru {
+    color: #f0c674;
+}
+
+.po-hud-detalii {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 42px;
+    padding: 0 18px;
+    border: 1px solid var(--po-fir-tare);
+    border-radius: 999px;
+    background: none;
+    font-family: var(--cc-font-mono);
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--cc-text);
+    cursor: pointer;
+    transition: border-color .3s, color .3s;
+}
+
+.po-hud-detalii:hover {
+    border-color: var(--cc-turcoaz);
+    color: var(--cc-turcoaz);
+}
+
+html.po-orbita .po-indiciu {
+    position: absolute;
+    left: 50%;
+    bottom: 16px;
+    z-index: 4;
+    display: flex;
+    gap: 10px;
+    margin: 0;
+    font-family: var(--cc-font-mono);
+    font-size: 10.5px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--cc-text-slab);
+    transform: translateX(-50%);
+    opacity: var(--indiciu, 1);
+    transition: opacity .4s;
+}
+
+/* --- tableta: orbita mai stransa, panou pe o coloana mai lata --- */
+
+@media (max-width: 1100px) {
+    html.po-orbita .po-scena {
+        --po-cy: 33%;
+    }
+
+    .po-hud-panou {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    }
+
+    .po-hud-titlu {
+        font-size: clamp(34px, 5.4vw, 56px);
+    }
+}
+
+/* --- telefon: aceeasi orbita, mai plata, cu un singur proiect in centru --- */
+
+@media (max-width: 820px) {
+    /* Proiectul din fata sta mai jos decat pe desktop, aproape de panoul lui:
+       sus, pe telefon, ramanea un gol intre ele. */
+    html.po-orbita .po-scena {
+        --po-cy: 30%;
+        --po-ochi: 20%;
+    }
+
+    html.po-orbita .po-spatiu {
+        perspective: 900px;
+    }
+
+    html.po-orbita .po-bara {
+        justify-content: center;
+        padding-top: 10px;
+    }
+
+    .po-bara-eticheta {
+        display: none;
+    }
+
+    .po-nav-buton {
+        min-width: 40px;
+        padding: 0 6px;
+        font-size: 11px;
+    }
+
+    html.po-orbita .po-hud {
+        bottom: 42px;
+    }
+
+    .po-hud-panou {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+    }
+
+    .po-hud-titlu {
+        margin-top: 10px;
+        font-size: clamp(30px, 9vw, 44px);
+    }
+
+    /* Descrierea intreaga e in fereastra de detalii; aici incap trei randuri. */
+    .po-hud-desc {
+        display: -webkit-box;
+        overflow: hidden;
+        font-size: 14.5px;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+
+    .po-taguri {
+        margin-top: 12px;
+    }
+
+    .po-hud-actiuni {
+        margin-top: 12px;
+    }
+
+    .po-card-eticheta {
+        padding: 30px 12px 10px;
+        font-size: 10.5px;
+    }
+
+    html.po-orbita .po-indiciu {
+        bottom: 12px;
+    }
+}
+
+@media (max-width: 380px) {
+    .po-taguri li:nth-child(3) {
+        display: none;
+    }
+
+    .po-hud-desc {
+        -webkit-line-clamp: 2;
+    }
+}
+
+/* ==================== lista statica ==================== */
+
+/*
+ * Fara orbita (miscare redusa, ecran foarte scund, fara JavaScript) proiectele
+ * sunt o lista editoriala: poza si textul unul langa altul, alternand.
+ */
+html:not(.po-orbita) .po-pista {
+    max-width: var(--cc-latime);
+    margin: 0 auto;
+    padding: clamp(24px, 4vh, 48px) var(--po-gutter) clamp(72px, 10vh, 120px);
+}
+
+html:not(.po-orbita) .po-lista {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(56px, 9vh, 104px);
+}
+
+html:not(.po-orbita) .po-proiect-interior {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(28px, 4vw, 64px);
+    align-items: center;
+}
+
+html:not(.po-orbita) .po-proiect:nth-child(even) .po-poza-cadru {
+    order: 2;
+}
+
+html:not(.po-orbita) .po-poza-cadru,
+.po-detaliu .po-poza-cadru {
+    aspect-ratio: 16 / 10;
+    border: 1px solid var(--po-fir);
+    border-radius: 14px;
+}
+
+.po-nr {
+    font-family: var(--cc-font-mono);
+    font-size: 12px;
+    letter-spacing: .1em;
+    color: var(--cc-turcoaz);
+}
+
+.po-titlu {
+    margin: 12px 0 0;
+    font-family: var(--cc-font-titlu);
+    font-size: clamp(32px, 4vw, 56px);
+    line-height: 1;
+    letter-spacing: -.045em;
+    color: var(--cc-alb-cald);
+}
+
+.po-categorie {
+    margin: 14px 0 0;
+    font-family: var(--cc-font-mono);
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--cc-text-estompat);
+}
+
+.po-descriere {
+    margin: 16px 0 0;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--cc-text-2);
+}
+
+.po-actiuni {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 20px;
+}
+
+@media (max-width: 820px) {
+
+    html:not(.po-orbita) .po-proiect-interior {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    html:not(.po-orbita) .po-proiect:nth-child(even) .po-poza-cadru {
+        order: 0;
+    }
+}
+
+/* ==================== fereastra de detalii ==================== */
+
+.po-detaliu {
+    width: min(1180px, calc(100vw - 32px));
+    max-width: none;
+    max-height: calc(100vh - 32px);
+    margin: auto;
+    padding: 0;
+    overflow: auto;
+    overscroll-behavior: contain;
+    border: 1px solid var(--po-fir-tare);
+    border-radius: 18px;
+    background: #08080f;
+    color: var(--cc-text);
+}
+
+.po-detaliu[open] {
+    animation: poApare .35s ease both;
+}
+
+.po-detaliu::backdrop {
+    background: rgba(4, 4, 10, .8);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+}
+
+@keyframes poApare {
+    from {
+        opacity: 0;
+    }
+}
+
+/* Pagina din spate nu se deruleaza (si orbita nu se roteste) cat e deschisa. */
+html.po-detaliu-deschis {
+    overflow: hidden;
+}
+
+.po-detaliu-cadru {
+    position: relative;
+    padding: clamp(18px, 3vw, 40px);
+}
+
+.po-detaliu-inchide {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 42px;
+    margin: 0 0 18px auto;
+    padding: 0 16px;
+    border: 1px solid var(--po-fir-tare);
+    border-radius: 999px;
+    background: none;
+    font-family: var(--cc-font-mono);
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--cc-text);
+    cursor: pointer;
+}
+
+.po-detaliu-inchide:hover {
+    border-color: var(--cc-turcoaz);
+    color: var(--cc-turcoaz);
+}
+
+.po-detaliu .po-proiect-interior {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(24px, 3vw, 48px);
+    align-items: center;
+}
+
+.po-detaliu .po-poza {
+    will-change: transform;
+}
+
+@media (max-width: 820px) {
+    .po-detaliu {
+        width: calc(100vw - 20px);
+        max-height: calc(100svh - 20px);
+    }
+
+    .po-detaliu .po-proiect-interior {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .po-detaliu .po-titlu {
+        font-size: clamp(30px, 9vw, 40px);
+    }
+}
+
+/* ==================== ce vezi ==================== */
+
+.po-zone-lista {
+    margin: clamp(40px, 7vh, 72px) 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--po-fir-tare);
+}
+
+.po-zona {
+    display: grid;
+    grid-template-columns: 64px minmax(0, 3fr) minmax(0, 5fr) minmax(0, 4fr);
+    align-items: baseline;
+    gap: 10px clamp(20px, 3vw, 48px);
+    padding: clamp(22px, 3.2vh, 32px) 0;
+    border-bottom: 1px solid var(--po-fir);
+    transition: background-color .4s;
+}
+
+.po-zona:hover {
+    background-color: rgba(124, 233, 224, .025);
+}
+
+.po-zona-nr {
+    font-family: var(--cc-font-mono);
+    font-size: 12px;
+    color: var(--cc-turcoaz);
+}
+
+.po-zona-nume {
+    margin: 0;
+    font-family: var(--cc-font-titlu);
+    font-weight: 600;
+    font-size: clamp(24px, 2.6vw, 40px);
+    line-height: 1.05;
+    letter-spacing: -.035em;
+    color: var(--cc-alb-cald);
+}
+
+.po-zona-text {
+    margin: 0;
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--cc-text-2);
+}
+
+.po-zona-proiecte {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 4px 18px;
+}
+
+.po-zona-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 40px;
+    font-family: var(--cc-font-mono);
+    font-size: 12px;
+    letter-spacing: .06em;
+    color: var(--cc-text-estompat);
+    transition: color .3s;
+}
+
+.po-zona-link:hover {
+    color: var(--cc-turcoaz);
+}
+
+@media (max-width: 900px) {
+    .po-zona {
+        grid-template-columns: 44px minmax(0, 1fr);
+    }
+
+    .po-zona-text,
+    .po-zona-proiecte {
+        grid-column: 2;
+    }
+
+    .po-zona-proiecte {
+        justify-content: flex-start;
+    }
+}
+
+/* ==================== finalul ==================== */
+
+.po-final {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding: clamp(110px, 18vh, 200px) var(--po-gutter) clamp(100px, 16vh, 180px);
+    border-top: 1px solid var(--po-fir);
+    text-align: center;
+}
+
+/* Aceeasi lumina turcoaz–violet ca finalul paginii de pachete si al hero-ului. */
+.po-final::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+        radial-gradient(55% 45% at 50% 58%, rgba(124, 233, 224, .12), transparent 70%),
+        radial-gradient(38% 38% at 36% 42%, rgba(160, 120, 255, .14), transparent 70%);
+    animation: poAurora 14s ease-in-out infinite alternate;
+}
+
+@keyframes poAurora {
+    to {
+        transform: scale(1.12) translateY(-3%);
+    }
+}
+
+.po-final-interior {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.po-final-titlu {
+    margin-top: 26px;
+    font-family: var(--cc-font-titlu);
+    font-size: clamp(46px, 9.4vw, 148px);
+    line-height: .9;
+    letter-spacing: -.056em;
+    color: var(--cc-alb-cald);
+}
+
+.po-final-sub {
+    max-width: 520px;
+    margin: 30px auto 0;
+    font-size: clamp(16px, 1.5vw, 19px);
+    line-height: 1.6;
+    color: var(--cc-text-2);
+}
+
+/* ==================== telefoane inguste, ecrane tactile ==================== */
+
+@media (max-width: 480px) {
+    .po-intro-titlu {
+        font-size: clamp(46px, 14vw, 64px);
+    }
+
+    .po-final-titlu {
+        font-size: clamp(40px, 12.5vw, 60px);
+    }
+
+    .po-titlu-mare {
+        font-size: clamp(34px, 10vw, 46px);
+    }
+}
+
+@media (max-width: 820px),
+(pointer: coarse) {
+    .po-pagina .lang-label {
+        padding: 11px 12px;
+    }
+
+    .po-pagina .cc-subsol-linkuri {
+        row-gap: 0;
+    }
+
+    .po-pagina .cc-subsol-linkuri a {
+        display: inline-block;
+        padding: 12px 2px;
+    }
+}
+
+/* ==================== miscare redusa si tiparire ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .po-pagina *,
+    .po-pagina *::before,
+    .po-pagina *::after {
+        transition-duration: 0s !important;
+        transition-delay: 0s !important;
+        animation: none !important;
+    }
+}
+
+@media print {
+
+    .navbar,
+    .cc-progres,
+    .cc-vigneta,
+    .cc-stele,
+    .po-bara,
+    .po-hud,
+    .po-inel,
+    .po-indiciu,
+    .po-intro-sistem,
+    .po-final,
+    .po-detaliu,
+    .cc-subsol {
+        display: none !important;
+    }
+
+    .po-pagina * {
+        color: #111 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+    }
+
+    html.po-orbita .po-pista,
+    html.po-orbita .po-scena,
+    html.po-orbita .po-spatiu,
+    html.po-orbita .po-centru,
+    html.po-orbita .po-proiect {
+        position: static !important;
+        height: auto !important;
+        width: auto !important;
+        margin: 0 !important;
+        transform: none !important;
+        opacity: 1 !important;
+        perspective: none !important;
+    }
+
+    html.po-orbita .po-lista .po-info {
+        display: block !important;
+    }
+
+    html.po-orbita .po-lista .po-poza-cadru {
+        position: relative !important;
+    }
+
+    .po-proiect {
+        break-inside: avoid;
+        margin-bottom: 24pt !important;
+    }
+}

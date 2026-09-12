@@ -8,7 +8,7 @@
     <title data-translate="projects_page_title">Proiecte - CodeCare</title>
 
     <meta name="description" data-translate="projects_page_desc"
-        content="Proiectele realizate de CodeCare: site-uri de prezentare, aplicații mobile Android și platforme web complexe.">
+        content="Proiectele CodeCare: site-uri de prezentare, aplicații mobile pentru Android și iOS și platforme web.">
 
     <link rel="canonical" href="https://codecare.ro/proiecte.html">
 
@@ -18,7 +18,7 @@
     <meta property="og:url" content="https://codecare.ro/proiecte.html">
     <meta property="og:title" content="Proiecte - CodeCare">
     <meta property="og:description"
-        content="Proiectele realizate de CodeCare: site-uri de prezentare și aplicații mobile.">
+        content="Proiectele CodeCare: site-uri de prezentare, aplicații mobile și platforme web.">
     <meta property="og:image" content="https://codecare.ro/assets/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -29,39 +29,60 @@
 
     <link rel="icon" type="image/png" href="assets/logo.png">
     <link rel="apple-touch-icon" href="assets/logo.png">
-    <meta name="theme-color" content="#0f0f23">
+    <meta name="theme-color" content="#06060d">
 
-    <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500&text=CodeCare&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="acasa.css">
+    <link rel="stylesheet" href="proiecte.css">
 </head>
 
-<body>
+<body class="po-pagina">
+    <div class="cc-progres" id="cc-progres" aria-hidden="true"></div>
+    <div class="cc-vigneta" aria-hidden="true"></div>
+    <canvas class="cc-stele" id="cc-stele" aria-hidden="true"></canvas>
+
     <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
-            <div class="nav-logo">
-                <a href="index.html" style="text-decoration: none;">
-                    <img src="assets/logo.png" alt="CodeCare" class="logo-img">
-                </a>
-            </div>
+            <a href="index.html" class="cc-logo cc-marca" aria-label="CodeCare">
+                <svg class="cc-semn" viewBox="128 143 244 123" aria-hidden="true" focusable="false">
+                    <defs>
+                        <linearGradient id="cc-semn-antet" gradientUnits="userSpaceOnUse" x1="135" y1="0" x2="365" y2="0">
+                            <stop offset="0" stop-color="#3ba7ef" />
+                            <stop offset="1" stop-color="#8c50d4" />
+                        </linearGradient>
+                    </defs>
+                    <g fill="none" stroke="url(#cc-semn-antet)" stroke-width="12.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path class="cc-semn-st" d="M166 180 L137.5 207.5 L166 235" />
+                        <path class="cc-semn-dr" d="M334 180 L362.5 207.5 L334 235" />
+                        <g class="cc-semn-bataie">
+                            <path class="cc-semn-inima" pathLength="1" d="M287 223 L303 208 C318 193 316 153 282 153 C266 153 256 161 250 168 C244 161 234 153 218 153 C184 153 182 193 197 208 L250 257 L270 245" />
+                            <path class="cc-semn-slash" d="M261 187.5 L246 225" />
+                        </g>
+                    </g>
+                </svg>
+                <span class="cc-logo-text">Code<span>Care</span></span>
+            </a>
 
             <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="index.html#home" class="nav-link" data-translate="nav_home">Acasă</a>
-                </li>
                 <li class="nav-item">
                     <a href="index.html#services" class="nav-link" data-translate="nav_services">Servicii</a>
                 </li>
                 <li class="nav-item">
-                    <a href="proiecte.html" class="nav-link active" aria-current="page"
-                        data-translate="nav_portfolio">Proiecte</a>
+                    <a href="index.html#proces" class="nav-link" data-translate="home_nav_process">Proces</a>
                 </li>
                 <li class="nav-item">
-                    <a href="index.html#pricing" class="nav-link" data-translate="nav_pricing">Pachete</a>
+                    <a href="proiecte.html" class="nav-link active" aria-current="page" data-translate="nav_portfolio">Proiecte</a>
                 </li>
                 <li class="nav-item">
-                    <a href="index.html#contact" class="nav-link" data-translate="nav_contact">Contact</a>
+                    <a href="pachete.html" class="nav-link" data-translate="nav_pricing">Pachete</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#intrebari" class="nav-link" data-translate="home_nav_faq">Întrebări</a>
                 </li>
             </ul>
 
@@ -84,330 +105,425 @@
         </div>
     </nav>
 
-    <header class="page-header">
-        <div class="page-header-bg" aria-hidden="true"></div>
-        <div class="container">
-            <nav class="breadcrumb" aria-label="Breadcrumb">
-                <a href="index.html" data-translate="breadcrumb_home">Acasă</a>
-                <span aria-hidden="true">/</span>
-                <span data-translate="breadcrumb_projects">Proiecte</span>
-            </nav>
-            <h1 class="page-title" data-translate="projects_header_title">
-                Proiectele <span class="gradient-text">Noastre</span>
-            </h1>
-            <p class="page-subtitle" data-translate="projects_header_subtitle">
-                Fiecare proiect de mai jos a pornit de la o discuție și s-a terminat cu ceva care funcționează în
-                fiecare zi pentru clientul nostru.
+    <main>
+        <header class="po-intro">
+            <p class="po-eticheta">
+                <b>03</b>
+                <span class="po-eticheta-fir" aria-hidden="true"></span>
+                <span data-translate="projects_label">Proiecte</span>
             </p>
-        </div>
-    </header>
-
-    <section class="portfolio">
-        <div class="container">
-            <div class="portfolio-grid">
-                <div class="portfolio-card portfolio-with-link">
-                    <div class="portfolio-image">
-                        <img src="assets/bucegi-experience.webp"
-                            alt="Bucegi Experience - închirieri ATV pe Valea Prahovei" class="project-thumbnail"
-                            loading="lazy" decoding="async" width="1280" height="800">
-                        <div class="portfolio-placeholder" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-                                <line x1="8" y1="21" x2="16" y2="21" />
-                                <line x1="12" y1="17" x2="12" y2="21" />
-                            </svg>
-                        </div>
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-tech">
-                                <span class="tech-tag">HTML5</span>
-                                <span class="tech-tag">Bootstrap</span>
-                                <span class="tech-tag">SEO</span>
-                            </div>
-                        </div>
-                        <a href="https://bucegiexperience.ro/" target="_blank" rel="noopener noreferrer"
-                            class="portfolio-live-btn">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                                <polyline points="15,3 21,3 21,9" />
-                                <line x1="10" y1="14" x2="21" y2="3" />
-                            </svg>
-                            <span data-translate="portfolio_view_live">Live</span>
-                        </a>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3 class="portfolio-title" data-translate="project1_title">Bucegi Experience</h3>
-                        <p class="portfolio-description" data-translate="project1_desc">
-                            Site de prezentare și rezervări pentru închirieri ATV și excursii off-road ghidate pe
-                            Valea Prahovei, optimizat pentru căutările locale din Bușteni, Sinaia și Azuga.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="portfolio-card portfolio-with-link">
-                    <div class="portfolio-image">
-                        <img src="assets/rarcri-invest.webp"
-                            alt="RarCri Invest - dezvoltator imobiliar în Bușteni și Sinaia" class="project-thumbnail"
-                            loading="lazy" decoding="async" width="1280" height="800">
-                        <div class="portfolio-placeholder" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-                                <line x1="8" y1="21" x2="16" y2="21" />
-                                <line x1="12" y1="17" x2="12" y2="21" />
-                            </svg>
-                        </div>
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-tech">
-                                <span class="tech-tag">HTML5</span>
-                                <span class="tech-tag">CSS3</span>
-                                <span class="tech-tag">JavaScript</span>
-                            </div>
-                        </div>
-                        <a href="https://rarcri-invest.ro/" target="_blank" rel="noopener noreferrer"
-                            class="portfolio-live-btn">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                                <polyline points="15,3 21,3 21,9" />
-                                <line x1="10" y1="14" x2="21" y2="3" />
-                            </svg>
-                            <span data-translate="portfolio_view_live">Live</span>
-                        </a>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3 class="portfolio-title" data-translate="project2_title">RarCri Invest</h3>
-                        <p class="portfolio-description" data-translate="project2_desc">
-                            Site de prezentare pentru un dezvoltator imobiliar din Bușteni și Sinaia, cu secțiune
-                            dedicată fiecărui proiect rezidențial, galerie foto și formular de cerere de ofertă.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="portfolio-card portfolio-with-link">
-                    <div class="portfolio-image">
-                        <img src="assets/doctor-casa.webp" alt="Doctor Casa - reparații și mentenanță pentru pensiuni"
-                            class="project-thumbnail" loading="lazy" decoding="async" width="1280" height="800">
-                        <div class="portfolio-placeholder" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-                                <line x1="8" y1="21" x2="16" y2="21" />
-                                <line x1="12" y1="17" x2="12" y2="21" />
-                            </svg>
-                        </div>
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-tech">
-                                <span class="tech-tag">Tailwind CSS</span>
-                                <span class="tech-tag">Core Web Vitals</span>
-                                <span class="tech-tag">SEO</span>
-                            </div>
-                        </div>
-                        <a href="https://doctor-casa.ro/" target="_blank" rel="noopener noreferrer"
-                            class="portfolio-live-btn">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                                <polyline points="15,3 21,3 21,9" />
-                                <line x1="10" y1="14" x2="21" y2="3" />
-                            </svg>
-                            <span data-translate="portfolio_view_live">Live</span>
-                        </a>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3 class="portfolio-title" data-translate="project4_title">Doctor Casa</h3>
-                        <p class="portfolio-description" data-translate="project4_desc">
-                            Site de prezentare pentru o firmă de reparații și mentenanță pentru pensiuni din Bușteni,
-                            Sinaia și Azuga, construit în jurul intervențiilor de urgență și al datelor structurate
-                            pentru căutările locale.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="portfolio-card portfolio-with-link">
-                    <div class="portfolio-image">
-                        <img src="assets/nova-creatives.webp"
-                            alt="NOVA Creatives - agenție de comunicare integrată din București"
-                            class="project-thumbnail" loading="lazy" decoding="async" width="1280" height="800">
-                        <div class="portfolio-placeholder" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-                                <line x1="8" y1="21" x2="16" y2="21" />
-                                <line x1="12" y1="17" x2="12" y2="21" />
-                            </svg>
-                        </div>
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-tech">
-                                <span class="tech-tag">Next.js</span>
-                                <span class="tech-tag">React</span>
-                                <span class="tech-tag">GSAP</span>
-                            </div>
-                        </div>
-                        <a href="https://novacreatives.ro" target="_blank" rel="noopener noreferrer"
-                            class="portfolio-live-btn">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                                <polyline points="15,3 21,3 21,9" />
-                                <line x1="10" y1="14" x2="21" y2="3" />
-                            </svg>
-                            <span data-translate="portfolio_view_live">Live</span>
-                        </a>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3 class="portfolio-title" data-translate="project5_title">NOVA Creatives</h3>
-                        <p class="portfolio-description" data-translate="project5_desc">
-                            Site pentru o agenție de comunicare integrată din București, cu secțiuni de servicii,
-                            portofoliu și reprezentare de talente, cu animații și scroll controlat.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="portfolio-card">
-                    <div class="portfolio-image">
-                        <img src="assets/gym-core.webp"
-                            alt="Gym Platform - platformă de gestiune pentru săli de fitness" class="project-thumbnail"
-                            loading="lazy" decoding="async" width="1280" height="800">
-                        <div class="portfolio-placeholder" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-                                <line x1="8" y1="21" x2="16" y2="21" />
-                                <line x1="12" y1="17" x2="12" y2="21" />
-                            </svg>
-                        </div>
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-tech">
-                                <span class="tech-tag">AI</span>
-                                <span class="tech-tag">Python</span>
-                                <span class="tech-tag">PostgreSQL</span>
-                            </div>
-                        </div>
-                        <div class="portfolio-status-badge">
-                            <span data-translate="portfolio_in_development">În dezvoltare</span>
-                        </div>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3 class="portfolio-title" data-translate="project3_title">Gym Platform</h3>
-                        <p class="portfolio-description" data-translate="project3_desc">
-                            Platformă de gestiune pentru mai multe săli de fitness: check-in și abonamente, reînnoiri,
-                            vânzări și registru de casă, analiză a riscului de abandon și rapoarte în timp real.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="portfolio-card">
-                    <div class="portfolio-image portfolio-image--app">
-                        <img src="assets/seifpro.webp" alt="SeifPro - manager de parole offline pentru Android"
-                            class="project-thumbnail" loading="lazy" decoding="async" width="1280" height="800">
-                        <div class="portfolio-placeholder" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
-                                <line x1="12" y1="18" x2="12.01" y2="18" />
-                            </svg>
-                        </div>
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-tech">
-                                <span class="tech-tag">Java</span>
-                                <span class="tech-tag">Android</span>
-                                <span class="tech-tag">Supabase</span>
-                            </div>
-                        </div>
-                        <div class="portfolio-status portfolio-status--platform">
-                            <span>Android</span>
-                        </div>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3 class="portfolio-title" data-translate="project6_title">SeifPro</h3>
-                        <p class="portfolio-description" data-translate="project6_desc">
-                            Manager de parole offline pentru Android: parolele rămân pe telefon, iar trimiterea
-                            securizată către desktop se face prin scanarea unui cod QR, cu Supabase folosit
-                            doar ca releu.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="portfolio-card">
-                    <div class="portfolio-image portfolio-image--app">
-                        <img src="assets/fasttrack.webp" alt="FastTrack - aplicație pentru șoferi, Android și iOS"
-                            class="project-thumbnail" loading="lazy" decoding="async" width="1280" height="800">
-                        <div class="portfolio-placeholder" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
-                                <line x1="12" y1="18" x2="12.01" y2="18" />
-                            </svg>
-                        </div>
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-tech">
-                                <span class="tech-tag">Flutter</span>
-                                <span class="tech-tag">Dart</span>
-                                <span class="tech-tag">Senzori IMU</span>
-                            </div>
-                        </div>
-                        <div class="portfolio-status portfolio-status--platform">
-                            <span>Android + iOS</span>
-                        </div>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3 class="portfolio-title" data-translate="project7_title">FastTrack</h3>
-                        <p class="portfolio-description" data-translate="project7_desc">
-                            Aplicație pentru șoferi, pe Android și iOS: viteza în timp real, cronometrare pe sectoare
-                            de drum și măsurarea accelerațiilor 0-100, 100-200 și 200-300 km/h.
-                        </p>
-                    </div>
-                </div>
+            <h1 class="po-intro-titlu po-linii" data-reveal>
+                <span class="po-rand"><span data-translate="projects_title_l1">Lucruri care</span></span>
+                <span class="po-rand"><span data-translate="projects_title_l2">rulează acum<span class="po-accent">.</span></span></span>
+            </h1>
+            <p class="po-intro-sub" data-translate="projects_intro_sub">Nu machete, nu șabloane. Site-uri, aplicații și
+                platforme construite de la zero — cele mai multe sunt online și le poți deschide chiar acum.</p>
+            <div class="po-intro-sistem" aria-hidden="true">
+                <span data-translate="projects_sys_label">Sistem de proiecte</span>
+                <span class="po-intro-fir"></span>
+                <span><b data-numar-proiecte>07</b> <span data-translate="projects_sys_count">proiecte</span></span>
+                <span class="po-intro-rotire">
+                    <span class="po-intro-fir"></span>
+                    <span class="po-doar-mare" data-translate="projects_scroll">Derulează ca să rotești</span>
+                    <span class="po-doar-mic" data-translate="projects_swipe">Derulează sau glisează</span>
+                    <span class="po-sageata-jos">↓</span>
+                </span>
             </div>
-        </div>
-    </section>
+        </header>
 
-    <section class="projects-cta">
-        <div class="container">
-            <div class="cta-card">
-                <h2 data-translate="projects_cta_title">Ai un proiect în minte?</h2>
-                <p data-translate="projects_cta_desc">
-                    Spune-ne ce vrei să construiești și îți răspundem cu o estimare clară, fără obligații.
-                </p>
-                <div class="cta-actions">
-                    <a href="index.html#contact" class="btn btn-primary" data-translate="projects_cta_btn">Hai să
-                        discutăm</a>
-                    <a href="index.html" class="btn btn-secondary" data-translate="projects_back">Înapoi la pagina
-                        principală</a>
-                </div>
-            </div>
-        </div>
-    </section>
+        <section class="po-sistem" aria-labelledby="po-titlu-sistem">
+            <h2 class="po-ascuns" id="po-titlu-sistem" data-translate="projects_system_title">Proiectele CodeCare</h2>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <div class="footer-logo">
-                        <img src="assets/logo.png" alt="CodeCare" class="logo-img logo-img--footer">
+            <div class="po-pista" id="po-pista">
+                <div class="po-scena" id="po-scena">
+                    <div class="po-bara">
+                        <p class="po-bara-eticheta" aria-hidden="true">
+                            <b>03</b> <span>/</span> <span data-translate="projects_sys_label">Sistem de proiecte</span>
+                            <span class="po-unghi" id="po-unghi">θ 000.0°</span>
+                        </p>
+                        <nav class="po-nav" id="po-nav" aria-label="Proiecte"></nav>
                     </div>
-                    <p class="footer-description" data-translate="footer_description">
-                        Soluții IT premium pentru afaceri moderne. Transformăm ideile în realitate digitală.
+
+                    <div class="po-spatiu">
+                        <div class="po-centru" id="po-centru">
+                            <div class="po-inel" id="po-inel" aria-hidden="true">
+                                <svg viewBox="-100 -100 200 200">
+                                    <circle class="po-inel-interior" r="74" />
+                                    <circle class="po-inel-gradatii" r="99" />
+                                    <circle class="po-inel-cerc" r="99" pathLength="1" />
+                                </svg>
+                            </div>
+
+                            <ol class="po-lista" id="po-lista">
+                                <li class="po-proiect" id="bucegi-experience">
+                                    <article class="po-proiect-interior">
+                                        <div class="po-poza-cadru">
+                                            <img class="po-poza" src="assets/bucegi-experience.webp"
+                                                alt="Bucegi Experience - închirieri ATV pe Valea Prahovei" width="1280"
+                                                height="800" loading="lazy" decoding="async">
+                                        </div>
+                                        <div class="po-info">
+                                            <span class="po-nr">01</span>
+                                            <h3 class="po-titlu" data-translate="project1_title">Bucegi Experience</h3>
+                                            <p class="po-categorie" data-translate="projects_cat1">Site de prezentare și rezervări</p>
+                                            <p class="po-descriere" data-translate="project1_desc">Site de prezentare și
+                                                rezervări pentru închirieri ATV și excursii off-road ghidate pe Valea Prahovei,
+                                                optimizat pentru căutările locale din Bușteni, Sinaia și Azuga.</p>
+                                            <ul class="po-taguri">
+                                                <li>HTML5</li>
+                                                <li>Bootstrap</li>
+                                                <li>SEO</li>
+                                            </ul>
+                                            <div class="po-actiuni">
+                                                <a class="po-live" href="https://bucegiexperience.ro/" target="_blank"
+                                                    rel="noopener noreferrer"><span data-translate="home_proj_live">VEZI SITE-UL ↗</span></a>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </li>
+
+                                <li class="po-proiect po-proiect--app" id="seifpro">
+                                    <article class="po-proiect-interior">
+                                        <div class="po-poza-cadru">
+                                            <img class="po-poza" src="assets/seifpro.webp"
+                                                alt="SeifPro - manager de parole offline pentru Android" width="1280"
+                                                height="800" loading="lazy" decoding="async">
+                                        </div>
+                                        <div class="po-info">
+                                            <span class="po-nr">02</span>
+                                            <h3 class="po-titlu" data-translate="project6_title">SeifPro</h3>
+                                            <p class="po-categorie" data-translate="projects_cat6">Aplicație Android</p>
+                                            <p class="po-descriere" data-translate="project6_desc">Manager de parole
+                                                offline pentru Android: parolele rămân pe telefon, iar trimiterea securizată
+                                                către desktop se face prin scanarea unui cod QR, cu Supabase folosit doar ca
+                                                releu.</p>
+                                            <ul class="po-taguri">
+                                                <li>Java</li>
+                                                <li>Android</li>
+                                                <li>Supabase</li>
+                                            </ul>
+                                            <div class="po-actiuni">
+                                                <span class="po-insigna">Android</span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </li>
+
+                                <li class="po-proiect" id="gym-platform">
+                                    <article class="po-proiect-interior">
+                                        <div class="po-poza-cadru">
+                                            <img class="po-poza" src="assets/gym-core.webp"
+                                                alt="Gym Platform - platformă de gestiune pentru săli de fitness" width="1280"
+                                                height="800" loading="lazy" decoding="async">
+                                        </div>
+                                        <div class="po-info">
+                                            <span class="po-nr">03</span>
+                                            <h3 class="po-titlu" data-translate="project3_title">Gym Platform</h3>
+                                            <p class="po-categorie" data-translate="projects_cat3">Platformă web de gestiune</p>
+                                            <p class="po-descriere" data-translate="project3_desc">Platformă de gestiune
+                                                pentru mai multe săli de fitness: check-in și abonamente, reînnoiri, vânzări
+                                                și registru de casă, analiză a riscului de abandon și rapoarte în timp real.</p>
+                                            <ul class="po-taguri">
+                                                <li>AI</li>
+                                                <li>Python</li>
+                                                <li>PostgreSQL</li>
+                                            </ul>
+                                            <div class="po-actiuni">
+                                                <span class="po-insigna po-insigna--lucru" data-translate="portfolio_in_development">În dezvoltare</span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </li>
+
+                                <li class="po-proiect" id="rarcri-invest">
+                                    <article class="po-proiect-interior">
+                                        <div class="po-poza-cadru">
+                                            <img class="po-poza" src="assets/rarcri-invest.webp"
+                                                alt="RarCri Invest - dezvoltator imobiliar în Bușteni și Sinaia" width="1280"
+                                                height="800" loading="lazy" decoding="async">
+                                        </div>
+                                        <div class="po-info">
+                                            <span class="po-nr">04</span>
+                                            <h3 class="po-titlu" data-translate="project2_title">RarCri Invest</h3>
+                                            <p class="po-categorie" data-translate="projects_cat2">Site de prezentare</p>
+                                            <p class="po-descriere" data-translate="project2_desc">Site de prezentare
+                                                pentru un dezvoltator imobiliar din Bușteni și Sinaia, cu secțiune dedicată
+                                                fiecărui proiect rezidențial, galerie foto și formular de cerere de ofertă.</p>
+                                            <ul class="po-taguri">
+                                                <li>HTML5</li>
+                                                <li>CSS3</li>
+                                                <li>JavaScript</li>
+                                            </ul>
+                                            <div class="po-actiuni">
+                                                <a class="po-live" href="https://rarcri-invest.ro/" target="_blank"
+                                                    rel="noopener noreferrer"><span data-translate="home_proj_live">VEZI SITE-UL ↗</span></a>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </li>
+
+                                <li class="po-proiect" id="doctor-casa">
+                                    <article class="po-proiect-interior">
+                                        <div class="po-poza-cadru">
+                                            <img class="po-poza" src="assets/doctor-casa.webp"
+                                                alt="Doctor Casa - reparații și mentenanță pentru pensiuni" width="1280"
+                                                height="800" loading="lazy" decoding="async">
+                                        </div>
+                                        <div class="po-info">
+                                            <span class="po-nr">05</span>
+                                            <h3 class="po-titlu" data-translate="project4_title">Doctor Casa</h3>
+                                            <p class="po-categorie" data-translate="projects_cat4">Site de prezentare</p>
+                                            <p class="po-descriere" data-translate="project4_desc">Site de prezentare
+                                                pentru o firmă de reparații și mentenanță pentru pensiuni din Bușteni, Sinaia
+                                                și Azuga, construit în jurul intervențiilor de urgență și al datelor
+                                                structurate pentru căutările locale.</p>
+                                            <ul class="po-taguri">
+                                                <li>Tailwind CSS</li>
+                                                <li>Core Web Vitals</li>
+                                                <li>SEO</li>
+                                            </ul>
+                                            <div class="po-actiuni">
+                                                <a class="po-live" href="https://doctor-casa.ro/" target="_blank"
+                                                    rel="noopener noreferrer"><span data-translate="home_proj_live">VEZI SITE-UL ↗</span></a>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </li>
+
+                                <li class="po-proiect" id="nova-creatives">
+                                    <article class="po-proiect-interior">
+                                        <div class="po-poza-cadru">
+                                            <img class="po-poza" src="assets/nova-creatives.webp"
+                                                alt="NOVA Creatives - agenție de comunicare integrată din București"
+                                                width="1280" height="800" loading="lazy" decoding="async">
+                                        </div>
+                                        <div class="po-info">
+                                            <span class="po-nr">06</span>
+                                            <h3 class="po-titlu" data-translate="project5_title">NOVA Creatives</h3>
+                                            <p class="po-categorie" data-translate="projects_cat5">Site de agenție</p>
+                                            <p class="po-descriere" data-translate="project5_desc">Site pentru o agenție
+                                                de comunicare integrată din București, cu secțiuni de servicii, portofoliu și
+                                                reprezentare de talente, cu animații și scroll controlat.</p>
+                                            <ul class="po-taguri">
+                                                <li>Next.js</li>
+                                                <li>React</li>
+                                                <li>GSAP</li>
+                                            </ul>
+                                            <div class="po-actiuni">
+                                                <a class="po-live" href="https://novacreatives.ro" target="_blank"
+                                                    rel="noopener noreferrer"><span data-translate="home_proj_live">VEZI SITE-UL ↗</span></a>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </li>
+
+                                <li class="po-proiect po-proiect--app" id="fasttrack">
+                                    <article class="po-proiect-interior">
+                                        <div class="po-poza-cadru">
+                                            <img class="po-poza" src="assets/fasttrack.webp"
+                                                alt="FastTrack - aplicație pentru șoferi, Android și iOS" width="1280"
+                                                height="800" loading="lazy" decoding="async">
+                                        </div>
+                                        <div class="po-info">
+                                            <span class="po-nr">07</span>
+                                            <h3 class="po-titlu" data-translate="project7_title">FastTrack</h3>
+                                            <p class="po-categorie" data-translate="projects_cat7">Aplicație Android și iOS</p>
+                                            <p class="po-descriere" data-translate="project7_desc">Aplicație pentru
+                                                șoferi, pe Android și iOS: viteza în timp real, cronometrare pe sectoare de
+                                                drum și măsurarea accelerațiilor 0-100, 100-200 și 200-300 km/h.</p>
+                                            <ul class="po-taguri">
+                                                <li>Flutter</li>
+                                                <li>Dart</li>
+                                                <li>Senzori IMU</li>
+                                            </ul>
+                                            <div class="po-actiuni">
+                                                <span class="po-insigna">Android + iOS</span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="po-hud" id="po-hud"></div>
+
+                    <p class="po-indiciu" aria-hidden="true">
+                        <span class="po-doar-mare" data-translate="projects_scroll">Derulează ca să rotești</span>
+                        <span class="po-doar-mic" data-translate="projects_swipe">Derulează sau glisează</span>
+                        <span>↓</span>
                     </p>
                 </div>
+            </div>
+        </section>
 
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h4 data-translate="footer_services_title">Servicii</h4>
-                        <ul>
-                            <li><a href="index.html#services" data-translate="footer_websites">Site-uri Web</a></li>
-                            <li><a href="index.html#services" data-translate="footer_mobile">Aplicații Mobile</a></li>
-                            <li><a href="index.html#services" data-translate="footer_seo">SEO Tehnic</a></li>
-                            <li><a href="index.html#services" data-translate="footer_hosting">Hosting & Domeniu</a></li>
-                            <li><a href="index.html#services" data-translate="footer_maint">Mentenanță & Suport</a></li>
-                        </ul>
-                    </div>
+        <section class="po-bloc po-zone" aria-labelledby="po-titlu-zone">
+            <div class="po-cap" data-reveal>
+                <p class="po-eticheta">
+                    <b>04</b>
+                    <span class="po-eticheta-fir" aria-hidden="true"></span>
+                    <span data-translate="projects_what_label">Ce vezi</span>
+                </p>
+                <h2 class="po-titlu-mare" id="po-titlu-zone" data-translate="projects_what_title">Fiecare proiect rezolvă
+                    altă problemă.</h2>
+                <p class="po-cap-text" data-translate="projects_what_sub">Nu facem doar site-uri care arată bine. În spatele
+                    lor sunt aplicații, baze de date și sisteme făcute pe măsură.</p>
+            </div>
 
-                    <div class="footer-column">
-                        <h4 data-translate="footer_company_title">Companie</h4>
-                        <ul>
-                            <li><a href="index.html#home" data-translate="footer_home">Acasă</a></li>
-                            <li><a href="index.html#services" data-translate="footer_services_link">Servicii</a></li>
-                            <li><a href="proiecte.html" aria-current="page"
-                                    data-translate="footer_portfolio">Proiecte</a></li>
-                            <li><a href="pachete.html" data-translate="footer_pricing">Pachete</a></li>
-                            <li><a href="index.html#contact" data-translate="footer_contact">Contact</a></li>
-                        </ul>
+            <ul class="po-zone-lista">
+                <li class="po-zona" data-zona="web" data-reveal>
+                    <span class="po-zona-nr" aria-hidden="true">/01</span>
+                    <h3 class="po-zona-nume" data-translate="projects_area_web">Web</h3>
+                    <p class="po-zona-text" data-translate="projects_area_web_text">Site-uri de prezentare și rezervări,
+                        rapide și construite ca să fie găsite.</p>
+                    <div class="po-zona-proiecte"></div>
+                </li>
+                <li class="po-zona" data-zona="mobil" data-reveal>
+                    <span class="po-zona-nr" aria-hidden="true">/02</span>
+                    <h3 class="po-zona-nume" data-translate="projects_area_mobil">Android și iOS</h3>
+                    <p class="po-zona-text" data-translate="projects_area_mobil_text">Aplicații native în Java și
+                        cross-platform în Flutter.</p>
+                    <div class="po-zona-proiecte"></div>
+                </li>
+                <li class="po-zona" data-zona="platforme" data-reveal>
+                    <span class="po-zona-nr" aria-hidden="true">/03</span>
+                    <h3 class="po-zona-nume" data-translate="projects_area_platforme">Platforme</h3>
+                    <p class="po-zona-text" data-translate="projects_area_platforme_text">Gestiunea zilnică a unei afaceri:
+                        abonamente, încasări și rapoarte în timp real.</p>
+                    <div class="po-zona-proiecte"></div>
+                </li>
+                <li class="po-zona" data-zona="date" data-reveal>
+                    <span class="po-zona-nr" aria-hidden="true">/04</span>
+                    <h3 class="po-zona-nume" data-translate="projects_area_date">Baze de date</h3>
+                    <p class="po-zona-text" data-translate="projects_area_date_text">PostgreSQL pentru datele de gestiune,
+                        Supabase ca releu securizat.</p>
+                    <div class="po-zona-proiecte"></div>
+                </li>
+                <li class="po-zona" data-zona="seo" data-reveal>
+                    <span class="po-zona-nr" aria-hidden="true">/05</span>
+                    <h3 class="po-zona-nume" data-translate="projects_area_seo">SEO</h3>
+                    <p class="po-zona-text" data-translate="projects_area_seo_text">Date structurate și optimizare pentru
+                        căutările locale din Bușteni, Sinaia și Azuga.</p>
+                    <div class="po-zona-proiecte"></div>
+                </li>
+                <li class="po-zona" data-zona="custom" data-reveal>
+                    <span class="po-zona-nr" aria-hidden="true">/06</span>
+                    <h3 class="po-zona-nume" data-translate="projects_area_custom">Sisteme custom</h3>
+                    <p class="po-zona-text" data-translate="projects_area_custom_text">Analiza riscului de abandon, transfer
+                        prin cod QR, măsurători din senzorii telefonului.</p>
+                    <div class="po-zona-proiecte"></div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="po-final" aria-labelledby="po-titlu-final">
+            <div class="po-final-interior">
+                <p class="po-eticheta po-eticheta--centru">
+                    <b>05</b>
+                    <span class="po-eticheta-fir" aria-hidden="true"></span>
+                    <span data-translate="projects_next_label">Următorul proiect</span>
+                </p>
+                <h2 class="po-final-titlu po-linii" id="po-titlu-final" data-reveal>
+                    <span class="po-rand"><span data-translate="projects_next_t1">Ai o idee care</span></span>
+                    <span class="po-rand"><span data-translate="projects_next_t2">încă nu există<span class="po-accent">?</span></span></span>
+                </h2>
+                <p class="po-final-sub" data-translate="projects_next_sub">Spune-ne ce trebuie să facă. Construim restul.</p>
+                <div class="po-butoane">
+                    <a href="index.html#contact" class="cc-btn cc-btn--alb po-cu-sageata">
+                        <span data-translate="projects_next_btn">Discută proiectul</span>
+                        <span class="po-sageata" aria-hidden="true">→</span>
+                    </a>
+                    <a href="pachete.html" class="cc-btn cc-btn--contur po-cu-sageata">
+                        <span data-translate="projects_next_packs">Vezi pachetele</span>
+                        <span class="po-sageata" aria-hidden="true">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <dialog class="po-detaliu" id="po-detaliu">
+            <div class="po-detaliu-cadru">
+                <button type="button" class="po-detaliu-inchide" id="po-detaliu-inchide">
+                    <span data-translate="projects_close">Închide</span>
+                    <span aria-hidden="true">✕</span>
+                </button>
+                <div class="po-detaliu-corp" id="po-detaliu-corp"></div>
+            </div>
+        </dialog>
+
+        <template id="po-sablon-hud">
+            <div class="po-hud-panou">
+                <div class="po-hud-st">
+                    <p class="po-hud-meta">
+                        <b data-camp="nr"></b>
+                        <span class="po-hud-total" data-camp="total"></span>
+                        <span class="po-hud-fir" aria-hidden="true"></span>
+                        <span data-camp="categorie"></span>
+                    </p>
+                    <h3 class="po-hud-titlu" data-camp="titlu"></h3>
+                </div>
+                <div class="po-hud-dr">
+                    <p class="po-hud-desc" data-camp="descriere"></p>
+                    <ul class="po-taguri" data-camp="taguri"></ul>
+                    <div class="po-hud-actiuni">
+                        <span class="po-hud-stare" data-camp="actiune"></span>
+                        <button type="button" class="po-hud-detalii">
+                            <span data-translate="projects_details">Detalii</span>
+                            <span aria-hidden="true">+</span>
+                        </button>
                     </div>
                 </div>
             </div>
+        </template>
 
+        <template id="po-sablon-nav">
+            <button type="button" class="po-nav-buton">
+                <span data-camp="nr"></span>
+                <span class="po-ascuns" data-camp="titlu"></span>
+            </button>
+        </template>
+
+        <template id="po-sablon-card">
+            <span class="po-card-eticheta" aria-hidden="true">
+                <b data-camp="nr"></b>
+                <span data-camp="titlu"></span>
+            </span>
+        </template>
+
+        <template id="po-sablon-zona">
+            <a class="po-zona-link" data-camp="ancora">
+                <span data-camp="titlu"></span>
+                <span aria-hidden="true">↗</span>
+            </a>
+        </template>
+    </main>
+
+    <footer class="cc-subsol">
+        <div class="cc-subsol-interior">
+            <a href="index.html" class="cc-logo cc-logo--mic cc-marca" aria-label="CodeCare">
+                <svg class="cc-semn" viewBox="128 143 244 123" aria-hidden="true" focusable="false">
+                    <defs>
+                        <linearGradient id="cc-semn-subsol" gradientUnits="userSpaceOnUse" x1="135" y1="0" x2="365" y2="0">
+                            <stop offset="0" stop-color="#3ba7ef" />
+                            <stop offset="1" stop-color="#8c50d4" />
+                        </linearGradient>
+                    </defs>
+                    <g fill="none" stroke="url(#cc-semn-subsol)" stroke-width="12.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path class="cc-semn-st" d="M166 180 L137.5 207.5 L166 235" />
+                        <path class="cc-semn-dr" d="M334 180 L362.5 207.5 L334 235" />
+                        <g class="cc-semn-bataie">
+                            <path class="cc-semn-inima" pathLength="1" d="M287 223 L303 208 C318 193 316 153 282 153 C266 153 256 161 250 168 C244 161 234 153 218 153 C184 153 182 193 197 208 L250 257 L270 245" />
+                            <path class="cc-semn-slash" d="M261 187.5 L246 225" />
+                        </g>
+                    </g>
+                </svg>
+                <span class="cc-logo-text">Code<span>Care</span></span>
+            </a>
+            <nav class="cc-subsol-linkuri" aria-label="Footer">
+                <a href="proiecte.html" aria-current="page" data-translate="footer_portfolio">Proiecte</a>
+                <a href="pachete.html" data-translate="footer_pricing">Pachete</a>
+                <a href="index.html#contact" data-translate="footer_contact">Contact</a>
+            </nav>
             <div class="footer-bottom">
                 <!--
                 <p class="footer-legal">
@@ -415,12 +531,15 @@
                     <span data-translate="footer_legal_ids">CUI: RO12345678 · Reg. Com.: J01/123/2025</span>
                 </p>
                 -->
-                <p data-translate="footer_copyright">© 2026 CodeCare. Toate drepturile rezervate.</p>
+                <p data-translate="footer_copyright">© 2026 CodeCare · Alba Iulia</p>
             </div>
         </div>
     </footer>
 
     <script src="scripts.js"></script>
+    <script src="acasa.js"></script>
+    <script src="proiecte-date.js"></script>
+    <script src="proiecte.js"></script>
 </body>
 
 </html>
