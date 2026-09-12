@@ -2,9 +2,9 @@
  * Prima pagina (index.html), refacuta dupa designul „CodeCare Homepage v2"
  * din Claude Design.
  *
- * Fisier separat de styles.css, intentionat: proiecte.html si pachete.html
- * raman pe stilul vechi, iar nimic de aici nu le poate atinge. index.html nu
- * mai incarca styles.css deloc.
+ * Designul comun al site-ului: il incarca toate cele trei pagini (prima
+ * pagina, pachete.html si proiecte.html), fiecare cu stilurile ei deasupra.
+ * O regula `cc-` a carei clasa nu apare pe o pagina pur si simplu nu se aplica acolo.
  *
  * scripts.js e comun tuturor paginilor si cauta clase precise — .navbar,
  * .nav-menu, .nav-link, .hamburger, .language-switch, .contact-form,

@@ -47,11 +47,8 @@ document.addEventListener('DOMContentLoaded', function () {
     initializeLanguageLabels();
     initializeNavigation();
     initializeScrollHandler();
-    initializeScrollEffects();
     initializeContactForm();
-    initializeAnimations();
     initializeThumbnailFallback();
-    initializePortfolioTouch();
     initializeCustomSelect();
     initializePricingButtons();
     preselecteazaServiciulDinAdresa();
@@ -366,11 +363,10 @@ function updateActiveNavLink() {
 
 // --- Scroll Effects & Animations ---
 
-// Un singur handler de scroll pentru tot: navbar, link activ si parallax.
+// Un singur handler de scroll pentru tot site-ul: antetul, link-ul activ si efectele paginilor.
 // Rulam pe requestAnimationFrame ca sa nu facem layout de mai multe ori pe frame.
 function initializeScrollHandler() {
     const navbar = document.querySelector('.navbar');
-    const particles = document.querySelector('.hero-particles');
     let ticking = false;
 
     function onScroll() {
@@ -386,9 +382,6 @@ function initializeScrollHandler() {
 
         if (navbar) {
             navbar.classList.toggle('scrolled', scrollY > 24);
-        }
-        if (particles) {
-            particles.style.transform = `translateY(${scrollY * 0.5}px)`;
         }
         updateActiveNavLink();
 
@@ -410,26 +403,6 @@ function initializeScrollHandler() {
     }, { passive: true });
 
     onScroll();
-}
-
-function initializeScrollEffects() {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in-up');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-    // Pagina de pachete isi are propriile aparitii, in pachete.js.
-    document.querySelectorAll('.service-card, .portfolio-card, .contact-item')
-        .forEach(el => observer.observe(el));
-}
-
-function initializeAnimations() {
-    document.querySelectorAll('.service-card').forEach((card, i) => card.style.animationDelay = `${i * 0.08}s`);
-    document.querySelectorAll('.portfolio-card').forEach((card, i) => card.style.animationDelay = `${i * 0.08}s`);
 }
 
 // --- Contact Form ---
@@ -563,7 +536,7 @@ function validateContactForm(formData) {
 }
 
 function showNotification(message, type = 'info') {
-    // Stilurile pentru .notification traiesc in styles.css
+    // Stilurile pentru .notification traiesc in acasa.css
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
     notification.setAttribute('role', type === 'error' ? 'alert' : 'status');
@@ -591,43 +564,9 @@ function initializeThumbnailFallback() {
     });
 }
 
-/*
- * Pe touch nu exista hover, deci lista de tehnologii se dezvaluie la tap.
- * Un singur card deschis o data; butonul Live isi pastreaza comportamentul.
- */
-function initializePortfolioTouch() {
-    if (window.matchMedia('(hover: hover)').matches) return;
-
-    document.querySelectorAll('.portfolio-card').forEach(card => {
-        const image = card.querySelector('.portfolio-image');
-        if (!image) return;
-
-        image.addEventListener('click', function (event) {
-            if (event.target.closest('.portfolio-live-btn')) return;
-
-            const opening = !card.classList.contains('tech-visible');
-            document.querySelectorAll('.portfolio-card.tech-visible')
-                .forEach(other => other.classList.remove('tech-visible'));
-
-            if (opening) {
-                card.classList.add('tech-visible');
-                // gestul a fost descoperit: oprim indiciile animate
-                document.body.classList.add('tech-discovered');
-            }
-        });
-    });
-
-    // tap in afara cardurilor inchide lista deschisa
-    document.addEventListener('click', function (event) {
-        if (event.target.closest('.portfolio-card')) return;
-        document.querySelectorAll('.portfolio-card.tech-visible')
-            .forEach(card => card.classList.remove('tech-visible'));
-    });
-}
-
 function initializeCustomSelect() {
     const wrapper = document.querySelector('.custom-select-wrapper');
-    // proiecte.html nu are formular de contact
+    // Doar prima pagina are formular de contact
     if (!wrapper) return;
 
     const select = wrapper.querySelector('.custom-select');
