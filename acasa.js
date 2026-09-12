@@ -171,7 +171,14 @@
 
     function pornesteIncarcatorul() {
         const loader = $('cc-loader');
-        if (!loader) return;
+        // pachete.html foloseste acelasi antet, dar n-are incarcator: fara
+        // asta, `cc-incarcare` ramanea pe <html> si logo-ul din antet astepta
+        // pentru totdeauna un incarcator care nu exista.
+        if (!loader) {
+            html.classList.remove('cc-incarcare');
+            incarcatorActiv = false;
+            return;
+        }
         if (!arataIncarcator) {
             loader.remove();
             return;

@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title data-translate="prices_page_title">Pachete - CodeCare</title>
+
+    <meta name="description" data-translate="prices_page_desc"
+        content="Ce include fiecare pachet CodeCare, ce nu include, termene și costurile care nu sunt ale noastre. Ofertă făcută pe măsura proiectului, fără surprize.">
+
+    <link rel="canonical" href="https://codecare.ro/pachete.html">
+
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://codecare.ro/pachete.html">
+    <meta property="og:title" content="Pachete - CodeCare">
+    <meta property="og:description"
+        content="Ce include fiecare pachet, ce nu include, termene și costuri. Fără surprize.">
+    <meta property="og:image" content="https://codecare.ro/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="CodeCare - Soluții IT Premium">
+    <meta property="og:site_name" content="CodeCare">
+    <meta property="og:locale" content="ro_RO">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="apple-touch-icon" href="assets/logo.png">
+    <meta name="theme-color" content="#06060d">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500&text=CodeCare&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="acasa.css">
+    <link rel="stylesheet" href="pachete.css">
+</head>
+
+<body class="pc-pagina">
+    <div class="cc-progres" id="cc-progres" aria-hidden="true"></div>
+    <div class="cc-vigneta" aria-hidden="true"></div>
+    <canvas class="cc-stele" id="cc-stele" aria-hidden="true"></canvas>
+
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <a href="index.html" class="cc-logo cc-marca" aria-label="CodeCare">
+                <svg class="cc-semn" viewBox="128 143 244 123" aria-hidden="true" focusable="false">
+                    <defs>
+                        <linearGradient id="cc-semn-antet" gradientUnits="userSpaceOnUse" x1="135" y1="0" x2="365" y2="0">
+                            <stop offset="0" stop-color="#3ba7ef" />
+                            <stop offset="1" stop-color="#8c50d4" />
+                        </linearGradient>
+                    </defs>
+                    <g fill="none" stroke="url(#cc-semn-antet)" stroke-width="12.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path class="cc-semn-st" d="M166 180 L137.5 207.5 L166 235" />
+                        <path class="cc-semn-dr" d="M334 180 L362.5 207.5 L334 235" />
+                        <g class="cc-semn-bataie">
+                            <path class="cc-semn-inima" pathLength="1" d="M287 223 L303 208 C318 193 316 153 282 153 C266 153 256 161 250 168 C244 161 234 153 218 153 C184 153 182 193 197 208 L250 257 L270 245" />
+                            <path class="cc-semn-slash" d="M261 187.5 L246 225" />
+                        </g>
+                    </g>
+                </svg>
+                <span class="cc-logo-text">Code<span>Care</span></span>
+            </a>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html#services" class="nav-link" data-translate="nav_services">Servicii</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#proces" class="nav-link" data-translate="home_nav_process">Proces</a>
+                </li>
+                <li class="nav-item">
+                    <a href="proiecte.html" class="nav-link" data-translate="nav_portfolio">Proiecte</a>
+                </li>
+                <li class="nav-item">
+                    <a href="pachete.html" class="nav-link active" aria-current="page" data-translate="nav_pricing">Pachete</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#intrebari" class="nav-link" data-translate="home_nav_faq">Întrebări</a>
+                </li>
+            </ul>
+
+            <div class="language-switch">
+                <div class="switch-container">
+                    <span class="lang-label" id="lang-ro" role="button" tabindex="0">RO</span>
+                    <label class="switch" aria-label="Schimbă limba">
+                        <input type="checkbox" id="language-toggle">
+                        <span class="slider"></span>
+                    </label>
+                    <span class="lang-label" id="lang-en" role="button" tabindex="0">EN</span>
+                </div>
+            </div>
+
+            <div class="hamburger" aria-label="Meniu mobil" role="button">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <header class="pc-hero" id="pc-hero">
+            <div class="pc-hero-scena">
+                <div class="pc-hero-cap">
+                    <p class="pc-eticheta">
+                        <b data-translate="prices_hero_label">Pachete CodeCare</b>
+                        <span class="pc-eticheta-fir" aria-hidden="true"></span>
+                        <span data-translate="prices_hero_path">Înțelegi → Configurezi → Construim</span>
+                    </p>
+                    <h1 class="pc-hero-titlu pc-linii" data-reveal>
+                        <span class="pc-rand"><span data-translate="prices_hero_t1">Ce</span></span>
+                        <span class="pc-rand"><span data-translate="prices_hero_t2">construim<span class="pc-accent">?</span></span></span>
+                    </h1>
+                    <p class="pc-hero-sub" data-translate="prices_hero_sub">Fiecare proiect pornește altfel. Alege
+                        direcția potrivită afacerii tale, iar noi construim soluția în jurul ei.</p>
+                </div>
+
+                <ol class="pc-directii" id="pc-directii" aria-label="Pachete"></ol>
+
+                <a href="#pachete" class="pc-indiciu">
+                    <span data-translate="prices_hero_scroll">Derulează ca să explorezi</span>
+                    <span class="pc-indiciu-sageata" aria-hidden="true">↓</span>
+                </a>
+            </div>
+        </header>
+
+        <div class="pc-pachete" id="pachete">
+            <nav class="pc-sina" aria-label="Pachete">
+                <div class="pc-sina-interior" id="pc-sina"></div>
+            </nav>
+
+            <section class="pc-capitol" aria-labelledby="pc-titlu-pachete">
+                <div class="pc-capitol-interior" data-reveal>
+                    <p class="pc-eticheta">
+                        <b>01</b>
+                        <span class="pc-eticheta-fir" aria-hidden="true"></span>
+                        <span data-translate="prices_ch1">Înțelegi</span>
+                    </p>
+                    <h2 class="pc-titlu-mare" id="pc-titlu-pachete" data-translate="prices_packages_title2">Patru
+                        niveluri de complexitate</h2>
+                    <p class="pc-cap-text" data-translate="prices_intro">Fiecare pachet acoperă proiectul așa cum e
+                        descris la <strong>„Ce include”</strong>. Orice altceva se poate face, dar se ofertează separat,
+                        după ce discutăm ce anume îți trebuie. Dacă un proiect iese din tipar, primești o ofertă scrisă
+                        înainte să înceapă ceva.</p>
+                </div>
+            </section>
+
+            <article class="pc-pachet pc-pachet--landing" id="landing-page" data-pachet="landing-page">
+                <div class="pc-pachet-grila">
+                    <span class="pc-pachet-nr" aria-hidden="true">01</span>
+
+                    <div class="pc-pachet-text">
+                        <p class="pc-pachet-index">
+                            <span>01</span>
+                            <span class="pc-pachet-index-fir" aria-hidden="true"></span>
+                            <span data-translate="prices_p1_level">O prezență digitală</span>
+                        </p>
+                        <h2 class="pc-pachet-nume" data-translate="price_start_title">Landing Page</h2>
+                        <p class="pc-recomandat" data-translate="prices_recommended">Potrivit pentru tine</p>
+                        <p class="pc-pachet-rol" data-translate="prices_start_role">
+                            Pentru afacerea locală care are nevoie de o singură pagină bine făcută: ce oferi, cât
+                            costă și un buton prin care omul te sună sau îți scrie pe loc. Cel mai rapid mod de a
+                            exista online cu adresa ta, nu doar cu o pagină de Facebook.
+                        </p>
+                        <dl class="pc-fise">
+                            <div>
+                                <dt data-translate="prices_label_term">Termen</dt>
+                                <dd>
+                                    <span class="pc-fise-mare" data-translate="prices_p1_term">3–5 zile lucrătoare</span>
+                                    <span class="pc-fise-mic" data-translate="prices_term_from_materials">de la primirea
+                                        textelor și a pozelor</span>
+                                </dd>
+                            </div>
+                            <div>
+                                <dt data-translate="prices_fit_label">Potrivit pentru</dt>
+                                <dd class="pc-fise-text" data-translate="price_start_fit">Saloane, service-uri și
+                                    meșteri care vor să existe online cu adresa lor, rapid.</dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div class="pc-pachet-detalii">
+                        <div class="pc-detalii">
+                            <button type="button" class="pc-detalii-buton" aria-expanded="false" aria-controls="pc-det-1">
+                                <span data-translate="prices_details_toggle">Ce include și ce nu</span>
+                                <span class="pc-plus" aria-hidden="true"></span>
+                            </button>
+                            <div class="pc-detalii-corp" id="pc-det-1">
+                                <div class="pc-detalii-interior">
+                                    <div class="pc-detalii-coloane">
+                                        <div>
+                                            <h3 class="pc-coloana-titlu" data-translate="prices_included">Ce include</h3>
+                                            <ul class="pc-lista pc-lista--da" data-translate="prices_start_in">
+                                                <li><strong>O singură pagină</strong> cu scroll fluid și secțiuni: prezentare, servicii,
+                                                    galerie, program, contact</li>
+                                                <li><strong>Design responsive</strong>, gândit întâi pentru telefon — de acolo vin
+                                                    aproape toți vizitatorii unei firme locale</li>
+                                                <li><strong>Secțiune de servicii cu listă de prețuri</strong>, pe care o poți schimba
+                                                    oricând, printr-un mesaj</li>
+                                                <li><strong>Buton de WhatsApp și de apel direct</strong>, care deschide conversația sau
+                                                    sună de pe telefonul clientului</li>
+                                                <li>Galerie foto și integrare Google Maps</li>
+                                                <li>Optimizare SEO de bază: titluri, descrieri, date structurate</li>
+                                                <li><strong>Asistență gratuită la achiziția domeniului și a hostingului</strong></li>
+                                                <li>Certificat SSL și punerea site-ului online</li>
+                                                <li>O rundă de modificări după prima versiune</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h3 class="pc-coloana-titlu" data-translate="prices_excluded">Ce nu include</h3>
+                                            <ul class="pc-lista pc-lista--nu" data-translate="prices_start_out">
+                                                <li>Pagini separate (Despre, Portofoliu, Contact) — vezi pachetul Site Prezentare</li>
+                                                <li>Textele și pozele — le pui tu; le pot scrie sau procura contra cost</li>
+                                                <li>Versiune în a doua limbă</li>
+                                                <li>Blog sau panou de administrare pentru conținut</li>
+                                                <li>Sistem de rezervări online sau cont de utilizator</li>
+                                                <li>Costul anual de hosting și domeniu</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pc-pachet-actiuni">
+                            <a href="index.html?serviciu=landing-page#contact" class="cc-btn cc-btn--alb pc-cu-sageata">
+                                <span data-translate="prices_ask">Cere ofertă pentru acest pachet</span>
+                                <span class="pc-sageata" aria-hidden="true">→</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="pc-pachet-vizual" aria-hidden="true">
+                        <div class="pc-scena pc-scena--landing" data-scena="landing">
+                            <ol class="pc-etape">
+                                <li data-e="1"><b>01</b> <span data-translate="prices_v1_s1">Cadru</span></li>
+                                <li data-e="2"><b>02</b> <span data-translate="prices_v1_s2">Navigație</span></li>
+                                <li data-e="3"><b>03</b> <span data-translate="prices_v1_s3">Hero</span></li>
+                                <li data-e="4"><b>04</b> <span data-translate="prices_v1_s4">Servicii</span></li>
+                                <li data-e="5"><b>05</b> <span data-translate="prices_v1_s5">Contact</span></li>
+                                <li data-e="6"><b>06</b> <span data-translate="prices_v1_s6">Online</span></li>
+                            </ol>
+                            <div class="pc-browser" data-e="1">
+                                <div class="pc-browser-bara">
+                                    <span class="pc-browser-puncte"><i></i><i></i><i></i></span>
+                                    <span class="pc-browser-adresa"><span class="pc-lacat"></span><span
+                                            data-translate="prices_v1_url">afacerea-ta.ro</span></span>
+                                    <span class="pc-browser-live" data-e="6">LIVE</span>
+                                </div>
+                                <div class="pc-browser-corp">
+                                    <div class="pc-wf pc-wf-nav" data-e="2"><b></b><span></span><span></span><span></span><em></em></div>
+                                    <div class="pc-wf pc-wf-hero" data-e="3">
+                                        <div><b></b><b></b><i></i><i></i><em></em></div>
+                                        <span class="pc-wf-poza"></span>
+                                    </div>
+                                    <div class="pc-wf pc-wf-servicii" data-e="4"><span></span><span></span><span></span></div>
+                                    <div class="pc-wf pc-wf-contact" data-e="5">
+                                        <div><b></b><i></i><i></i><em></em></div>
+                                        <span class="pc-wf-harta"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="pc-scena-nota" data-translate="prices_v1_caption">O singură pagină, construită
+                                secțiune cu secțiune</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="pc-pachet pc-pachet--invers" id="site-prezentare" data-pachet="site-prezentare">
+                <div class="pc-pachet-grila">
+                    <span class="pc-pachet-nr" aria-hidden="true">02</span>
+
+                    <div class="pc-pachet-text">
+                        <p class="pc-pachet-index">
+                            <span>02</span>
+                            <span class="pc-pachet-index-fir" aria-hidden="true"></span>
+                            <span data-translate="prices_p2_level">Un site complet pentru firmă</span>
+                        </p>
+                        <h2 class="pc-pachet-nume" data-translate="price_basic_title">Site Prezentare</h2>
+                        <p class="pc-pachet-insigna" data-translate="price_badge">Cel mai ales</p>
+                        <p class="pc-recomandat" data-translate="prices_recommended">Potrivit pentru tine</p>
+                        <p class="pc-pachet-rol" data-translate="prices_basic_role">
+                            Pentru firma care are nevoie să fie găsită și să inspire încredere: servicii, portofoliu,
+                            date de contact. Scris de mână, fără teme cumpărate.
+                        </p>
+                        <dl class="pc-fise">
+                            <div>
+                                <dt data-translate="prices_label_term">Termen</dt>
+                                <dd>
+                                    <span class="pc-fise-mare" data-translate="prices_p2_term">10–15 zile lucrătoare</span>
+                                    <span class="pc-fise-mic" data-translate="prices_term_from_materials">de la primirea
+                                        textelor și a pozelor</span>
+                                </dd>
+                            </div>
+                            <div>
+                                <dt data-translate="prices_fit_label">Potrivit pentru</dt>
+                                <dd class="pc-fise-text" data-translate="price_basic_fit">Firme locale care vor să fie
+                                    găsite pe Google și să inspire încredere.</dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div class="pc-pachet-detalii">
+                        <div class="pc-detalii">
+                            <button type="button" class="pc-detalii-buton" aria-expanded="false" aria-controls="pc-det-2">
+                                <span data-translate="prices_details_toggle">Ce include și ce nu</span>
+                                <span class="pc-plus" aria-hidden="true"></span>
+                            </button>
+                            <div class="pc-detalii-corp" id="pc-det-2">
+                                <div class="pc-detalii-interior">
+                                    <div class="pc-detalii-coloane">
+                                        <div>
+                                            <h3 class="pc-coloana-titlu" data-translate="prices_included">Ce include</h3>
+                                            <ul class="pc-lista pc-lista--da" data-translate="prices_basic_in">
+                                                <li><strong>Până la 5 pagini</strong> — de exemplu Acasă, Servicii, Despre, Portofoliu,
+                                                    Contact</li>
+                                                <li><strong>Design responsive</strong>, verificat pe telefon, tabletă și desktop</li>
+                                                <li>Formular de contact funcțional și hartă</li>
+                                                <li>Optimizare SEO de bază: titluri, descrieri, sitemap, date structurate</li>
+                                                <li>Viteză de încărcare optimizată — imagini comprimate, cod curat</li>
+                                                <li><strong>Configurare hosting și domeniu inclusă</strong></li>
+                                                <li>Certificat SSL și punerea site-ului online</li>
+                                                <li>O rundă de modificări după prima versiune</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h3 class="pc-coloana-titlu" data-translate="prices_excluded">Ce nu include</h3>
+                                            <ul class="pc-lista pc-lista--nu" data-translate="prices_basic_out">
+                                                <li>Textele și pozele — le pui tu; le pot scrie sau procura contra cost</li>
+                                                <li>Versiune în a doua limbă — vezi pachetul Site Business</li>
+                                                <li>Blog sau panou de administrare pentru conținut</li>
+                                                <li>Rezervări, cont de utilizator sau catalog cu bază de date</li>
+                                                <li>Costul anual de hosting și domeniu</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pc-pachet-actiuni">
+                            <a href="index.html?serviciu=site-prezentare#contact" class="cc-btn cc-btn--alb pc-cu-sageata">
+                                <span data-translate="prices_ask">Cere ofertă pentru acest pachet</span>
+                                <span class="pc-sageata" aria-hidden="true">→</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="pc-pachet-vizual" aria-hidden="true">
+                        <div class="pc-scena pc-scena--harta" data-scena="continua">
+                            <svg class="pc-harta-fire" viewBox="0 0 100 72" preserveAspectRatio="none">
+                                <path style="--i:0" pathLength="1" d="M50 23 C50 32 13 30 13 40" />
+                                <path style="--i:1" pathLength="1" d="M50 23 C50 32 37.5 30 37.5 40" />
+                                <path style="--i:2" pathLength="1" d="M50 23 C50 32 62.5 30 62.5 40" />
+                                <path style="--i:3" pathLength="1" d="M50 23 C50 32 87 30 87 40" />
+                            </svg>
+                            <div class="pc-foaie pc-foaie--acasa">
+                                <span class="pc-foaie-bara"><i></i><i></i><i></i></span>
+                                <span class="pc-foaie-nume" data-translate="prices_v2_home">Acasă</span>
+                                <span class="pc-foaie-bloc"></span>
+                                <span class="pc-foaie-rand"></span>
+                            </div>
+                            <div class="pc-foaie" style="--i:0;--x:13">
+                                <span class="pc-foaie-bara"><i></i><i></i><i></i></span>
+                                <span class="pc-foaie-nume" data-translate="prices_v2_services">Servicii</span>
+                                <span class="pc-foaie-rand"></span>
+                                <span class="pc-foaie-rand pc-foaie-rand--scurt"></span>
+                                <span class="pc-foaie-grila"><i></i><i></i><i></i><i></i></span>
+                            </div>
+                            <div class="pc-foaie" style="--i:1;--x:37.5">
+                                <span class="pc-foaie-bara"><i></i><i></i><i></i></span>
+                                <span class="pc-foaie-nume" data-translate="prices_v2_about">Despre</span>
+                                <span class="pc-foaie-bloc"></span>
+                                <span class="pc-foaie-rand"></span>
+                                <span class="pc-foaie-rand pc-foaie-rand--scurt"></span>
+                            </div>
+                            <div class="pc-foaie" style="--i:2;--x:62.5">
+                                <span class="pc-foaie-bara"><i></i><i></i><i></i></span>
+                                <span class="pc-foaie-nume" data-translate="prices_v2_portfolio">Portofoliu</span>
+                                <span class="pc-foaie-grila"><i></i><i></i><i></i><i></i></span>
+                                <span class="pc-foaie-rand pc-foaie-rand--scurt"></span>
+                            </div>
+                            <div class="pc-foaie" style="--i:3;--x:87">
+                                <span class="pc-foaie-bara"><i></i><i></i><i></i></span>
+                                <span class="pc-foaie-nume" data-translate="prices_v2_contact">Contact</span>
+                                <span class="pc-foaie-rand"></span>
+                                <span class="pc-foaie-rand pc-foaie-rand--scurt"></span>
+                                <span class="pc-foaie-bloc pc-foaie-bloc--harta"></span>
+                            </div>
+                            <p class="pc-scena-nota" data-translate="prices_v2_caption">O pagină → un site complet</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="pc-pachet" id="site-business" data-pachet="site-business">
+                <div class="pc-pachet-grila">
+                    <span class="pc-pachet-nr" aria-hidden="true">03</span>
+
+                    <div class="pc-pachet-text">
+                        <p class="pc-pachet-index">
+                            <span>03</span>
+                            <span class="pc-pachet-index-fir" aria-hidden="true"></span>
+                            <span data-translate="prices_p3_level">O prezență digitală completă</span>
+                        </p>
+                        <h2 class="pc-pachet-nume" data-translate="price_biz_title">Site Business</h2>
+                        <p class="pc-recomandat" data-translate="prices_recommended">Potrivit pentru tine</p>
+                        <p class="pc-pachet-rol" data-translate="prices_biz_role">
+                            Site de prezentare dus până la capăt: mai multe pagini, în două limbi, cu design făcut de la
+                            zero și SEO complet. Pentru firma care vrea să fie găsită și de clienți din afara țării.
+                        </p>
+                        <dl class="pc-fise">
+                            <div>
+                                <dt data-translate="prices_label_term">Termen</dt>
+                                <dd>
+                                    <span class="pc-fise-mare" data-translate="prices_p3_term">3–4 săptămâni</span>
+                                    <span class="pc-fise-mic" data-translate="prices_term_from_all">de la primirea
+                                        materialelor</span>
+                                </dd>
+                            </div>
+                            <div>
+                                <dt data-translate="prices_fit_label">Potrivit pentru</dt>
+                                <dd class="pc-fise-text" data-translate="price_biz_fit">Firme cu mai multe servicii sau
+                                    clienți din străinătate, care vor site bilingv.</dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div class="pc-pachet-detalii">
+                        <div class="pc-detalii">
+                            <button type="button" class="pc-detalii-buton" aria-expanded="false" aria-controls="pc-det-3">
+                                <span data-translate="prices_details_toggle">Ce include și ce nu</span>
+                                <span class="pc-plus" aria-hidden="true"></span>
+                            </button>
+                            <div class="pc-detalii-corp" id="pc-det-3">
+                                <div class="pc-detalii-interior">
+                                    <div class="pc-detalii-coloane">
+                                        <div>
+                                            <h3 class="pc-coloana-titlu" data-translate="prices_included">Ce include</h3>
+                                            <ul class="pc-lista pc-lista--da" data-translate="prices_biz_in">
+                                                <li><strong>Tot ce conține pachetul Site Prezentare</strong></li>
+                                                <li><strong>Până la 10 pagini</strong></li>
+                                                <li><strong>Site bilingv, română și engleză</strong>, cu comutator, memorarea limbii alese
+                                                    și marcaje corecte pentru Google</li>
+                                                <li><strong>Design personalizat de la zero</strong>, cu machetă aprobată de tine înainte să
+                                                    scriu prima linie de cod</li>
+                                                <li><strong>SEO avansat</strong>: cercetare de cuvinte cheie, date structurate complete,
+                                                    Google Search Console și Analytics configurate</li>
+                                                <li>Galerie foto și formular de contact extins, cu atașamente</li>
+                                                <li>Buton de WhatsApp și integrare Google Maps</li>
+                                                <li>Pagini legale și banner de cookies conform GDPR</li>
+                                                <li>Raport de viteză la livrare (Core Web Vitals)</li>
+                                                <li>Două runde de modificări</li>
+                                                <li><strong>3 luni de suport inclus</strong>: modificări de conținut — texte, poze, prețuri
+                                                    — până la 2 ore pe lună</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h3 class="pc-coloana-titlu" data-translate="prices_excluded">Ce nu include</h3>
+                                            <ul class="pc-lista pc-lista--nu" data-translate="prices_biz_out">
+                                                <li>Redactarea textelor și traducerea lor în engleză — se ofertează separat</li>
+                                                <li>Fotografie profesională</li>
+                                                <li>Panou de administrare pentru conținut</li>
+                                                <li>Rezervări online, conturi de client, catalog cu bază de date</li>
+                                                <li>A treia limbă</li>
+                                                <li>Pagini noi sau funcții noi în perioada de suport</li>
+                                                <li>Costul anual de hosting și domeniu</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pc-pachet-actiuni">
+                            <a href="index.html?serviciu=site-business#contact" class="cc-btn cc-btn--alb pc-cu-sageata">
+                                <span data-translate="prices_ask">Cere ofertă pentru acest pachet</span>
+                                <span class="pc-sageata" aria-hidden="true">→</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="pc-pachet-vizual" aria-hidden="true">
+                        <div class="pc-scena pc-scena--eco" data-scena="continua">
+                            <svg class="pc-eco-fire" viewBox="0 0 100 80" preserveAspectRatio="none">
+                                <ellipse class="pc-eco-orbita" cx="50" cy="40" rx="37" ry="29" />
+                                <path class="pc-eco-fir" style="--i:0" pathLength="1" d="M50 40 L18 15" />
+                                <path class="pc-eco-fir" style="--i:1" pathLength="1" d="M50 40 L82 15" />
+                                <path class="pc-eco-fir" style="--i:2" pathLength="1" d="M50 40 L82 65" />
+                                <path class="pc-eco-fir" style="--i:3" pathLength="1" d="M50 40 L18 65" />
+                                <path class="pc-eco-puls" style="--i:0" pathLength="1" d="M50 40 L18 15" />
+                                <path class="pc-eco-puls" style="--i:1" pathLength="1" d="M50 40 L82 15" />
+                                <path class="pc-eco-puls" style="--i:2" pathLength="1" d="M50 40 L82 65" />
+                                <path class="pc-eco-puls" style="--i:3" pathLength="1" d="M50 40 L18 65" />
+                            </svg>
+                            <div class="pc-eco-centru">
+                                <span class="pc-eco-browser"><span class="pc-foaie-bara"><i></i><i></i><i></i></span><span
+                                        class="pc-foaie-bloc"></span><span class="pc-foaie-rand"></span></span>
+                                <b data-translate="prices_v3_site">Website</b>
+                                <span data-translate="prices_v3_site_meta">până la 10 pagini</span>
+                            </div>
+                            <div class="pc-eco-nod" style="--i:0;--x:18;--y:15">
+                                <b>RO / EN</b>
+                                <span data-translate="prices_v3_lang_meta">site bilingv</span>
+                            </div>
+                            <div class="pc-eco-nod" style="--i:1;--x:82;--y:15">
+                                <b data-translate="prices_v3_seo">SEO avansat</b>
+                                <span data-translate="prices_v3_seo_meta">cuvinte cheie, date structurate</span>
+                            </div>
+                            <div class="pc-eco-nod" style="--i:2;--x:82;--y:65">
+                                <b>Analytics</b>
+                                <span data-translate="prices_v3_analytics_meta">Search Console configurat</span>
+                            </div>
+                            <div class="pc-eco-nod" style="--i:3;--x:18;--y:65">
+                                <b data-translate="prices_v3_support">Suport</b>
+                                <span data-translate="prices_v3_support_meta">3 luni incluse</span>
+                            </div>
+                            <p class="pc-scena-nota" data-translate="prices_v3_caption">Site-ul, conectat la tot ce îl
+                                face găsit</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="pc-pachet pc-pachet--custom" id="aplicatii-custom" data-pachet="aplicatii-custom">
+                <div class="pc-custom-pista">
+                    <div class="pc-custom-scena">
+                        <div class="pc-custom-cap">
+                            <div>
+                                <p class="pc-pachet-index">
+                                    <span>04</span>
+                                    <span class="pc-pachet-index-fir" aria-hidden="true"></span>
+                                    <span data-translate="prices_p4_level">Un sistem digital</span>
+                                </p>
+                                <h2 class="pc-pachet-nume pc-custom-nume" data-translate="price_pro_title">Aplicații / Custom</h2>
+                                <p class="pc-recomandat" data-translate="prices_recommended">Potrivit pentru tine</p>
+                                <p class="pc-custom-afirmatie" data-translate="prices_p4_statement">Aici nu mai vorbim
+                                    despre un pachet. <em>Construim un sistem în jurul afacerii tale.</em></p>
+                            </div>
+                            <div>
+                                <p class="pc-pachet-rol" data-translate="prices_pro_role">
+                                    Aici intră tot ce nu încape într-un pachet cu preț fix: aplicații de telefon, platforme
+                                    interne, rezervări online, cataloage cu bază de date, conturi de client, integrări între
+                                    sisteme.
+                                </p>
+                                <dl class="pc-fise">
+                                    <div>
+                                        <dt data-translate="prices_label_term">Termen</dt>
+                                        <dd>
+                                            <span class="pc-fise-mare" data-translate="prices_p4_term">Pe etape</span>
+                                            <span class="pc-fise-mic" data-translate="prices_p4_term_note">stabilite
+                                                împreună, după discuție</span>
+                                        </dd>
+                                    </div>
+                                    <div>
+                                        <dt data-translate="prices_fit_label">Potrivit pentru</dt>
+                                        <dd class="pc-fise-text" data-translate="price_pro_fit">Afaceri care au nevoie de
+                                            rezervări, conturi de client sau o aplicație proprie.</dd>
+                                    </div>
+                                </dl>
+                            </div>
+                        </div>
+
+                        <div class="pc-sistem" data-scena="continua" aria-hidden="true">
+                            <ol class="pc-noduri">
+                                <li class="pc-nod" style="--i:0">
+                                    <svg class="pc-nod-ic" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5" /><path d="M5 20c1.2-3.6 4-5.5 7-5.5s5.8 1.9 7 5.5" /></svg>
+                                    <span class="pc-nod-nume" data-translate="prices_v4_user">Utilizator</span>
+                                    <span class="pc-nod-meta">web · Android · iOS</span>
+                                </li>
+                                <li class="pc-nod" style="--i:1">
+                                    <svg class="pc-nod-ic" viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2" /><path d="M11 17.5h2" /></svg>
+                                    <span class="pc-nod-nume" data-translate="prices_v4_app">Aplicație</span>
+                                    <span class="pc-nod-meta" data-translate="prices_v4_app_meta">logica afacerii</span>
+                                </li>
+                                <li class="pc-nod" style="--i:2">
+                                    <svg class="pc-nod-ic" viewBox="0 0 24 24"><path d="M9 7 4.5 12 9 17M15 7l4.5 5-4.5 5" /></svg>
+                                    <span class="pc-nod-nume">API</span>
+                                    <span class="pc-nod-meta" data-translate="prices_v4_api_meta">REST · integrări</span>
+                                </li>
+                                <li class="pc-nod" style="--i:3">
+                                    <svg class="pc-nod-ic" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="2.8" /><path d="M5 6v12c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8V6M5 12c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8" /></svg>
+                                    <span class="pc-nod-nume" data-translate="prices_v4_db">Bază de date</span>
+                                    <span class="pc-nod-meta">PostgreSQL · Supabase</span>
+                                </li>
+                                <li class="pc-nod" style="--i:4">
+                                    <svg class="pc-nod-ic" viewBox="0 0 24 24"><rect x="3.5" y="4" width="17" height="16" rx="2" /><path d="M8 16v-4M12 16V9M16 16v-6" /></svg>
+                                    <span class="pc-nod-nume" data-translate="prices_v4_panel">Panou de administrare</span>
+                                    <span class="pc-nod-meta" data-translate="prices_v4_panel_meta">rapoarte · gestiune</span>
+                                </li>
+                            </ol>
+                            <ul class="pc-capabilitati" data-translate="prices_p4_tags">
+                                <li>Aplicații Android &amp; iOS</li>
+                                <li>Platforme web</li>
+                                <li>Panouri de administrare</li>
+                                <li>Baze de date</li>
+                                <li>API-uri</li>
+                                <li>Rezervări online</li>
+                                <li>Conturi de client</li>
+                                <li>Integrări între sisteme</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pc-custom-jos">
+                    <div>
+                        <h3 class="pc-coloana-titlu" data-translate="prices_can_build">Ce pot construi</h3>
+                        <ul class="pc-lista pc-lista--da" data-translate="prices_pro_in">
+                            <li><strong>Aplicații Android</strong> native în Java, sau <strong>Android și iOS</strong>
+                                dintr-un singur cod, în Flutter</li>
+                            <li><strong>Platforme web de gestiune</strong>: abonamente, check-in, rapoarte, registru de
+                                casă</li>
+                            <li>Rezervări online, cataloage cu bază de date, conturi de client</li>
+                            <li>Baze de date și API-uri (PostgreSQL, Supabase)</li>
+                            <li>Panouri de administrare făcute exact pe fluxul tău de lucru</li>
+                            <li>Consultanță tehnică înainte de a începe ceva</li>
+                            <li>Mentenanță dedicată după lansare</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="pc-coloana-titlu" data-translate="prices_how_quote">Cum se ajunge la ofertă</h3>
+                        <ol class="pc-lista pc-lista--pasi" data-translate="prices_pro_out">
+                            <li>Discutăm ce trebuie să facă aplicația și pentru cine</li>
+                            <li>Împart proiectul în etape, fiecare cu livrabil clar</li>
+                            <li>Primești preț și termen pe fiecare etapă, în scris</li>
+                            <li>Poți opri proiectul după orice etapă, fără penalizare</li>
+                        </ol>
+                        <p class="pc-exemple" data-translate="prices_pro_examples">
+                            <strong>Exemple reale:</strong> SeifPro, FastTrack și Gym Platform — toate se văd pe pagina
+                            de proiecte.
+                        </p>
+                        <div class="pc-pachet-actiuni">
+                            <a href="index.html?serviciu=custom-app#contact" class="cc-btn cc-btn--alb pc-cu-sageata">
+                                <span data-translate="prices_talk">Hai să discutăm proiectul</span>
+                                <span class="pc-sageata" aria-hidden="true">→</span>
+                            </a>
+                            <a href="proiecte.html" class="pc-link-mono">
+                                <span data-translate="prices_see_projects">Vezi proiectele</span>
+                                <span class="pc-sageata" aria-hidden="true">→</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <section class="pc-bloc pc-alege" aria-labelledby="pc-titlu-alege">
+            <div class="pc-cap" data-reveal>
+                <p class="pc-eticheta">
+                    <b>02</b>
+                    <span class="pc-eticheta-fir" aria-hidden="true"></span>
+                    <span data-translate="prices_ch2">Configurezi</span>
+                </p>
+                <h2 class="pc-titlu-mare" id="pc-titlu-alege" data-translate="prices_choose_title">Nu știi ce să alegi?</h2>
+                <p class="pc-cap-text" data-translate="prices_choose_sub">E în regulă. Răspunde la o singură întrebare
+                    și îți arătăm direcția potrivită.</p>
+            </div>
+
+            <div class="pc-alege-grila">
+                <fieldset class="pc-intrebare" data-reveal>
+                    <legend data-translate="prices_choose_q">De ce ai nevoie?</legend>
+                    <label class="pc-optiune">
+                        <input type="radio" name="pc-nevoie" value="landing-page">
+                        <span class="pc-optiune-litera" aria-hidden="true">A</span>
+                        <span class="pc-optiune-text" data-translate="prices_need1">O prezență online simplă</span>
+                        <span class="pc-optiune-sageata" aria-hidden="true">→</span>
+                    </label>
+                    <label class="pc-optiune">
+                        <input type="radio" name="pc-nevoie" value="site-prezentare">
+                        <span class="pc-optiune-litera" aria-hidden="true">B</span>
+                        <span class="pc-optiune-text" data-translate="prices_need2">Un site complet pentru firmă</span>
+                        <span class="pc-optiune-sageata" aria-hidden="true">→</span>
+                    </label>
+                    <label class="pc-optiune">
+                        <input type="radio" name="pc-nevoie" value="site-business">
+                        <span class="pc-optiune-litera" aria-hidden="true">C</span>
+                        <span class="pc-optiune-text" data-translate="prices_need3">Un site mai complex, în două limbi</span>
+                        <span class="pc-optiune-sageata" aria-hidden="true">→</span>
+                    </label>
+                    <label class="pc-optiune">
+                        <input type="radio" name="pc-nevoie" value="aplicatii-custom">
+                        <span class="pc-optiune-litera" aria-hidden="true">D</span>
+                        <span class="pc-optiune-text" data-translate="prices_need4">O aplicație sau un sistem la comandă</span>
+                        <span class="pc-optiune-sageata" aria-hidden="true">→</span>
+                    </label>
+                    <label class="pc-optiune">
+                        <input type="radio" name="pc-nevoie" value="nesigur">
+                        <span class="pc-optiune-litera" aria-hidden="true">?</span>
+                        <span class="pc-optiune-text" data-translate="prices_need5">Nu sunt sigur</span>
+                        <span class="pc-optiune-sageata" aria-hidden="true">→</span>
+                    </label>
+                </fieldset>
+
+                <div class="pc-rezultat" id="pc-rezultat" aria-live="polite" data-reveal>
+                    <ol class="pc-harta-mica" id="pc-harta-mica" aria-hidden="true"></ol>
+                    <p class="pc-rezultat-gol" data-translate="prices_choose_empty">Alege un răspuns și îți arătăm
+                        pachetul cel mai apropiat.</p>
+                    <div id="pc-rezultate"></div>
+                    <div class="pc-rezultat-panou" data-pentru="nesigur" hidden>
+                        <p class="pc-eticheta" data-translate="prices_choose_unsure_label">Hai să vorbim</p>
+                        <p class="pc-rezultat-nume" data-translate="prices_choose_unsure_title">Nicio problemă.</p>
+                        <p class="pc-rezultat-text" data-translate="prices_cta_desc">O discuție de 30 de minute, fără
+                            obligații, și pleci cu o ofertă făcută pe ce îți trebuie.</p>
+                        <div class="pc-butoane pc-butoane--stanga">
+                            <a href="index.html#contact" class="cc-btn cc-btn--alb pc-cu-sageata">
+                                <span data-translate="projects_cta_btn">Hai să discutăm</span>
+                                <span class="pc-sageata" aria-hidden="true">→</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pc-bloc pc-factori" aria-labelledby="pc-titlu-factori">
+            <div class="pc-cap" data-reveal>
+                <p class="pc-eticheta">
+                    <b>02</b>
+                    <span class="pc-eticheta-fir" aria-hidden="true"></span>
+                    <span data-translate="prices_factors_label">Variabilele proiectului</span>
+                </p>
+                <h2 class="pc-titlu-mare" id="pc-titlu-factori" data-translate="prices_factors_title">Ce influențează costul</h2>
+                <p class="pc-cap-text" data-translate="prices_factors_sub">
+                    Pachetele sunt punctul de plecare. Oferta finală depinde de câteva lucruri concrete — le trec aici ca
+                    să știi de ce două site-uri care arată la fel pot costa diferit.
+                </p>
+            </div>
+
+            <div class="pc-factori-grila" data-reveal>
+                <div class="pc-arbore">
+                    <p class="pc-arbore-radacina" data-translate="prices_tree_root">Proiect</p>
+                    <div class="pc-arbore-ramuri" role="tablist" aria-orientation="vertical" aria-labelledby="pc-titlu-factori">
+                        <button type="button" class="pc-ramura" role="tab" id="pc-ramura-1" aria-selected="true" aria-controls="pc-factor-1">
+                            <span class="pc-ramura-fir" aria-hidden="true">├──</span>
+                            <span data-translate="prices_factor1_short">Pagini</span>
+                        </button>
+                        <button type="button" class="pc-ramura" role="tab" id="pc-ramura-2" aria-selected="false" aria-controls="pc-factor-2">
+                            <span class="pc-ramura-fir" aria-hidden="true">├──</span>
+                            <span data-translate="prices_factor2_short">Conținut</span>
+                        </button>
+                        <button type="button" class="pc-ramura" role="tab" id="pc-ramura-3" aria-selected="false" aria-controls="pc-factor-3">
+                            <span class="pc-ramura-fir" aria-hidden="true">├──</span>
+                            <span data-translate="prices_factor3_short">Funcții</span>
+                        </button>
+                        <button type="button" class="pc-ramura" role="tab" id="pc-ramura-4" aria-selected="false" aria-controls="pc-factor-4">
+                            <span class="pc-ramura-fir" aria-hidden="true">├──</span>
+                            <span data-translate="prices_factor4_short">Limbi</span>
+                        </button>
+                        <button type="button" class="pc-ramura" role="tab" id="pc-ramura-5" aria-selected="false" aria-controls="pc-factor-5">
+                            <span class="pc-ramura-fir" aria-hidden="true">└──</span>
+                            <span data-translate="prices_factor5_short">Termen</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="pc-factor-panouri">
+                    <div class="pc-factor" role="tabpanel" id="pc-factor-1" aria-labelledby="pc-ramura-1">
+                        <span class="pc-factor-index" aria-hidden="true">/01</span>
+                        <div>
+                            <h3 data-translate="prices_factor1_title">Numărul de pagini</h3>
+                            <p data-translate="prices_factor1_text">O pagină sau zece nu înseamnă aceeași muncă: fiecare
+                                pagină are design, conținut și verificări proprii.</p>
+                            <p class="pc-scala" aria-hidden="true" data-translate="prices_factor1_scale"><span>1 pagină</span><i></i><span>5 pagini</span><i></i><span>10 pagini</span></p>
+                        </div>
+                    </div>
+                    <div class="pc-factor" role="tabpanel" id="pc-factor-2" aria-labelledby="pc-ramura-2">
+                        <span class="pc-factor-index" aria-hidden="true">/02</span>
+                        <div>
+                            <h3 data-translate="prices_factor2_title">Textele și pozele</h3>
+                            <p data-translate="prices_factor2_text">Dacă le ai deja, începem imediat. Dacă trebuie
+                                scrise sau fotografiate, se adaugă la ofertă.</p>
+                            <p class="pc-scala" aria-hidden="true" data-translate="prices_factor2_scale"><span>Le ai deja</span><i></i><span>Se scriu sau se fotografiază</span></p>
+                        </div>
+                    </div>
+                    <div class="pc-factor" role="tabpanel" id="pc-factor-3" aria-labelledby="pc-ramura-3">
+                        <span class="pc-factor-index" aria-hidden="true">/03</span>
+                        <div>
+                            <h3 data-translate="prices_factor3_title">Funcțiile speciale</h3>
+                            <p data-translate="prices_factor3_text">Rezervări online, conturi de client, catalog cu bază
+                                de date sau plăți online cer programare dedicată.</p>
+                            <p class="pc-scala pc-scala--etichete" aria-hidden="true" data-translate="prices_factor3_scale"><span>Rezervări</span><span>Conturi de client</span><span>Catalog</span><span>Plăți online</span></p>
+                        </div>
+                    </div>
+                    <div class="pc-factor" role="tabpanel" id="pc-factor-4" aria-labelledby="pc-ramura-4">
+                        <span class="pc-factor-index" aria-hidden="true">/04</span>
+                        <div>
+                            <h3 data-translate="prices_factor4_title">A doua limbă</h3>
+                            <p data-translate="prices_factor4_text">Traducerea și structura bilingvă dublează o parte din
+                                conținut și din munca de SEO.</p>
+                            <p class="pc-scala" aria-hidden="true" data-translate="prices_factor4_scale"><span>RO</span><i></i><span>RO + EN</span></p>
+                        </div>
+                    </div>
+                    <div class="pc-factor" role="tabpanel" id="pc-factor-5" aria-labelledby="pc-ramura-5">
+                        <span class="pc-factor-index" aria-hidden="true">/05</span>
+                        <div>
+                            <h3 data-translate="prices_factor5_title">Termenul</h3>
+                            <p data-translate="prices_factor5_text">Un proiect care trebuie gata mai repede decât de
+                                obicei se planifică altfel.</p>
+                            <p class="pc-scala" aria-hidden="true" data-translate="prices_factor5_scale"><span>Termen obișnuit</span><i></i><span>Mai repede decât de obicei</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pc-bloc pc-externe" aria-labelledby="pc-titlu-externe">
+            <div class="pc-externe-cap" data-reveal>
+                <p class="pc-eticheta">
+                    <b>//</b>
+                    <span class="pc-eticheta-fir" aria-hidden="true"></span>
+                    <span data-translate="prices_ext_label">Costuri externe</span>
+                </p>
+                <h2 class="pc-titlu-mic" id="pc-titlu-externe" data-translate="prices_costs_title">Costuri care nu sunt ale noastre</h2>
+                <p class="pc-externe-text" data-translate="prices_costs_sub">
+                    Ca să nu existe surprize: acestea se plătesc anual către alți furnizori, nu către mine. Le trec aici
+                    pentru că fac parte din costul real al unui site.
+                </p>
+            </div>
+            <div class="pc-tabel-cadru" data-reveal>
+                <table class="pc-tabel">
+                    <thead>
+                        <tr data-translate="prices_costs_head">
+                            <th>Cost</th>
+                            <th>Către cine</th>
+                            <th>Cât, orientativ</th>
+                        </tr>
+                    </thead>
+                    <tbody data-translate="prices_costs_rows">
+                        <tr>
+                            <td>Domeniu <strong>.ro</strong></td>
+                            <td>Registrar, de exemplu HostGate</td>
+                            <td>~60–80 lei/an</td>
+                        </tr>
+                        <tr>
+                            <td>Hosting</td>
+                            <td>Furnizor de hosting</td>
+                            <td>~100–200 lei/an</td>
+                        </tr>
+                        <tr>
+                            <td>Certificat SSL</td>
+                            <td>Let's Encrypt</td>
+                            <td>gratuit</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="pc-bloc pc-proces" aria-labelledby="pc-titlu-proces">
+            <div class="pc-cap" data-reveal>
+                <p class="pc-eticheta">
+                    <b>03</b>
+                    <span class="pc-eticheta-fir" aria-hidden="true"></span>
+                    <span data-translate="prices_ch3">Construim</span>
+                </p>
+                <h2 class="pc-titlu-mare" id="pc-titlu-proces" data-translate="prices_process_title">Cum decurge un proiect</h2>
+            </div>
+
+            <div class="pc-cronologie" id="pc-cronologie">
+                <div class="pc-cronologie-fir" aria-hidden="true"><i></i></div>
+                <ol class="pc-etape-proiect">
+                    <li class="pc-etapa">
+                        <span class="pc-etapa-nr" aria-hidden="true">01</span>
+                        <h3 data-translate="prices_step1_title">Discuție</h3>
+                        <p data-translate="prices_step1_text">30 de minute, telefonic sau pe WhatsApp. Îmi spui ce vrei,
+                            îți spunem ce e realist.</p>
+                    </li>
+                    <li class="pc-etapa">
+                        <span class="pc-etapa-nr" aria-hidden="true">02</span>
+                        <h3 data-translate="prices_step2_title">Ofertă scrisă</h3>
+                        <p data-translate="prices_step2_text">Preț ferm, termen și lista exactă de livrabile. În 2 zile
+                            lucrătoare.</p>
+                    </li>
+                    <li class="pc-etapa">
+                        <span class="pc-etapa-nr" aria-hidden="true">03</span>
+                        <h3 data-translate="prices_step3_title">Execuție</h3>
+                        <p data-translate="prices_step3_text">Vezi lucrarea pe un link de test pe tot parcursul ei, nu
+                            doar la final.</p>
+                    </li>
+                    <li class="pc-etapa">
+                        <span class="pc-etapa-nr" aria-hidden="true">04</span>
+                        <h3 data-translate="prices_step4_title">Livrare</h3>
+                        <p data-translate="prices_step4_text">Punere online, instruire și 30 de zile în care repar
+                            gratuit orice nu merge.</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <section class="pc-bloc pc-termeni" aria-labelledby="pc-titlu-termeni">
+            <div class="pc-cap" data-reveal>
+                <p class="pc-eticheta">
+                    <b>03</b>
+                    <span class="pc-eticheta-fir" aria-hidden="true"></span>
+                    <span data-translate="prices_terms_label">Înainte să începem</span>
+                </p>
+                <h2 class="pc-titlu-mare" id="pc-titlu-termeni" data-translate="prices_terms_title">Cum lucrăm</h2>
+            </div>
+
+            <ul class="pc-termeni-lista">
+                <li class="pc-termen" data-reveal>
+                    <p class="pc-termen-cifra">50/50<small data-translate="prices_term1_fig">avans · livrare</small></p>
+                    <h3 data-translate="prices_term1_title">Plata</h3>
+                    <p class="pc-termen-text" data-translate="prices_term1_text">50% avans la începerea lucrului, 50% la
+                        livrare, înainte de punerea online.</p>
+                </li>
+                <li class="pc-termen" data-reveal>
+                    <p class="pc-termen-cifra">1–2<small data-translate="prices_term2_fig">runde incluse</small></p>
+                    <h3 data-translate="prices_term2_title">Modificări</h3>
+                    <p class="pc-termen-text" data-translate="prices_term2_text">O rundă inclusă la Landing Page și Site
+                        Prezentare, două la Site Business. Cele în plus se ofertează separat.</p>
+                </li>
+                <li class="pc-termen" data-reveal>
+                    <p class="pc-termen-cifra">30<small data-translate="prices_term3_fig">zile de garanție</small></p>
+                    <h3 data-translate="prices_term3_title">Garanție</h3>
+                    <p class="pc-termen-text" data-translate="prices_term3_text">30 de zile de la livrare în care repar
+                        gratuit orice nu funcționează cum am stabilit.</p>
+                </li>
+                <li class="pc-termen" data-reveal>
+                    <p class="pc-termen-cifra pc-termen-cifra--text" data-translate="prices_term4_fig">Site · cod · conturi</p>
+                    <h3 data-translate="prices_term4_title">Proprietate</h3>
+                    <p class="pc-termen-text" data-translate="prices_term4_text">La plata finală, site-ul, codul și
+                        conturile sunt ale tale.</p>
+                </li>
+                <li class="pc-termen" data-reveal>
+                    <p class="pc-termen-cifra pc-termen-cifra--text" data-translate="prices_term5_fig">Texte · poze · logo</p>
+                    <h3 data-translate="prices_term5_title">De la tine</h3>
+                    <p class="pc-termen-text" data-translate="prices_term5_text">Texte, poze și logo. Fără ele proiectul
+                        stă, iar termenul se decalează.</p>
+                </li>
+            </ul>
+
+            <p class="pc-anunt" data-translate="prices_notice">
+                <strong>Pagina este încă în lucru.</strong> Pachetele și detaliile de pe ea se pot schimba până la
+                varianta finală.
+            </p>
+        </section>
+
+        <section class="pc-final" aria-labelledby="pc-titlu-final">
+            <div class="pc-final-interior">
+                <svg class="cc-semn pc-final-semn" viewBox="128 143 244 123" aria-hidden="true" focusable="false">
+                    <defs>
+                        <linearGradient id="cc-semn-final" gradientUnits="userSpaceOnUse" x1="135" y1="0" x2="365" y2="0">
+                            <stop offset="0" stop-color="#3ba7ef" />
+                            <stop offset="1" stop-color="#8c50d4" />
+                        </linearGradient>
+                    </defs>
+                    <g fill="none" stroke="url(#cc-semn-final)" stroke-width="12.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path class="cc-semn-st" d="M166 180 L137.5 207.5 L166 235" />
+                        <path class="cc-semn-dr" d="M334 180 L362.5 207.5 L334 235" />
+                        <g class="cc-semn-bataie">
+                            <path class="cc-semn-inima" pathLength="1" d="M287 223 L303 208 C318 193 316 153 282 153 C266 153 256 161 250 168 C244 161 234 153 218 153 C184 153 182 193 197 208 L250 257 L270 245" />
+                            <path class="cc-semn-slash" d="M261 187.5 L246 225" />
+                        </g>
+                    </g>
+                </svg>
+                <h2 class="pc-final-titlu pc-linii" id="pc-titlu-final" data-reveal>
+                    <span class="pc-rand"><span data-translate="prices_final_t1">Deci,</span></span>
+                    <span class="pc-rand"><span data-translate="prices_final_t2">ce construim<span class="pc-accent">?</span></span></span>
+                </h2>
+                <p class="pc-final-sub" data-translate="prices_final_sub">Spune-ne ce ai în minte. Îl transformăm
+                    într-un plan clar și într-o ofertă scrisă.</p>
+                <div class="pc-butoane">
+                    <a href="index.html#contact" class="cc-btn cc-btn--alb pc-cu-sageata">
+                        <span data-translate="prices_final_cta">Începe un proiect</span>
+                        <span class="pc-sageata" aria-hidden="true">→</span>
+                    </a>
+                    <a href="https://wa.me/40729728477" class="cc-btn cc-btn--contur pc-cu-sageata" target="_blank" rel="noopener">
+                        <span data-translate="prices_final_talk">Vorbește cu noi</span>
+                        <span class="pc-sageata" aria-hidden="true">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <template id="pc-sablon-directie">
+            <li class="pc-directie">
+                <a class="pc-directie-link" data-camp="ancora">
+                    <span class="pc-directie-sus">
+                        <span class="pc-directie-nr" data-camp="nr"></span>
+                        <span class="pc-directie-sageata" aria-hidden="true">↘</span>
+                    </span>
+                    <span class="pc-directie-jos">
+                        <span class="pc-directie-nume" data-camp="nume"></span>
+                        <span class="pc-directie-nivel" data-camp="nivel"></span>
+                        <span class="pc-directie-termen"><span data-translate="prices_label_term">Termen</span><span data-camp="termen"></span></span>
+                        <span class="pc-bare" data-camp="bare" aria-hidden="true"></span>
+                    </span>
+                </a>
+            </li>
+        </template>
+
+        <template id="pc-sablon-sina">
+            <a class="pc-sina-link" data-camp="ancora">
+                <span class="pc-sina-nr" data-camp="nr"></span>
+                <span class="pc-sina-nume" data-camp="nume"></span>
+            </a>
+        </template>
+
+        <template id="pc-sablon-harta">
+            <li>
+                <span class="pc-hm-nr" data-camp="nr"></span>
+                <span class="pc-hm-nume" data-camp="nume"></span>
+            </li>
+        </template>
+
+        <template id="pc-sablon-rezultat">
+            <div class="pc-rezultat-panou" hidden>
+                <p class="pc-eticheta">
+                    <b data-camp="nr"></b>
+                    <span class="pc-eticheta-fir" aria-hidden="true"></span>
+                    <span data-translate="prices_choose_result">Direcția potrivită</span>
+                </p>
+                <p class="pc-rezultat-nume" data-camp="nume"></p>
+                <p class="pc-rezultat-text" data-camp="potrivit"></p>
+                <p class="pc-rezultat-termen">
+                    <span data-translate="prices_label_term">Termen</span>
+                    <span class="pc-rezultat-termen-val" data-camp="termen"></span>
+                </p>
+                <div class="pc-butoane pc-butoane--stanga">
+                    <a class="cc-btn cc-btn--alb pc-cu-sageata" data-camp="oferta">
+                        <span data-translate="prices_ask_short">Cere ofertă</span>
+                        <span class="pc-sageata" aria-hidden="true">→</span>
+                    </a>
+                    <a class="cc-btn cc-btn--contur pc-cu-sageata" data-camp="ancora">
+                        <span data-translate="prices_choose_see">Vezi pachetul</span>
+                        <span class="pc-sageata" aria-hidden="true">↓</span>
+                    </a>
+                </div>
+            </div>
+        </template>
+    </main>
+
+    <footer class="cc-subsol">
+        <div class="cc-subsol-interior">
+            <a href="index.html" class="cc-logo cc-logo--mic cc-marca" aria-label="CodeCare">
+                <svg class="cc-semn" viewBox="128 143 244 123" aria-hidden="true" focusable="false">
+                    <defs>
+                        <linearGradient id="cc-semn-subsol" gradientUnits="userSpaceOnUse" x1="135" y1="0" x2="365" y2="0">
+                            <stop offset="0" stop-color="#3ba7ef" />
+                            <stop offset="1" stop-color="#8c50d4" />
+                        </linearGradient>
+                    </defs>
+                    <g fill="none" stroke="url(#cc-semn-subsol)" stroke-width="12.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path class="cc-semn-st" d="M166 180 L137.5 207.5 L166 235" />
+                        <path class="cc-semn-dr" d="M334 180 L362.5 207.5 L334 235" />
+                        <g class="cc-semn-bataie">
+                            <path class="cc-semn-inima" pathLength="1" d="M287 223 L303 208 C318 193 316 153 282 153 C266 153 256 161 250 168 C244 161 234 153 218 153 C184 153 182 193 197 208 L250 257 L270 245" />
+                            <path class="cc-semn-slash" d="M261 187.5 L246 225" />
+                        </g>
+                    </g>
+                </svg>
+                <span class="cc-logo-text">Code<span>Care</span></span>
+            </a>
+            <nav class="cc-subsol-linkuri" aria-label="Footer">
+                <a href="proiecte.html" data-translate="footer_portfolio">Proiecte</a>
+                <a href="pachete.html" data-translate="footer_pricing">Pachete</a>
+                <a href="index.html#contact" data-translate="footer_contact">Contact</a>
+            </nav>
+            <div class="footer-bottom">
+                <!--
+                <p class="footer-legal">
+                    <span data-translate="footer_legal_name">CodeCare Solutions S.R.L.</span>
+                    <span data-translate="footer_legal_ids">CUI: RO12345678 · Reg. Com.: J01/123/2025</span>
+                </p>
+                -->
+                <p data-translate="footer_copyright">© 2026 CodeCare · Alba Iulia</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+    <script src="acasa.js"></script>
+    <script src="pachete-date.js"></script>
+    <script src="pachete.js"></script>
+</body>
+
+</html>
