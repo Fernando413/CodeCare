@@ -30,12 +30,16 @@
 
     <link rel="icon" type="image/png" href="assets/logo.png">
     <link rel="apple-touch-icon" href="assets/logo.png">
-    <meta name="theme-color" content="#0f0f23">
+    <meta name="theme-color" content="#06060d">
 
-    <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500&text=CodeCare&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="acasa.css">
 
     <script type="application/ld+json">
     {
@@ -69,36 +73,77 @@
         ],
         "opens": "09:00",
         "closes": "18:00"
-      },
-      "priceRange": "$$"
+      }
     }
     </script>
 </head>
 
 <body>
+    <div class="cc-loader" id="cc-loader" aria-hidden="true">
+        <div class="cc-marca cc-marca--mare">
+            <svg class="cc-semn cc-semn--anim" viewBox="128 143 244 123" aria-hidden="true" focusable="false">
+                <defs>
+                    <linearGradient id="cc-semn-incarcator" gradientUnits="userSpaceOnUse" x1="135" y1="0" x2="365" y2="0">
+                        <stop offset="0" stop-color="#3ba7ef" />
+                        <stop offset="1" stop-color="#8c50d4" />
+                    </linearGradient>
+                </defs>
+                <g fill="none" stroke="url(#cc-semn-incarcator)" stroke-width="12.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path class="cc-semn-st" d="M166 180 L137.5 207.5 L166 235" />
+                    <path class="cc-semn-dr" d="M334 180 L362.5 207.5 L334 235" />
+                    <g class="cc-semn-bataie">
+                        <path class="cc-semn-inima" pathLength="1" d="M287 223 L303 208 C318 193 316 153 282 153 C266 153 256 161 250 168 C244 161 234 153 218 153 C184 153 182 193 197 208 L250 257 L270 245" />
+                        <path class="cc-semn-slash" d="M261 187.5 L246 225" />
+                    </g>
+                </g>
+            </svg>
+            <span class="cc-logo-text">Code<span>Care</span></span>
+        </div>
+    </div>
+
+    <div class="cc-progres" id="cc-progres" aria-hidden="true"></div>
+    <canvas class="cc-pete" id="cc-pete" aria-hidden="true"></canvas>
+    <div class="cc-vigneta" aria-hidden="true"></div>
+    <canvas class="cc-stele" id="cc-stele" aria-hidden="true"></canvas>
+    <div class="cc-lumina" id="cc-lumina" aria-hidden="true"></div>
+
     <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
-            <div class="nav-logo">
-                <a href="#home" style="text-decoration: none;">
-                    <img src="assets/logo.png" alt="CodeCare" class="logo-img">
-                </a>
-            </div>
+            <a href="#home" class="cc-logo cc-marca">
+                <svg class="cc-semn" viewBox="128 143 244 123" aria-hidden="true" focusable="false">
+                    <defs>
+                        <linearGradient id="cc-semn-antet" gradientUnits="userSpaceOnUse" x1="135" y1="0" x2="365" y2="0">
+                            <stop offset="0" stop-color="#3ba7ef" />
+                            <stop offset="1" stop-color="#8c50d4" />
+                        </linearGradient>
+                    </defs>
+                    <g fill="none" stroke="url(#cc-semn-antet)" stroke-width="12.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path class="cc-semn-st" d="M166 180 L137.5 207.5 L166 235" />
+                        <path class="cc-semn-dr" d="M334 180 L362.5 207.5 L334 235" />
+                        <g class="cc-semn-bataie">
+                            <path class="cc-semn-inima" pathLength="1" d="M287 223 L303 208 C318 193 316 153 282 153 C266 153 256 161 250 168 C244 161 234 153 218 153 C184 153 182 193 197 208 L250 257 L270 245" />
+                            <path class="cc-semn-slash" d="M261 187.5 L246 225" />
+                        </g>
+                    </g>
+                </svg>
+                <span class="cc-logo-text">Code<span>Care</span></span>
+            </a>
 
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="#home" class="nav-link" data-translate="nav_home">Acasă</a>
+                    <a href="#services" class="nav-link" data-translate="nav_services">Servicii</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#services" class="nav-link" data-translate="nav_services">Servicii</a>
+                    <a href="#proces" class="nav-link" data-translate="home_nav_process">Proces</a>
                 </li>
                 <li class="nav-item">
                     <a href="#portfolio" class="nav-link" data-translate="nav_portfolio">Proiecte</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#pricing" class="nav-link" data-translate="nav_pricing">Prețuri</a>
+                    <a href="#pricing" class="nav-link" data-translate="nav_pricing">Pachete</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#contact" class="nav-link" data-translate="nav_contact">Contact</a>
+                    <a href="#intrebari" class="nav-link" data-translate="home_nav_faq">Întrebări</a>
                 </li>
             </ul>
 
@@ -121,478 +166,516 @@
         </div>
     </nav>
 
-    <section id="home" class="hero">
-        <div class="hero-background">
-            <div class="hero-particles"></div>
-        </div>
-        <div class="hero-content">
-            <div class="container">
-                <h1 class="hero-title" data-translate="hero_title">
-                    Soluții IT <span class="gradient-text">Premium</span><br>
-                    pentru Afacerea Ta
-                </h1>
-                <p class="hero-subtitle" data-translate="hero_subtitle">
-                    Dezvoltăm site-uri web moderne, aplicații mobile și oferim servicii complete de hosting și SEO
-                    pentru a-ți transforma ideile în realitate digitală.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#services" class="btn btn-primary" data-translate="hero_cta_primary">Descoperă
-                        Serviciile</a>
-                    <a href="#portfolio" class="btn btn-secondary" data-translate="hero_cta_secondary">Vezi
-                        Portofoliul</a>
+    <main>
+        <section id="home" class="cc-intro">
+            <div class="cc-intro-scena">
+                <div class="cc-intro-fundal" id="cc-fundal-final" aria-hidden="true"></div>
+                <div class="cc-intro-stage" id="cc-stage" aria-hidden="true"></div>
+
+                <div class="cc-intro-rezerva" id="cc-rezerva" aria-hidden="true">
+                    <pre>const digitalProduct = {
+  idea: true,
+  design: true,
+  code: true,
+  possibilities: Infinity
+}</pre>
                 </div>
+
+                <div class="cc-intro-continut" id="cc-portal">
+                    <h1 class="cc-hero-titlu" data-translate="home_hero_title">Cod care<br>îți aduce clienți.</h1>
+                    <p class="cc-hero-sub" data-translate="home_hero_sub">Site-uri, aplicații Android și sisteme web
+                        construite de la zero — rapide, indexate, făcute să vândă.</p>
+                    <div class="cc-hero-butoane">
+                        <a href="#contact" class="cc-btn cc-btn--alb" data-translate="home_hero_cta1">Discută
+                            proiectul</a>
+                        <a href="#portfolio" class="cc-btn cc-btn--contur" data-translate="home_hero_cta2">Proiecte
+                            live</a>
+                    </div>
+                </div>
+
+                <div class="cc-intro-intra" id="cc-intra" aria-hidden="true">ENTER CODECARE →</div>
+                <div class="cc-intro-indiciu" id="cc-indiciu" aria-hidden="true">SCROLL TO ENTER ↓</div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="services" class="services">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-translate="services_title">Serviciile Noastre</h2>
-                <p class="section-subtitle" data-translate="services_subtitle">
-                    Oferim soluții complete și personalizate pentru toate nevoile tale digitale
-                </p>
-            </div>
-
-            <div class="services-grid">
-                <article class="service-card">
-                    <div class="service-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-                            <line x1="8" y1="21" x2="16" y2="21" />
-                            <line x1="12" y1="17" x2="12" y2="21" />
-                        </svg>
-                    </div>
-                    <h3 class="service-title" data-translate="service_websites_title">Site-uri Web</h3>
-                    <p class="service-description" data-translate="service_websites_desc">
-                        Dezvoltăm site-uri de prezentare statice și dinamice, optimizate pentru performanță și SEO,
-                        adaptate perfect nevoilor tale de business.
-                    </p>
-                    <ul class="service-features">
-                        <li data-translate="service_websites_feature1">Design responsive modern</li>
-                        <li data-translate="service_websites_feature2">Optimizare SEO avansată</li>
-                        <li data-translate="service_websites_feature3">Performanță maximă</li>
-                    </ul>
-                </article>
-
-                <article class="service-card">
-                    <div class="service-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
-                            <line x1="12" y1="18" x2="12.01" y2="18" />
-                        </svg>
-                    </div>
-                    <h3 class="service-title" data-translate="service_mobile_title">Aplicații Mobile</h3>
-                    <p class="service-description" data-translate="service_mobile_desc">
-                        Creăm aplicații mobile native pentru Android, la cerere, cu interfețe intuitive și
-                        funcționalități avansate pentru utilizatorii tăi.
-                    </p>
-                    <ul class="service-features">
-                        <li data-translate="service_mobile_feature1">Dezvoltare Android nativă</li>
-                        <li data-translate="service_mobile_feature2">UI/UX modern și intuitiv</li>
-                        <li data-translate="service_mobile_feature3">Integrări API complete</li>
-                    </ul>
-                </article>
-
-                <article class="service-card">
-                    <div class="service-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                            <path d="M2 17l10 5 10-5" />
-                            <path d="M2 12l10 5 10-5" />
-                        </svg>
-                    </div>
-                    <h3 class="service-title" data-translate="service_complex_title">Sisteme Complexe</h3>
-                    <p class="service-description" data-translate="service_complex_desc">
-                        Dezvoltăm aplicații web complexe cu baze de date, panouri de administrare și sisteme de
-                        management personalizate pentru afacerea ta.
-                    </p>
-                    <ul class="service-features">
-                        <li data-translate="service_complex_feature1">Panouri de administrare</li>
-                        <li data-translate="service_complex_feature2">Baze de date optimizate</li>
-                        <li data-translate="service_complex_feature3">Sisteme de management</li>
-                    </ul>
-                </article>
-
-                <article class="service-card">
-                    <div class="service-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="11" cy="11" r="8" />
-                            <path d="M21 21l-4.35-4.35" />
-                        </svg>
-                    </div>
-                    <h3 class="service-title" data-translate="service_seo_title">SEO Tehnic</h3>
-                    <p class="service-description" data-translate="service_seo_desc">
-                        Optimizăm direct în cod pentru motoarele de căutare, îmbunătățind vizibilitatea și performanța
-                        site-ului tău în rezultatele de căutare.
-                    </p>
-                    <ul class="service-features">
-                        <li data-translate="service_seo_feature1">Optimizare on-page</li>
-                        <li data-translate="service_seo_feature2">Structură tehnică avansată</li>
-                        <li data-translate="service_seo_feature3">Analiză și raportare</li>
-                    </ul>
-                </article>
-
-                <article class="service-card">
-                    <div class="service-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path
-                                d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2" />
-                        </svg>
-                    </div>
-                    <h3 class="service-title" data-translate="service_hosting_title">Configurare Hosting & Domeniu</h3>
-                    <p class="service-description" data-translate="service_hosting_desc">
-                        Te ajutăm să achiziționezi domeniul și găzduirea potrivită de la HostGate, apoi ne ocupăm de
-                        configurarea serverului și publicarea site-ului tău online.
-                    </p>
-                    <ul class="service-features">
-                        <li data-translate="service_hosting_feature1">Consultanță achiziție</li>
-                        <li data-translate="service_hosting_feature2">Configurare HostGate</li>
-                        <li data-translate="service_hosting_feature3">Publicare site online</li>
-                    </ul>
-                </article>
-
-                <article class="service-card">
-                    <div class="service-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                            <polyline points="9,12 11,14 15,10" />
-                        </svg>
-                    </div>
-                    <h3 class="service-title" data-translate="service_maint_title">Mentenanță & Suport</h3>
-                    <p class="service-description" data-translate="service_maint_desc">
-                        Îți ținem site-ul actualizat, securizat și online, cu intervenție rapidă atunci când apare o
-                        problemă, ca tu să te ocupi de afacere, nu de tehnic.
-                    </p>
-                    <ul class="service-features">
-                        <li data-translate="service_maint_feature1">Actualizări și backup periodic</li>
-                        <li data-translate="service_maint_feature2">Monitorizare uptime 24/7</li>
-                        <li data-translate="service_maint_feature3">Suport tehnic prioritar</li>
-                    </ul>
-                </article>
+        <div class="cc-banda" aria-hidden="true">
+            <div class="cc-banda-pista">
+                <span>HTML5</span><span>·</span><span>BOOTSTRAP</span><span>·</span><span
+                    data-translate="home_tech_android">ANDROID NATIV</span><span>·</span><span>JAVA</span><span>·</span><span>PYTHON</span><span>·</span><span>POSTGRESQL</span><span>·</span><span>SUPABASE</span><span>·</span><span
+                    data-translate="home_tech_seo">SEO TEHNIC</span><span>·</span><span>HOSTGATE</span><span>·</span>
+                <span>HTML5</span><span>·</span><span>BOOTSTRAP</span><span>·</span><span
+                    data-translate="home_tech_android">ANDROID NATIV</span><span>·</span><span>JAVA</span><span>·</span><span>PYTHON</span><span>·</span><span>POSTGRESQL</span><span>·</span><span>SUPABASE</span><span>·</span><span
+                    data-translate="home_tech_seo">SEO TEHNIC</span><span>·</span><span>HOSTGATE</span><span>·</span>
             </div>
         </div>
-    </section>
 
-    <section id="portfolio" class="portfolio">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-translate="portfolio_title">Proiectele Noastre</h2>
-                <p class="section-subtitle" data-translate="portfolio_subtitle">
-                    Proiecte realizate cu pasiune și atenție la detalii
-                </p>
+        <section id="services" class="cc-sectiune">
+            <div class="cc-cap" data-reveal>
+                <div class="cc-eticheta" data-translate="home_services_label">01 / SERVICII</div>
+                <h2 class="cc-titlu" data-translate="home_services_title">Tot lanțul, de la idee la server.</h2>
+                <p class="cc-cap-text" data-translate="home_services_intro">Nu te plimbăm între furnizori. Construim,
+                    optimizăm, publicăm și ținem online.</p>
             </div>
 
-            <div class="portfolio-grid" id="portfolio-grid">
-                <div class="portfolio-card portfolio-with-link">
-                    <div class="portfolio-image">
-                        <img src="assets/bucegi-experience.webp"
-                            alt="Bucegi Experience - închirieri ATV pe Valea Prahovei" class="project-thumbnail"
-                            loading="lazy" decoding="async" width="1280" height="800">
-                        <div class="portfolio-placeholder" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-                                <line x1="8" y1="21" x2="16" y2="21" />
-                                <line x1="12" y1="17" x2="12" y2="21" />
-                            </svg>
-                        </div>
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-tech">
-                                <span class="tech-tag">HTML5</span>
-                                <span class="tech-tag">Bootstrap</span>
-                                <span class="tech-tag">SEO</span>
-                            </div>
-                        </div>
-                        <a href="https://bucegiexperience.ro/" target="_blank" rel="noopener noreferrer"
-                            class="portfolio-live-btn">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                                <polyline points="15,3 21,3 21,9" />
-                                <line x1="10" y1="14" x2="21" y2="3" />
-                            </svg>
-                            <span data-translate="portfolio_view_live">Live</span>
-                        </a>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3 class="portfolio-title" data-translate="project1_title">Bucegi Experience</h3>
-                        <p class="portfolio-description" data-translate="project1_desc">
-                            Site de prezentare și rezervări pentru închirieri ATV și excursii off-road ghidate pe
-                            Valea Prahovei, optimizat pentru căutările locale din Bușteni, Sinaia și Azuga.
-                        </p>
+            <div class="cc-servicii">
+                <article class="cc-serviciu" data-reveal>
+                    <div class="cc-serviciu-nr">01</div>
+                    <h3 data-translate="home_s1_title">Site-uri web</h3>
+                    <p data-translate="home_s1_desc">Prezentare sau dinamice, construite în cod curat și livrate rapide
+                        din prima zi.</p>
+                    <ul class="cc-puncte" data-translate="home_s1_items">
+                        <li>Responsive real, nu doar „merge pe mobil”</li>
+                        <li>SEO tehnic din construcție</li>
+                        <li>Încărcare sub o secundă</li>
+                    </ul>
+                </article>
+
+                <article class="cc-serviciu" data-reveal>
+                    <div class="cc-serviciu-nr">02</div>
+                    <h3 data-translate="home_s2_title">Aplicații Android</h3>
+                    <p data-translate="home_s2_desc">Aplicații native, la comandă, cu interfețe simple pe care le
+                        înțelege oricine.</p>
+                    <ul class="cc-puncte" data-translate="home_s2_items">
+                        <li>Dezvoltare Android nativă</li>
+                        <li>UI/UX gândit pe fluxuri</li>
+                        <li>Integrări API complete</li>
+                    </ul>
+                </article>
+
+                <article class="cc-serviciu" data-reveal>
+                    <div class="cc-serviciu-nr">03</div>
+                    <h3 data-translate="home_s3_title">Sisteme complexe</h3>
+                    <p data-translate="home_s3_desc">Platforme web cu baze de date, roluri și panouri de administrare pe
+                        măsura firmei.</p>
+                    <ul class="cc-puncte" data-translate="home_s3_items">
+                        <li>Panouri de administrare</li>
+                        <li>Baze de date optimizate</li>
+                        <li>Rapoarte în timp real</li>
+                    </ul>
+                </article>
+
+                <article class="cc-serviciu" data-reveal>
+                    <div class="cc-serviciu-nr">04</div>
+                    <h3 data-translate="home_s4_title">SEO tehnic</h3>
+                    <p data-translate="home_s4_desc">Optimizăm direct în cod: structură, viteză, indexare. Fără
+                        promisiuni goale.</p>
+                    <ul class="cc-puncte" data-translate="home_s4_items">
+                        <li>Optimizare on-page</li>
+                        <li>Structură tehnică avansată</li>
+                        <li>Analiză și raportare</li>
+                    </ul>
+                </article>
+
+                <article class="cc-serviciu" data-reveal>
+                    <div class="cc-serviciu-nr">05</div>
+                    <h3 data-translate="home_s5_title">Hosting &amp; domeniu</h3>
+                    <p data-translate="home_s5_desc">Îți alegem pachetul potrivit la HostGate, configurăm serverul și te
+                        punem online.</p>
+                    <ul class="cc-puncte" data-translate="home_s5_items">
+                        <li>Consultanță achiziție</li>
+                        <li>Configurare DNS și SSL</li>
+                        <li>Publicare completă</li>
+                    </ul>
+                </article>
+
+                <article class="cc-serviciu" data-reveal>
+                    <div class="cc-serviciu-nr">06</div>
+                    <h3 data-translate="home_s6_title">Mentenanță &amp; suport</h3>
+                    <p data-translate="home_s6_desc">Site actualizat, securizat și online. Tu vezi de afacere, noi de
+                        tehnic.</p>
+                    <ul class="cc-puncte" data-translate="home_s6_items">
+                        <li>Backup și actualizări</li>
+                        <li>Monitorizare uptime 24/7</li>
+                        <li>Suport tehnic prioritar</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section id="proces" class="cc-proces">
+            <div class="cc-proces-lipit">
+                <div class="cc-proces-cap">
+                    <div class="cc-eticheta" data-translate="home_process_label">02 / PROCES</div>
+                    <h2 class="cc-proces-titlu" data-translate="home_process_title">De la idee la lansare.</h2>
+                </div>
+
+                <div class="cc-proces-fereastra">
+                    <div class="cc-proces-pista" id="cc-pista">
+                        <article class="cc-pas">
+                            <div class="cc-pas-cap"><span class="cc-pas-nr">01</span><span class="cc-pas-tag"
+                                    data-translate="home_p1_tag">// discuție</span></div>
+                            <h3 data-translate="home_p1_title">Înțelegem afacerea</h3>
+                            <p data-translate="home_p1_desc">Prima discuție nu e despre culori. E despre cine sunt
+                                clienții tăi, ce caută pe Google și ce trebuie să facă un vizitator pe site ca tu să
+                                câștigi.</p>
+                            <div class="cc-chips" data-translate="home_p1_chips"><span>obiective</span><span>public
+                                    țintă</span><span>analiză concurență</span></div>
+                        </article>
+
+                        <article class="cc-pas">
+                            <div class="cc-pas-cap"><span class="cc-pas-nr">02</span><span class="cc-pas-tag"
+                                    data-translate="home_p2_tag">// structură</span></div>
+                            <h3 data-translate="home_p2_title">Desenăm harta</h3>
+                            <p data-translate="home_p2_desc">Stabilim paginile, ordinea secțiunilor și textele-cheie
+                                înainte să scriem o linie de cod. Vezi structura și o aprobi.</p>
+                            <div class="cc-chips" data-translate="home_p2_chips">
+                                <span>sitemap</span><span>wireframe</span><span>texte</span></div>
+                        </article>
+
+                        <article class="cc-pas">
+                            <div class="cc-pas-cap"><span class="cc-pas-nr">03</span><span class="cc-pas-tag"
+                                    data-translate="home_p3_tag">// design</span></div>
+                            <h3 data-translate="home_p3_title">Construim identitatea</h3>
+                            <p data-translate="home_p3_desc">Design personalizat, nu temă cumpărată. Îți arătăm varianta
+                                pe desktop și pe telefon și ajustăm până arată exact cum trebuie.</p>
+                            <div class="cc-chips" data-translate="home_p3_chips"><span>design custom</span><span>mobil
+                                    first</span><span>revizii incluse</span></div>
+                        </article>
+
+                        <article class="cc-pas">
+                            <div class="cc-pas-cap"><span class="cc-pas-nr">04</span><span class="cc-pas-tag"
+                                    data-translate="home_p4_tag">// cod</span></div>
+                            <h3 data-translate="home_p4_title">Scriem codul</h3>
+                            <p data-translate="home_p4_desc">Cod curat, fără plugin-uri inutile. Optimizat pentru viteză
+                                și pentru Google din construcție, nu lipit la final.</p>
+                            <div class="cc-chips" data-translate="home_p4_chips"><span>performanță</span><span>seo
+                                    tehnic</span><span>securitate</span></div>
+                        </article>
+
+                        <article class="cc-pas">
+                            <div class="cc-pas-cap"><span class="cc-pas-nr">05</span><span class="cc-pas-tag"
+                                    data-translate="home_p5_tag">// lansare</span></div>
+                            <h3 data-translate="home_p5_title">Publicăm și rămânem</h3>
+                            <p data-translate="home_p5_desc">Configurăm hostingul, domeniul și SSL, urcăm site-ul, îl
+                                trimitem la indexare — apoi îl ținem online și actualizat.</p>
+                            <div class="cc-chips" data-translate="home_p5_chips">
+                                <span>hostgate</span><span>indexare</span><span>mentenanță</span></div>
+                        </article>
                     </div>
                 </div>
 
-                <div class="portfolio-card">
-                    <div class="portfolio-image portfolio-image--app">
-                        <img src="assets/seifpro.webp" alt="SeifPro - manager de parole offline pentru Android"
-                            class="project-thumbnail" loading="lazy" decoding="async" width="1280" height="800">
-                        <div class="portfolio-placeholder" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
-                                <line x1="12" y1="18" x2="12.01" y2="18" />
-                            </svg>
+                <div class="cc-proces-jos" aria-hidden="true">
+                    <div class="cc-proces-bara">
+                        <div id="cc-pas-bara"></div>
+                    </div>
+                    <span>SCROLL →</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="cc-sectiune cc-proiecte">
+            <div class="cc-cap-rand" data-reveal>
+                <div class="cc-cap">
+                    <div class="cc-eticheta" data-translate="home_projects_label">03 / PROIECTE</div>
+                    <h2 class="cc-titlu" data-translate="home_projects_title">Lucruri care rulează acum.</h2>
+                </div>
+                <a href="proiecte.html" class="cc-link-mono" data-translate="home_projects_all">TOATE PROIECTELE →</a>
+            </div>
+
+            <div class="cc-proiecte-lista">
+                <article class="cc-proiect" data-reveal>
+                    <div class="cc-proiect-grila">
+                        <div class="cc-proiect-poza">
+                            <img src="assets/bucegi-experience.webp"
+                                alt="Bucegi Experience - închirieri ATV pe Valea Prahovei" class="project-thumbnail"
+                                loading="lazy" decoding="async" width="1280" height="800">
+                            <span class="cc-insigna">LIVE</span>
                         </div>
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-tech">
-                                <span class="tech-tag">Java</span>
-                                <span class="tech-tag">Android</span>
-                                <span class="tech-tag">Supabase</span>
-                            </div>
-                        </div>
-                        <div class="portfolio-status portfolio-status--platform">
-                            <span>Android</span>
+                        <div class="cc-proiect-text">
+                            <span class="cc-proiect-nr">01</span>
+                            <h3 data-translate="project1_title">Bucegi Experience</h3>
+                            <p data-translate="home_proj1_desc">Rezervări ATV și tururi off-road pe Valea Prahovei,
+                                optimizat pentru căutările din Bușteni, Sinaia și Azuga.</p>
+                            <div class="cc-chips cc-chips--gri">
+                                <span>HTML5</span><span>Bootstrap</span><span>SEO</span></div>
+                            <a href="https://bucegiexperience.ro/" target="_blank" rel="noopener noreferrer"
+                                class="cc-link-mono cc-proiect-live" data-translate="home_proj_live">VEZI SITE-UL ↗</a>
                         </div>
                     </div>
-                    <div class="portfolio-content">
-                        <h3 class="portfolio-title" data-translate="project6_title">SeifPro</h3>
-                        <p class="portfolio-description" data-translate="project6_desc">
-                            Manager de parole offline pentru Android: parolele rămân pe telefon, iar trimiterea
-                            securizată către desktop se face prin scanarea unui cod QR, cu Supabase folosit
-                            doar ca releu.
-                        </p>
+                </article>
+
+                <article class="cc-proiect" data-reveal>
+                    <div class="cc-proiect-grila">
+                        <div class="cc-proiect-poza cc-proiect-poza--app">
+                            <img src="assets/seifpro.webp" alt="SeifPro - manager de parole offline pentru Android"
+                                class="project-thumbnail" loading="lazy" decoding="async" width="1280" height="800">
+                            <span class="cc-insigna">ANDROID</span>
+                        </div>
+                        <div class="cc-proiect-text">
+                            <span class="cc-proiect-nr">02</span>
+                            <h3 data-translate="project6_title">SeifPro</h3>
+                            <p data-translate="home_proj2_desc">Manager de parole offline: parolele rămân pe telefon,
+                                transferul spre desktop se face prin cod QR, cu Supabase doar ca releu.</p>
+                            <div class="cc-chips cc-chips--gri">
+                                <span>Java</span><span>Android</span><span>Supabase</span></div>
+                        </div>
                     </div>
+                </article>
+
+                <article class="cc-proiect" data-reveal>
+                    <div class="cc-proiect-grila">
+                        <div class="cc-proiect-poza">
+                            <img src="assets/gym-core.webp"
+                                alt="Gym Platform - platformă de gestiune pentru săli de fitness"
+                                class="project-thumbnail" loading="lazy" decoding="async" width="1280" height="800">
+                            <span class="cc-insigna" data-translate="home_proj3_badge">ÎN LUCRU</span>
+                        </div>
+                        <div class="cc-proiect-text">
+                            <span class="cc-proiect-nr">03</span>
+                            <h3 data-translate="project3_title">Gym Platform</h3>
+                            <p data-translate="home_proj3_desc">Gestiune pentru mai multe săli de fitness: abonamente,
+                                încasări, risc de abandon și rapoarte în timp real.</p>
+                            <div class="cc-chips cc-chips--gri">
+                                <span>Streamlit</span><span>Python</span><span>PostgreSQL</span></div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="cc-sectiune cc-cifre">
+            <div class="cc-cifre-grila" data-reveal>
+                <div class="cc-cifra">
+                    <div class="cc-cifra-nr" data-numar="7">7</div>
+                    <div class="cc-cifra-eticheta" data-translate="home_stat1">PROIECTE ÎN PORTOFOLIU</div>
+                </div>
+                <div class="cc-cifra">
+                    <div class="cc-cifra-nr" data-numar="98" data-sufix="/100">98/100</div>
+                    <div class="cc-cifra-eticheta" data-translate="home_stat2">SCOR PAGESPEED</div>
+                </div>
+                <div class="cc-cifra">
+                    <div class="cc-cifra-nr" data-numar="99.9" data-zecimale="1" data-sufix="%">99.9%</div>
+                    <div class="cc-cifra-eticheta" data-translate="home_stat3">UPTIME MONITORIZAT</div>
+                </div>
+                <div class="cc-cifra">
+                    <div class="cc-cifra-nr" data-numar="24" data-prefix="&lt; ">&lt; 24</div>
+                    <div class="cc-cifra-eticheta" data-translate="home_stat4">ORE PÂNĂ LA RĂSPUNS</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="cc-sectiune cc-pachete">
+            <div class="cc-cap-rand" data-reveal>
+                <div class="cc-cap cc-cap--lat">
+                    <div class="cc-eticheta" data-translate="home_packs_label">04 / PACHETE</div>
+                    <h2 class="cc-titlu" data-translate="home_packs_title">Alege direcția. Bugetul îl construim
+                        împreună.</h2>
+                    <p class="cc-cap-text" data-translate="home_packs_intro">Fiecare proiect are alt scop, alt conținut,
+                        alt volum de muncă — așa că nu lipim un preț pe el înainte să-l înțelegem. Spune-ne ce vrei să
+                        obții și primești o ofertă clară, pe scris, în 24 de ore.</p>
+                </div>
+                <a href="preturi.html" class="cc-link-mono" data-translate="home_packs_details">CE INCLUDE FIECARE
+                    PACHET →</a>
+            </div>
+
+            <div class="cc-pachete-grila">
+                <div class="cc-pachet" data-reveal>
+                    <div class="cc-pachet-nr" data-translate="home_pack1_num">PACHET 01</div>
+                    <h3 data-translate="home_pack1_name">Start</h3>
+                    <p class="cc-pachet-pentru" data-translate="home_pack1_for">Pentru cine vrea prezență online rapidă și
+                        un număr de telefon la un click distanță.</p>
+                    <ul class="cc-pachet-lista" data-translate="home_pack1_items">
+                        <li>O pagină, scroll fluid pe secțiuni</li>
+                        <li>Design responsive, optimizat mobil</li>
+                        <li>Secțiune servicii și prezentare</li>
+                        <li>Buton WhatsApp / apel direct</li>
+                        <li>Asistență domeniu &amp; hosting</li>
+                    </ul>
+                    <div class="cc-pachet-termen" data-translate="home_pack1_time">LIVRARE ORIENTATIVĂ: 1–2 SĂPTĂMÂNI
+                    </div>
+                    <a href="#contact" class="cc-pachet-cta" data-service="landing-page"
+                        data-translate="home_pack_cta">Cere ofertă</a>
                 </div>
 
-                <div class="portfolio-card">
-                    <div class="portfolio-image">
-                        <img src="assets/gym-core.webp"
-                            alt="Gym Platform - platformă de gestiune pentru săli de fitness" class="project-thumbnail"
-                            loading="lazy" decoding="async" width="1280" height="800">
-                        <div class="portfolio-placeholder" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-                                <line x1="8" y1="21" x2="16" y2="21" />
-                                <line x1="12" y1="17" x2="12" y2="21" />
-                            </svg>
-                        </div>
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-tech">
-                                <span class="tech-tag">Streamlit</span>
-                                <span class="tech-tag">Python</span>
-                                <span class="tech-tag">PostgreSQL</span>
-                            </div>
-                        </div>
-                        <div class="portfolio-status-badge">
-                            <span data-translate="portfolio_in_development">În dezvoltare</span>
-                        </div>
+                <div class="cc-pachet cc-pachet--evidentiat" data-reveal>
+                    <div class="cc-pachet-insigna" data-translate="home_pack_badge">CEL MAI CERUT</div>
+                    <div class="cc-pachet-nr" data-translate="home_pack2_num">PACHET 02</div>
+                    <h3 data-translate="home_pack2_name">Prezentare</h3>
+                    <p class="cc-pachet-pentru" data-translate="home_pack2_for">Pentru firme care au nevoie de pagini
+                        separate, formular și vizibilitate în Google.</p>
+                    <ul class="cc-pachet-lista" data-translate="home_pack2_items">
+                        <li>Până la 5 pagini</li>
+                        <li>Design modern, personalizat</li>
+                        <li>Optimizare SEO de bază</li>
+                        <li>Formular de contact și hartă</li>
+                        <li>Configurare hosting inclusă</li>
+                    </ul>
+                    <div class="cc-pachet-termen" data-translate="home_pack2_time">LIVRARE ORIENTATIVĂ: 2–3 SĂPTĂMÂNI
                     </div>
-                    <div class="portfolio-content">
-                        <h3 class="portfolio-title" data-translate="project3_title">Gym Platform</h3>
-                        <p class="portfolio-description" data-translate="project3_desc">
-                            Platformă de gestiune pentru mai multe săli de fitness: check-in și abonamente, reînnoiri,
-                            vânzări și registru de casă, analiză a riscului de abandon și rapoarte în timp real.
-                        </p>
+                    <a href="#contact" class="cc-pachet-cta" data-service="site-prezentare"
+                        data-translate="home_pack_cta">Cere ofertă</a>
+                </div>
+
+                <div class="cc-pachet" data-reveal>
+                    <div class="cc-pachet-nr" data-translate="home_pack3_num">PACHET 03</div>
+                    <h3 data-translate="home_pack3_name">Business</h3>
+                    <p class="cc-pachet-pentru" data-translate="home_pack3_for">Pentru afaceri care vând și în afara
+                        orașului sau în afara țării.</p>
+                    <ul class="cc-pachet-lista" data-translate="home_pack3_items">
+                        <li>Până la 10 pagini</li>
+                        <li>Site bilingv RO + EN</li>
+                        <li>Design personalizat de la zero</li>
+                        <li>SEO avansat &amp; Google Analytics</li>
+                        <li>3 luni de suport incluse</li>
+                    </ul>
+                    <div class="cc-pachet-termen" data-translate="home_pack3_time">LIVRARE ORIENTATIVĂ: 3–5 SĂPTĂMÂNI
                     </div>
+                    <a href="#contact" class="cc-pachet-cta" data-service="site-business"
+                        data-translate="home_pack_cta">Cere ofertă</a>
+                </div>
+
+                <div class="cc-pachet" data-reveal>
+                    <div class="cc-pachet-nr" data-translate="home_pack4_num">PACHET 04</div>
+                    <h3 data-translate="home_pack4_name">Custom</h3>
+                    <p class="cc-pachet-pentru" data-translate="home_pack4_for">Pentru aplicații, platforme și tot ce nu
+                        intră într-un tipar.</p>
+                    <ul class="cc-pachet-lista" data-translate="home_pack4_items">
+                        <li>Aplicații mobile Android</li>
+                        <li>Platforme web complexe (SaaS)</li>
+                        <li>Baze de date &amp; API-uri</li>
+                        <li>Consultanță tehnică</li>
+                        <li>Mentenanță dedicată</li>
+                    </ul>
+                    <div class="cc-pachet-termen" data-translate="home_pack4_time">CALENDAR STABILIT ÎMPREUNĂ</div>
+                    <a href="#contact" class="cc-pachet-cta" data-service="custom-app"
+                        data-translate="home_pack_cta">Cere ofertă</a>
                 </div>
             </div>
 
-            <div class="portfolio-actions">
-                <a href="proiecte.html" class="btn btn-secondary portfolio-toggle-btn"
-                    data-translate="portfolio_show_all">
-                    Vezi toate proiectele
-                </a>
+            <div class="cc-extra" data-reveal>
+                <div>
+                    <h3 data-translate="home_extra_title">Ai deja site și vrei doar o bucată?</h3>
+                    <p data-translate="home_extra_desc">SEO tehnic, configurare hosting și domeniu, audit sau mentenanță
+                        lunară — se pot lua separat.</p>
+                </div>
+                <a href="#contact" class="cc-extra-cta" data-translate="home_extra_cta">Întreabă-ne →</a>
+            </div>
+        </section>
+
+        <section id="intrebari" class="cc-sectiune cc-intrebari">
+            <div data-reveal>
+                <div class="cc-eticheta" data-translate="home_faq_label">05 / ÎNTREBĂRI</div>
+                <h2 class="cc-titlu" data-translate="home_faq_title">Răspunsuri, direct.</h2>
+            </div>
+
+            <div class="cc-faq-lista">
+                <div class="cc-faq este-deschis" data-reveal>
+                    <button type="button" class="cc-faq-intrebare" id="cc-faq-q1" aria-expanded="true"
+                        aria-controls="cc-faq-r1">
+                        <span data-translate="home_faq1_q">Cât costă un site?</span>
+                        <span class="cc-faq-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="cc-faq-raspuns" id="cc-faq-r1" role="region" aria-labelledby="cc-faq-q1">
+                        <div>
+                            <p data-translate="home_faq1_a">Depinde de ce trebuie să facă. Un site care prezintă trei
+                                servicii și unul cu rezervări online sunt două proiecte diferite. Ne spui obiectivul, îți
+                                trimitem o ofertă fixă, pe scris, cu tot ce include — fără costuri care apar pe parcurs.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cc-faq" data-reveal>
+                    <button type="button" class="cc-faq-intrebare" id="cc-faq-q2" aria-expanded="false"
+                        aria-controls="cc-faq-r2">
+                        <span data-translate="home_faq2_q">Cât durează?</span>
+                        <span class="cc-faq-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="cc-faq-raspuns" id="cc-faq-r2" role="region" aria-labelledby="cc-faq-q2">
+                        <div>
+                            <p data-translate="home_faq2_a">O pagină de prezentare simplă: 1–2 săptămâni. Un site de
+                                business complet: 3–5 săptămâni. Aplicațiile și platformele depind de scop, dar primești
+                                un calendar clar înainte să începem.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cc-faq" data-reveal>
+                    <button type="button" class="cc-faq-intrebare" id="cc-faq-q3" aria-expanded="false"
+                        aria-controls="cc-faq-r3">
+                        <span data-translate="home_faq3_q">Ce trebuie să pregătesc eu?</span>
+                        <span class="cc-faq-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="cc-faq-raspuns" id="cc-faq-r3" role="region" aria-labelledby="cc-faq-q3">
+                        <div>
+                            <p data-translate="home_faq3_a">Ideal: texte, poze și logo. Dacă nu le ai, te ajutăm —
+                                scriem conținutul împreună și îți spunem exact ce poze sunt necesare.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cc-faq" data-reveal>
+                    <button type="button" class="cc-faq-intrebare" id="cc-faq-q4" aria-expanded="false"
+                        aria-controls="cc-faq-r4">
+                        <span data-translate="home_faq4_q">Domeniul și hostingul cum funcționează?</span>
+                        <span class="cc-faq-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="cc-faq-raspuns" id="cc-faq-r4" role="region" aria-labelledby="cc-faq-q4">
+                        <div>
+                            <p data-translate="home_faq4_a">Rămân pe numele tău, la HostGate. Noi te ghidăm la
+                                achiziție, configurăm DNS, SSL și publicăm site-ul. Nu îți ținem site-ul ostatic
+                                niciodată.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cc-faq" data-reveal>
+                    <button type="button" class="cc-faq-intrebare" id="cc-faq-q5" aria-expanded="false"
+                        aria-controls="cc-faq-r5">
+                        <span data-translate="home_faq5_q">Ce se întâmplă după lansare?</span>
+                        <span class="cc-faq-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="cc-faq-raspuns" id="cc-faq-r5" role="region" aria-labelledby="cc-faq-q5">
+                        <div>
+                            <p data-translate="home_faq5_a">Rămâi cu un site care funcționează și, dacă vrei, cu noi în
+                                spate: actualizări, backup, monitorizare uptime și modificări de conținut la cerere.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cc-faq" data-reveal>
+                    <button type="button" class="cc-faq-intrebare" id="cc-faq-q6" aria-expanded="false"
+                        aria-controls="cc-faq-r6">
+                        <span data-translate="home_faq6_q">Lucrați și în afara Albei Iulia?</span>
+                        <span class="cc-faq-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="cc-faq-raspuns" id="cc-faq-r6" role="region" aria-labelledby="cc-faq-q6">
+                        <div>
+                            <p data-translate="home_faq6_a">Da. Majoritatea proiectelor le facem 100% remote, cu apeluri
+                                scurte și actualizări scrise la fiecare etapă.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="cc-banda cc-banda--mare" aria-hidden="true">
+            <div class="cc-banda-pista">
+                <span data-translate="home_marquee_talk">SĂ VORBIM —</span><span
+                    data-translate="home_marquee_talk">SĂ VORBIM —</span><span data-translate="home_marquee_talk">SĂ
+                    VORBIM —</span><span data-translate="home_marquee_talk">SĂ VORBIM —</span>
+                <span data-translate="home_marquee_talk">SĂ VORBIM —</span><span
+                    data-translate="home_marquee_talk">SĂ VORBIM —</span><span data-translate="home_marquee_talk">SĂ
+                    VORBIM —</span><span data-translate="home_marquee_talk">SĂ VORBIM —</span>
             </div>
         </div>
-    </section>
 
-    <section id="pricing" class="pricing">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-translate="pricing_title">Planuri și Prețuri</h2>
-                <p class="section-subtitle" data-translate="pricing_subtitle">
-                    Investiții transparente pentru afacerea ta digitală. Alege pachetul care ți se potrivește.
-                </p>
-            </div>
-
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3 data-translate="price_start_title">Landing Page</h3>
-                        <div class="price">
-                            <span class="amount" data-translate="price_start_amount">899</span>
-                            <span class="currency" data-translate="price_start_currency">lei</span>
-                        </div>
-                        <p class="price-subtitle" data-translate="price_start_sub">Preț de pornire</p>
-                    </div>
-                    <ul class="pricing-features">
-                        <li data-translate="price_start_f1">Design Responsive (Optimizat Mobile)</li>
-                        <li data-translate="price_start_f2">Pagină Unică (Scroll fluid cu secțiuni)</li>
-                        <li data-translate="price_start_f3">Secțiune Servicii & Listă de Prețuri</li>
-                        <li data-translate="price_start_f4">Integrare Buton WhatsApp / Apel Direct</li>
-                        <li data-translate="price_start_f5">Asistență gratuită achiziție domeniu & hosting</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-secondary full-width" data-service="landing-page"
-                        data-translate="btn_order">Comandă</a>
-                </div>
-
-                <div class="pricing-card popular">
-                    <div class="popular-badge" data-translate="price_badge">Cel mai ales</div>
-                    <div class="pricing-header">
-                        <h3 data-translate="price_basic_title">Site Prezentare</h3>
-                        <div class="price">
-                            <span class="amount" data-translate="price_basic_amount">1.499</span>
-                            <span class="currency" data-translate="price_basic_currency">lei</span>
-                        </div>
-                        <p class="price-subtitle" data-translate="price_basic_sub">Preț de pornire</p>
-                    </div>
-                    <ul class="pricing-features">
-                        <li data-translate="price_basic_f1">Design Responsive & Modern</li>
-                        <li data-translate="price_basic_f2">Până la 5 Pagini</li>
-                        <li data-translate="price_basic_f3">Optimizare SEO Basic</li>
-                        <li data-translate="price_basic_f4">Formular Contact & Harta</li>
-                        <li data-translate="price_basic_f5">Configurare Hosting Gratuită</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-primary full-width" data-service="site-prezentare"
-                        data-translate="btn_order">Comandă</a>
-                </div>
-
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3 data-translate="price_biz_title">Site Business</h3>
-                        <div class="price">
-                            <span class="amount" data-translate="price_biz_amount">3.499</span>
-                            <span class="currency" data-translate="price_biz_currency">lei</span>
-                        </div>
-                        <p class="price-subtitle" data-translate="price_biz_sub">Preț de pornire</p>
-                    </div>
-                    <ul class="pricing-features">
-                        <li data-translate="price_biz_f1">Până la 10 Pagini</li>
-                        <li data-translate="price_biz_f2">Site Bilingv (RO + EN)</li>
-                        <li data-translate="price_biz_f3">Design Personalizat de la Zero</li>
-                        <li data-translate="price_biz_f4">SEO Avansat & Google Analytics</li>
-                        <li data-translate="price_biz_f5">3 Luni de Suport Inclus</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-secondary full-width" data-service="site-business"
-                        data-translate="btn_order">Comandă</a>
-                </div>
-
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3 data-translate="price_pro_title">Aplicații / Custom</h3>
-                        <div class="price">
-                            <span class="amount amount--text" data-translate="price_pro_amount">Discutabil</span>
-                        </div>
-                        <p class="price-subtitle" data-translate="price_pro_sub">În funcție de complexitate</p>
-                    </div>
-                    <ul class="pricing-features">
-                        <li data-translate="price_pro_f1">Aplicații Mobile Android</li>
-                        <li data-translate="price_pro_f2">Platforme Web Complexe (SaaS)</li>
-                        <li data-translate="price_pro_f3">Baze de Date & API-uri</li>
-                        <li data-translate="price_pro_f4">Consultanță Tehnică</li>
-                        <li data-translate="price_pro_f5">Mentenanță Dedicată</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-secondary full-width" data-service="custom-app"
-                        data-translate="price_btn_contact">Contactează-ne</a>
-                </div>
-            </div>
-
-            <div class="pricing-actions">
-                <a href="preturi.html" class="btn btn-secondary portfolio-toggle-btn"
-                    data-translate="pricing_details_btn">
-                    Vezi ce include fiecare pachet
-                </a>
-            </div>
-
-            <div class="pricing-extras">
-                <div class="extras-header">
-                    <h3 data-translate="extras_title">Servicii Individuale</h3>
-                    <p data-translate="extras_subtitle">Ai deja un site? Alege doar serviciile de care ai nevoie.</p>
-                </div>
-
-                <div class="extras-list">
-                    <div class="extra-item">
-                        <div class="extra-info">
-                            <h4 data-translate="extra_seo_title">Optimizare SEO Tehnic</h4>
-                            <p data-translate="extra_seo_desc">Optimizare cod, meta tag-uri, sitemap și viteză de
-                                încărcare pentru un site existent.</p>
-                        </div>
-                        <div class="extra-action">
-                            <span class="extra-price" data-translate="extra_seo_price">749 lei</span>
-                            <a href="#contact" class="btn btn-secondary btn-sm" data-service="seo-only"
-                                data-translate="btn_order">Comandă</a>
-                        </div>
-                    </div>
-
-                    <div class="extra-item">
-                        <div class="extra-info">
-                            <h4 data-translate="extra_host_title">Configurare Hosting & Domeniu</h4>
-                            <p data-translate="extra_host_desc">Asistență achiziție HostGate, configurare DNS, instalare
-                                SSL și urcare fișiere pe server.</p>
-                        </div>
-                        <div class="extra-action">
-                            <span class="extra-price" data-translate="extra_host_price">249 lei</span>
-                            <a href="#contact" class="btn btn-secondary btn-sm" data-service="hosting-setup"
-                                data-translate="btn_order">Comandă</a>
-                        </div>
-                    </div>
-
-                    <div class="extra-item">
-                        <div class="extra-info">
-                            <h4 data-translate="extra_audit_title">Audit & Mentenanță</h4>
-                            <p data-translate="extra_audit_desc">Verificare erori, actualizare platformă, backup manual
-                                și mici modificări de conținut.</p>
-                        </div>
-                        <div class="extra-action">
-                            <span class="extra-price" data-translate="extra_audit_price">149 lei/h</span>
-                            <a href="#contact" class="btn btn-secondary btn-sm" data-service="mentenanta"
-                                data-translate="btn_order">Comandă</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-translate="contact_title">Să Discutăm Proiectul Tău</h2>
-                <p class="section-subtitle" data-translate="contact_subtitle">
-                    Suntem aici să transformăm ideile tale în soluții digitale de succes
-                </p>
-            </div>
-
-            <div class="contact-content">
-                <div class="contact-info">
-                    <address class="contact-item" style="font-style: normal;">
-                        <div class="contact-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                                <polyline points="22,6 12,13 2,6" />
-                            </svg>
-                        </div>
-                        <div class="contact-details">
-                            <h3 data-translate="contact_email_title">Email</h3>
-                            <a href="mailto:contact@codecare.ro"
-                                style="color: var(--text-secondary); text-decoration: none;">contact@codecare.ro</a>
-                        </div>
-                    </address>
-
-                    <address class="contact-item" style="font-style: normal;">
-                        <div class="contact-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path
-                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                            </svg>
-                        </div>
-                        <div class="contact-details">
-                            <h3 data-translate="contact_phone_title">Telefon</h3>
-                            <a href="tel:+40729728477" style="color: var(--text-secondary); text-decoration: none;">+40
-                                729 728 477</a>
-                        </div>
-                    </address>
-
-                    <address class="contact-item" style="font-style: normal;">
-                        <div class="contact-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                                <circle cx="12" cy="10" r="3" />
-                            </svg>
-                        </div>
-                        <div class="contact-details">
-                            <h3 data-translate="contact_location_title">Locație</h3>
-                            <p data-translate="contact_location_text">Alba Iulia, România</p>
-                        </div>
+        <section id="contact" class="cc-sectiune cc-contact">
+            <div class="cc-contact-panou" data-reveal>
+                <div class="cc-contact-info">
+                    <div class="cc-eticheta" data-translate="home_contact_label">06 / CONTACT</div>
+                    <h2 class="cc-contact-titlu" data-translate="home_contact_title">Spune-ne ideea. Îți răspundem în
+                        24h.</h2>
+                    <p class="cc-contact-sub" data-translate="home_contact_sub">Ofertă gratuită, fără obligații și fără
+                        limbaj tehnic inutil.</p>
+                    <address class="cc-contact-date">
+                        <a href="mailto:contact@codecare.ro" class="cc-contact-rand"><span class="cc-contact-ic"
+                                aria-hidden="true">@</span>contact@codecare.ro</a>
+                        <a href="tel:+40729728477" class="cc-contact-rand"><span class="cc-contact-ic"
+                                aria-hidden="true">☎</span>+40 729 728 477</a>
+                        <span class="cc-contact-rand cc-contact-rand--text"><span class="cc-contact-ic"
+                                aria-hidden="true">◎</span><span data-translate="contact_location_text">Alba Iulia,
+                                România</span></span>
                     </address>
                 </div>
 
@@ -603,30 +686,31 @@
                         aria-hidden="true">
 
                     <div class="form-group">
-                        <input type="text" id="name" name="name" required aria-required="true">
+                        <input type="text" id="name" name="name" required aria-required="true" autocomplete="name">
                         <label for="name" data-translate="form_name">Numele tău</label>
                     </div>
 
                     <div class="form-group">
-                        <input type="email" id="email" name="email" required aria-required="true">
+                        <input type="email" id="email" name="email" required aria-required="true"
+                            autocomplete="email">
                         <label for="email" data-translate="form_email">Email</label>
                     </div>
 
                     <div class="form-group custom-select-wrapper">
                         <select id="service" name="service" style="display: none;">
                             <option value="" disabled selected></option>
-                            <option value="landing-page">Landing Page</option>
-                            <option value="site-prezentare">Site Prezentare (Start)</option>
-                            <option value="site-business">Site Business</option>
+                            <option value="landing-page">Pachet Start</option>
+                            <option value="site-prezentare">Pachet Prezentare</option>
+                            <option value="site-business">Pachet Business</option>
                             <option value="custom-app">Aplicație / Custom</option>
-                            <option value="seo-only">Doar SEO Tehnic</option>
-                            <option value="hosting-setup">Configurare Hosting & Domeniu</option>
-                            <option value="mentenanta">Audit & Mentenanță</option>
+                            <option value="seo-only">Doar SEO tehnic</option>
+                            <option value="hosting-setup">Hosting &amp; domeniu</option>
+                            <option value="mentenanta">Audit &amp; mentenanță</option>
                             <option value="altul">Alt serviciu</option>
                         </select>
 
                         <label for="service" id="service-label" data-translate="form_service_label">Tipul
-                            Proiectului</label>
+                            proiectului</label>
 
                         <div class="custom-select">
                             <div class="custom-select-trigger">
@@ -634,20 +718,20 @@
                                 <div class="arrow"></div>
                             </div>
                             <div class="custom-options">
-                                <span class="custom-option" data-value="landing-page"
-                                    data-translate="opt_landing">Landing Page</span>
+                                <span class="custom-option" data-value="landing-page" data-translate="opt_landing">Pachet
+                                    Start</span>
                                 <span class="custom-option" data-value="site-prezentare"
-                                    data-translate="opt_site_pres">Site Prezentare (Start)</span>
+                                    data-translate="opt_site_pres">Pachet Prezentare</span>
                                 <span class="custom-option" data-value="site-business"
-                                    data-translate="opt_ecommerce">Site Business</span>
-                                <span class="custom-option" data-value="custom-app"
-                                    data-translate="opt_custom">Aplicație / Custom</span>
+                                    data-translate="opt_ecommerce">Pachet Business</span>
+                                <span class="custom-option" data-value="custom-app" data-translate="opt_custom">Aplicație
+                                    / Custom</span>
                                 <span class="custom-option" data-value="seo-only" data-translate="opt_seo">Doar SEO
-                                    Tehnic</span>
+                                    tehnic</span>
                                 <span class="custom-option" data-value="hosting-setup"
-                                    data-translate="opt_hosting">Configurare Hosting & Domeniu</span>
+                                    data-translate="opt_hosting">Hosting &amp; domeniu</span>
                                 <span class="custom-option" data-value="mentenanta"
-                                    data-translate="opt_mentenanta">Audit & Mentenanță</span>
+                                    data-translate="opt_mentenanta">Audit &amp; mentenanță</span>
                                 <span class="custom-option" data-value="altul" data-translate="opt_other">Alt
                                     serviciu</span>
                             </div>
@@ -660,13 +744,11 @@
                     </div>
 
                     <div class="form-group">
-                        <textarea id="message" name="message" rows="5" required aria-required="true"></textarea>
-                        <label for="message" data-translate="form_message">Mesajul tău</label>
+                        <textarea id="message" name="message" rows="4" required aria-required="true"></textarea>
+                        <label for="message" data-translate="home_form_message">Ce vrei să obții cu proiectul?</label>
                     </div>
 
-                    <button type="submit" class="btn btn-primary" data-translate="form_submit">
-                        Trimite Mesajul
-                    </button>
+                    <button type="submit" class="cc-trimite" data-translate="form_submit">Trimite mesajul</button>
 
                     <p class="form-confirm" id="form-confirm" role="status" hidden data-translate="form_confirm">
                         Ți-am primit mesajul și îți răspund în cel mult 24 de ore, de pe
@@ -675,46 +757,35 @@
                     </p>
                 </form>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <div class="footer-logo">
-                        <img src="assets/logo.png" alt="CodeCare" class="logo-img logo-img--footer">
-                    </div>
-                    <p class="footer-description" data-translate="footer_description">
-                        Soluții IT premium pentru afaceri moderne. Transformăm ideile în realitate digitală.
-                    </p>
-                </div>
-
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h4 data-translate="footer_services_title">Servicii</h4>
-                        <ul>
-                            <li><a href="#services" data-translate="footer_websites">Site-uri Web</a></li>
-                            <li><a href="#services" data-translate="footer_mobile">Aplicații Mobile</a></li>
-                            <li><a href="#services" data-translate="footer_seo">SEO Tehnic</a></li>
-                            <li><a href="#services" data-translate="footer_hosting">Hosting & Domeniu</a></li>
-                            <li><a href="#services" data-translate="footer_maint">Mentenanță & Suport</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-column">
-                        <h4 data-translate="footer_company_title">Companie</h4>
-                        <ul>
-                            <li><a href="#home" data-translate="footer_home">Acasă</a></li>
-                            <li><a href="#services" data-translate="footer_services_link">Servicii</a></li>
-                            <li><a href="proiecte.html" data-translate="footer_portfolio">Proiecte</a></li>
-                            <li><a href="preturi.html" data-translate="footer_pricing">Prețuri</a></li>
-                            <li><a href="#contact" data-translate="footer_contact">Contact</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
+    <footer class="cc-subsol">
+        <div class="cc-subsol-interior">
+            <a href="#home" class="cc-logo cc-logo--mic cc-marca">
+                <svg class="cc-semn" viewBox="128 143 244 123" aria-hidden="true" focusable="false">
+                    <defs>
+                        <linearGradient id="cc-semn-subsol" gradientUnits="userSpaceOnUse" x1="135" y1="0" x2="365" y2="0">
+                            <stop offset="0" stop-color="#3ba7ef" />
+                            <stop offset="1" stop-color="#8c50d4" />
+                        </linearGradient>
+                    </defs>
+                    <g fill="none" stroke="url(#cc-semn-subsol)" stroke-width="12.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path class="cc-semn-st" d="M166 180 L137.5 207.5 L166 235" />
+                        <path class="cc-semn-dr" d="M334 180 L362.5 207.5 L334 235" />
+                        <g class="cc-semn-bataie">
+                            <path class="cc-semn-inima" pathLength="1" d="M287 223 L303 208 C318 193 316 153 282 153 C266 153 256 161 250 168 C244 161 234 153 218 153 C184 153 182 193 197 208 L250 257 L270 245" />
+                            <path class="cc-semn-slash" d="M261 187.5 L246 225" />
+                        </g>
+                    </g>
+                </svg>
+                <span class="cc-logo-text">Code<span>Care</span></span>
+            </a>
+            <nav class="cc-subsol-linkuri" aria-label="Footer">
+                <a href="proiecte.html" data-translate="footer_portfolio">Proiecte</a>
+                <a href="preturi.html" data-translate="footer_pricing">Pachete</a>
+                <a href="#contact" data-translate="footer_contact">Contact</a>
+            </nav>
             <div class="footer-bottom">
                 <!--
                 <p class="footer-legal">
@@ -722,12 +793,13 @@
                     <span data-translate="footer_legal_ids">CUI: RO12345678 · Reg. Com.: J01/123/2025</span>
                 </p>
                 -->
-                <p data-translate="footer_copyright">© 2026 CodeCare. Toate drepturile rezervate.</p>
+                <p data-translate="footer_copyright">© 2026 CodeCare · Alba Iulia</p>
             </div>
         </div>
     </footer>
 
     <script src="scripts.js"></script>
+    <script src="acasa.js"></script>
 </body>
 
 </html>

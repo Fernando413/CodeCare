@@ -391,6 +391,13 @@ function initializeScrollHandler() {
         }
         updateActiveNavLink();
 
+        // Prima pagina isi leaga aici efectele de derulare (hero-ul, procesul,
+        // bara de progres, aparitiile), din acasa.js. Asa ramane un singur
+        // listener de scroll pe tot site-ul.
+        if (typeof window.acasaLaScroll === 'function') {
+            window.acasaLaScroll(scrollY);
+        }
+
         ticking = false;
     }
 

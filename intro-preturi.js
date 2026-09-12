@@ -1,13 +1,12 @@
 /**
- * Intro-ul paginii de preturi.
+ * Intro-ul paginii de pachete (adresa a ramas preturi.html).
  *
  * Coregrafia, in ordine:
  *   1. praf de lumina care pluteste in intuneric;
  *   2. un cerc subtire se traseaza in jurul lui;
- *   3. pe cerc apar cele patru repere de pret si un al cincilea semn, care se
- *      rotesc incet;
+ *   3. pe cerc apar cinci cuvinte care descriu munca, si se rotesc incet;
  *   4. reperele se strang spre centru si se sparg in particule;
- *   5. particulele se aseaza in cuvantul PRETURI;
+ *   5. particulele se aseaza in cuvantul PACHETE;
  *   6. cuvantul vine spre privitor si trecem prin el in pagina.
  *
  * Trei reguli fara de care animatia ar lucra impotriva paginii:
@@ -16,7 +15,7 @@
  *     zece minute nu mai are chef de spectacol.
  *   - **Se poate sari oricand** — click, tasta, derulare, sau butonul din colt.
  *   - **Pagina de dedesubt e intreaga.** Cuvantul desenat aici e decor; titlul
- *     si preturile sunt text normal in HTML, deci Google si cititoarele de
+ *     si pachetele sunt text normal in HTML, deci Google si cititoarele de
  *     ecran vad continutul chiar daca animatia nu ruleaza niciodata.
  *
  * Cine are „miscare redusa" pornita in sistem intra direct in pagina.
@@ -50,11 +49,10 @@
 
     // ==================== date ====================
 
-    // Reperele care se rotesc pe cerc. Sunt preturile reale din pagina: ce
-    // zboara pe ecran e informatie, nu ornament. Al cincilea e un semn, ca sa
-    // rupa sirul de cifre.
+    // Cuvintele care se rotesc pe cerc. Pagina nu mai afiseaza preturi, deci
+    // nici intro-ul nu mai are sume: se termina in numele paginii, PACHETE.
     const REPERE = ['DESIGN', 'PREMIUM', 'MODERN', 'PERFORMANT', 'INOVATOR'];
-    const CUVANT = 'PREȚURI';
+    const CUVANT = 'PACHETE';
 
     const DURATE = {
         praf: 430,        // particulele plutesc singure
