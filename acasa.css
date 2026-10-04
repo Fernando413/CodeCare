@@ -2209,6 +2209,112 @@ html:not(.cc-gata) .cc-faq-raspuns {
     }
 }
 
+/* Datele firmei si linkurile legale, sub copyright. Mai stinse decat restul
+   subsolului: trebuie sa fie acolo, nu sa atraga privirea. */
+.footer-legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px 14px;
+    margin-bottom: 10px !important;
+}
+
+.footer-legal-linkuri {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 20px;
+    margin-bottom: 14px;
+}
+
+.footer-legal-linkuri a {
+    font-size: 13px;
+    color: var(--cc-text-2);
+    transition: color .3s;
+}
+
+.footer-legal-linkuri a:hover {
+    color: var(--cc-turcoaz);
+}
+
+/* ==================== bannerul de cookies ==================== */
+
+/* Informativ, in coltul din stanga-jos: nu acopera continutul si nu cere o
+   alegere, fiindca site-ul nu pune cookie-uri de urmarire. */
+.cc-cookies {
+    position: fixed;
+    left: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    z-index: 250;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    max-width: min(560px, calc(100vw - 32px));
+    padding: 16px 18px;
+    border-radius: 16px;
+    border: 1px solid var(--cc-chenar);
+    background: rgba(13, 13, 25, .96);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .9);
+    animation: ccNotificare .45s var(--cc-ease) both;
+}
+
+.cc-cookies-text {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--cc-text-2);
+}
+
+.cc-cookies-text a {
+    color: var(--cc-turcoaz);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.cc-cookies-buton {
+    flex: none;
+    padding: 10px 18px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--cc-alb-cald);
+    color: var(--cc-fundal);
+    font: 700 14px var(--cc-font-text);
+    cursor: pointer;
+    transition: transform .3s;
+}
+
+.cc-cookies-buton:hover {
+    transform: translateY(-2px);
+}
+
+.cc-cookies-buton:focus-visible,
+.cc-cookies-text a:focus-visible {
+    outline: 2px solid var(--cc-turcoaz);
+    outline-offset: 3px;
+}
+
+@media (max-width: 620px) {
+    .cc-cookies {
+        left: 12px;
+        right: 12px;
+        max-width: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .cc-cookies-buton {
+        padding: 12px 18px;
+    }
+}
+
+@media print {
+    .cc-cookies {
+        display: none;
+    }
+}
+
 /* ==================== miscare redusa ==================== */
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,29 +1,5 @@
 const crypto = require("node:crypto");
-
-async function redis(comenzi) {
-    const url = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
-    const token =
-        process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
-
-    if (!url || !token) {
-        throw new Error("Upstash nu e configurat");
-    }
-
-    const raspuns = await fetch(`${url}/pipeline`, {
-        method: "POST",
-        headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(comenzi),
-    });
-
-    if (!raspuns.ok) {
-        throw new Error(`Upstash: ${raspuns.status}`);
-    }
-
-    return raspuns.json();
-}
+const { redis } = require("./_comun");
 
 function tokenValid(primit, asteptat) {
     if (!asteptat) return false;
@@ -104,7 +80,17 @@ async function handler(req, res) {
                 try {
                     const e = JSON.parse(intrare);
                     if (e && e.t) {
-                        evenimente.push({ t: e.t, d: e.d || "necunoscut" });
+                        // Doar campurile cunoscute: evenimentele vechi mai aveau
+                        // oras si IP, care nu mai pleaca nicaieri.
+                        evenimente.push({
+                            t: e.t,
+                            d: e.d || "necunoscut",
+                            browser: e.browser || "",
+                            os: e.os || "",
+                            sursa: e.sursa || "",
+                            a: e.a || "",
+                            durata: 0,
+                        });
                     }
                 } catch {
                     // O intrare stricata nu are voie sa arunce tot raspunsul.
@@ -113,6 +99,33 @@ async function handler(req, res) {
 
             demo[slug] = { deschideri, persoane, evenimente };
         });
+
+        // Timpul pe pagina: secundele adunate de durata.js pe amprenta zilnica a
+        // fiecarei persoane. Amprenta in sine nu iese din server.
+        const cereri = [];
+        for (const [slug, info] of Object.entries(demo)) {
+            for (const e of info.evenimente) {
+                if (e.a) {
+                    cereri.push({ e, cmd: ["HGET", `demo:${slug}:durata:${e.t.slice(0, 10)}`, e.a] });
+                }
+            }
+        }
+        for (let i = 0; i < cereri.length; i += 500) {
+            const bucata = cereri.slice(i, i + 500);
+            const raspuns = await redis(bucata.map((c) => c.cmd));
+            bucata.forEach((c, j) => {
+                c.e.durata = Number(raspuns?.[j]?.result || 0);
+            });
+        }
+        // `v` = vizitatorul, ca platforma sa grupeze paginile vazute de aceeasi
+        // persoana in aceeasi zi. E amprenta zilnica (hash ireversibil, alt
+        // sir in fiecare zi), nu un identificator al omului.
+        for (const info of Object.values(demo)) {
+            for (const e of info.evenimente) {
+                e.v = e.a;
+                delete e.a;
+            }
+        }
 
         res.status(200).json({ demo });
     } catch (eroare) {

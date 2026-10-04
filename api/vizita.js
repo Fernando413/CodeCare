@@ -1,100 +1,75 @@
-
-const crypto = require("node:crypto");
+/*
+ * Numara o vizita: pagina (sau demo-ul) cere un GIF de 1x1 de aici la incarcare.
+ *
+ * Pentru fiecare persoana noua pe zi se salveaza un eveniment cu: ora, tipul
+ * de dispozitiv, browserul, sistemul, site-ul de pe care a venit si amprenta
+ * zilnica (folosita ca sa-i lipim apoi timpul petrecut pe pagina, vezi
+ * durata.js). Fara oras si fara IP: orasul dedus din IP iesea gresit (Alba
+ * Iulia aparea Bucuresti), deci nu merita nici stocat, nici declarat.
+ */
+const { ZILE_PASTRARE, SLUG_VALID, esteBot, esteExclus, ziua, amprenta, redis } = require("./_comun");
 
 const PIXEL = Buffer.from(
     "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
     "base64"
 );
 
-const BOTI = [
-    "whatsapp",
-    "facebookexternalhit",
-    "facebot",
-    "twitterbot",
-    "slackbot",
-    "telegrambot",
-    "discordbot",
-    "linkedinbot",
-    "skypeuripreview",
-    "vkshare",
-    "embedly",
-    "bot",
-    "crawler",
-    "spider",
-    "preview",
-    "curl",
-    "wget",
-    "python-requests",
-    "httpx",
-    "headlesschrome",
-    "lighthouse",
-];
-
-const ZILE_PASTRARE_PERSOANE = 40 * 24 * 60 * 60; // secunde
 const MAX_EVENIMENTE = 500;
-
-function esteBot(userAgent) {
-    const ua = (userAgent || "").toLowerCase();
-    if (!ua) return true; // niciun user-agent = aproape sigur un script
-    return BOTI.some((semnal) => ua.includes(semnal));
-}
 
 function esteMobil(userAgent) {
     return /android|iphone|ipad|ipod|windows phone|mobile/i.test(userAgent || "");
 }
 
-function ipVizitator(req) {
-    const inaintat = req.headers["x-forwarded-for"];
-    if (typeof inaintat === "string" && inaintat.length) {
-        return inaintat.split(",")[0].trim();
-    }
-    return req.headers["x-real-ip"] || "necunoscut";
+function browser(ua) {
+    if (/edg\//i.test(ua)) return "Edge";
+    if (/opr\/|opera/i.test(ua)) return "Opera";
+    if (/samsungbrowser/i.test(ua)) return "Samsung Internet";
+    if (/fban|fbav|instagram/i.test(ua)) return "Facebook/Instagram";
+    if (/firefox|fxios/i.test(ua)) return "Firefox";
+    if (/chrome|crios/i.test(ua)) return "Chrome";
+    if (/safari/i.test(ua)) return "Safari";
+    return "Altul";
 }
 
-/** Comenzi Redis prin API-ul REST al Upstash. Fara dependinte, doar fetch. */
-async function redis(comenzi) {
-    const url = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
-    const token =
-        process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
-
-    if (!url || !token) {
-        throw new Error("Upstash nu e configurat");
-    }
-
-    const raspuns = await fetch(`${url}/pipeline`, {
-        method: "POST",
-        headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(comenzi),
-    });
-
-    if (!raspuns.ok) {
-        throw new Error(`Upstash: ${raspuns.status}`);
-    }
-
-    return raspuns.json();
+function sistem(ua) {
+    if (/android/i.test(ua)) return "Android";
+    if (/iphone|ipad|ipod/i.test(ua)) return "iOS";
+    if (/windows/i.test(ua)) return "Windows";
+    if (/mac os x|macintosh/i.test(ua)) return "macOS";
+    if (/linux/i.test(ua)) return "Linux";
+    return "Altul";
 }
 
-async function numara(slug, azi, amprenta, userAgent) {
+/*
+ * De unde a venit: domeniul paginii anterioare. Site-ul il trimite in `ref`
+ * (document.referrer); pixelul demo-urilor nu are `ref`, deci ramane gol.
+ * Linkurile deschise din WhatsApp nu au referrer, deci apar ca „direct".
+ */
+function sursa(ref) {
+    try {
+        const host = new URL(ref).hostname.replace(/^www\./, "");
+        if (!host || host === "codecare.ro" || host.endsWith(".vercel.app")) return "";
+        return host.slice(0, 60);
+    } catch {
+        return "";
+    }
+}
+
+async function numara(slug, azi, cine, detalii) {
     const cheiePersoane = `demo:${slug}:persoane:${azi}`;
 
     const rezultat = await redis([
         ["SADD", "demo:sluguri", slug],
         ["INCR", `demo:${slug}:deschideri`],
-        ["SADD", cheiePersoane, amprenta],
-        ["EXPIRE", cheiePersoane, String(ZILE_PASTRARE_PERSOANE)],
+        ["SADD", cheiePersoane, cine],
+        ["EXPIRE", cheiePersoane, String(ZILE_PASTRARE)],
     ]);
 
     if (rezultat?.[2]?.result !== 1) {
         return false;
     }
 
-    const eveniment = JSON.stringify({
-        t: new Date().toISOString(),
-        d: esteMobil(userAgent) ? "mobil" : "desktop",
-    });
+    const eveniment = JSON.stringify({ t: new Date().toISOString(), a: cine, ...detalii });
 
     await redis([
         ["INCR", `demo:${slug}:persoane`],
@@ -115,31 +90,31 @@ function trimitePixel(res) {
 async function handler(req, res) {
     const slug = String(req.query.slug || "").toLowerCase();
 
-    if (!/^[a-z0-9-]{1,80}$/.test(slug)) {
+    if (!SLUG_VALID.test(slug)) {
         trimitePixel(res);
         return;
     }
 
     const userAgent = req.headers["user-agent"] || "";
-    if (esteBot(userAgent)) {
+    if (esteBot(userAgent) || esteExclus(req)) {
         trimitePixel(res);
         return;
     }
 
     try {
-        const azi = new Date().toISOString().slice(0, 10);
-        const amprenta = crypto
-            .createHash("sha256")
-            .update(
-                `${ipVizitator(req)}|${userAgent}|${process.env.TRACKING_SALT || ""}|${azi}`
-            )
-            .digest("hex")
-            .slice(0, 16);
+        const azi = ziua();
+        const cine = amprenta(req, azi);
+        const detalii = {
+            d: esteMobil(userAgent) ? "mobil" : "desktop",
+            browser: browser(userAgent),
+            os: sistem(userAgent),
+            sursa: sursa(req.query.ref),
+        };
 
-        await numara(slug, azi, amprenta, userAgent);
+        await numara(slug, azi, cine, detalii);
 
         if (slug.startsWith("site-")) {
-            await numara("site", azi, amprenta, userAgent);
+            await numara("site", azi, cine, detalii);
         }
     } catch (eroare) {
         console.error("vizita:", eroare.message);

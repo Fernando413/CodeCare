@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initializePricingButtons();
     preselecteazaServiciulDinAdresa();
     numaraVizita();
+    initializeCookieBanner();
 });
 
 /**
@@ -62,8 +63,8 @@ document.addEventListener('DOMContentLoaded', function () {
  * slug. Cere o imagine de 1x1: nu are nevoie de CORS, nu blocheaza randarea si
  * nu depinde de vreo librarie externa.
  *
- * Nu se scrie nimic in browserul vizitatorului si nu se salveaza niciun IP —
- * functia numara si atat. De asta nu e nevoie de banner de consimtamant.
+ * Nu se scrie nimic in browserul vizitatorului si nu se salveaza niciun IP.
+ * Pe langa vizita, `masoaraTimpul()` trimite cat a stat pagina in fata.
  */
 function numaraVizita() {
     const PAGINI = {
@@ -80,10 +81,115 @@ function numaraVizita() {
 
     try {
         // Acelasi domeniu, deci adresa relativa e suficienta.
-        new Image().src = `/api/vizita?slug=${slug}&t=${Date.now()}`;
+        // `ref` = pagina de pe care a venit (Google, Facebook...). Contorul
+        // pastreaza doar domeniul ei; navigarea in interiorul site-ului e ignorata.
+        const ref = encodeURIComponent(document.referrer || '');
+        new Image().src = `/api/vizita?slug=${slug}&ref=${ref}&t=${Date.now()}`;
+        masoaraTimpul(`/api/durata?slug=${slug}`);
     } catch (eroare) {
         // Un contor care nu merge nu are voie sa strice pagina.
     }
+}
+
+/*
+ * Timpul petrecut pe pagina: se numara doar cat fila e vizibila (o fila lasata
+ * in spate nu inseamna citit) si se trimite cand pagina e ascunsa sau inchisa,
+ * cu sendBeacon — singura cerere pe care browserul o duce la capat si dupa ce
+ * pagina a disparut. Serverul aduna trimiterile, deci o pagina ascunsa si
+ * revazuta de mai multe ori trimite de mai multe ori bucati mici.
+ */
+function masoaraTimpul(adresa) {
+    let vizibilDin = document.visibilityState === 'visible' ? Date.now() : null;
+    let acumulat = 0;
+
+    const trimite = () => {
+        if (vizibilDin !== null) {
+            acumulat += Date.now() - vizibilDin;
+            vizibilDin = null;
+        }
+        const secunde = Math.round(acumulat / 1000);
+        if (secunde < 1) return;
+        acumulat = 0;
+        const url = `${adresa}&s=${secunde}`;
+        try {
+            if (!(navigator.sendBeacon && navigator.sendBeacon(url))) {
+                fetch(url, { method: 'POST', keepalive: true });
+            }
+        } catch (eroare) {
+            // Timpul pierdut nu are voie sa strice pagina.
+        }
+    };
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') {
+            trimite();
+        } else if (vizibilDin === null) {
+            vizibilDin = Date.now();
+        }
+    });
+    window.addEventListener('pagehide', trimite);
+}
+
+/**
+ * Bannerul de cookies — informativ. Site-ul nu pune cookie-uri de urmarire sau
+ * de publicitate, deci nu avem ce bloca pana la un „Accept"; bannerul spune ce
+ * se foloseste si duce la politica. Inchiderea lui se tine minte in
+ * localStorage (`codecare-cookies`), ca sa nu reapara pe fiecare pagina.
+ *
+ * Textul e generat aici, nu in HTML, ca sa nu se repete pe fiecare pagina; de
+ * aceea limba se schimba din `updateCookieBanner()`, ca la celelalte texte
+ * generate la runtime.
+ */
+const COOKIE_STORAGE_KEY = 'codecare-cookies';
+
+const COOKIE_TEXT = {
+    ro: {
+        text: 'Folosim stocarea locală a browserului pentru limba aleasă și numărăm vizitele fără cookie-uri de urmărire: reținem tipul de dispozitiv, browserul și cât timp stai pe fiecare pagină, fără adresa IP. Nu folosim cookie-uri de publicitate.',
+        link: 'Politica de cookies',
+        buton: 'Am înțeles',
+        eticheta: 'Informare despre cookies'
+    },
+    en: {
+        text: 'We use your browser’s local storage to remember your language and we count visits without tracking cookies: we keep the device type, the browser and how long you stay on each page, without your IP address. We use no advertising cookies.',
+        link: 'Cookie policy',
+        buton: 'Got it',
+        eticheta: 'Cookie notice'
+    }
+};
+
+function initializeCookieBanner() {
+    try {
+        if (localStorage.getItem(COOKIE_STORAGE_KEY) === 'ok') return;
+    } catch (error) {
+        /* stocare blocata: aratam bannerul, dar nu-l putem tine minte */
+    }
+
+    const banner = document.createElement('div');
+    banner.className = 'cc-cookies';
+    banner.setAttribute('role', 'region');
+    banner.innerHTML = '<p class="cc-cookies-text"><span></span> <a href="cookies.html"></a></p>' +
+        '<button type="button" class="cc-cookies-buton"></button>';
+    banner.querySelector('button').addEventListener('click', () => {
+        try {
+            localStorage.setItem(COOKIE_STORAGE_KEY, 'ok');
+        } catch (error) {
+            /* navigare privata: bannerul reapare la urmatoarea pagina */
+        }
+        banner.remove();
+    });
+
+    document.body.appendChild(banner);
+    updateCookieBanner();
+}
+
+function updateCookieBanner() {
+    const banner = document.querySelector('.cc-cookies');
+    if (!banner) return;
+    const t = COOKIE_TEXT[languageToggle && languageToggle.checked ? 'en' : 'ro'];
+    banner.setAttribute('aria-label', t.eticheta);
+    banner.querySelector('.cc-cookies-text span').textContent = t.text;
+    banner.querySelector('.cc-cookies-text a').textContent = t.link;
+    banner.querySelector('.cc-cookies-buton').textContent = t.buton;
 }
 
 // --- Language Management (Sistemul Nou) ---
@@ -181,6 +287,7 @@ async function handleLanguageToggle() {
     currentLanguage = newLanguage;
     storeLanguage(newLanguage);
     updateLanguageLabels();
+    updateCookieBanner();
 }
 
 async function loadEnglishTranslations() {
